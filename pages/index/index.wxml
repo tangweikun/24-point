@@ -1,11 +1,42 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+  <!-- <view class="userinfo">
+    <button
+      wx:if="{{!hasUserInfo && canIUse}}"
+      open-type="getUserInfo"
+      bindgetuserinfo="getUserInfo"
+    >
+      获取头像昵称
+    </button>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <image
+        bindtap="bindViewTap"
+        class="userinfo-avatar"
+        src="{{userInfo.avatarUrl}}"
+        background-size="cover"
+      />
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
+  </view> -->
+  <view class='wrapper'>
+    <view class='card-wrapper'>
+    <button class='card' bindtap='selectCardOrOpeartor' id='5'>5</button>
+    <button class='card' bindtap='selectCardOrOpeartor' id='5'>5</button>
+    <button class='card' bindtap='selectCardOrOpeartor' id='5'>5</button>
+    <button class='card' bindtap='selectCardOrOpeartor' id='1'>1</button>
+    </view>
+    <view class='operator-wrapper'>
+      <button class='operator' bindtap='selectCardOrOpeartor' id='+'>+</button>
+      <button class='operator' bindtap='selectCardOrOpeartor' id='-'>-</button>
+      <button class='operator' bindtap='selectCardOrOpeartor' id='*'>*</button>
+      <button class='operator' bindtap='selectCardOrOpeartor' id='/'>/</button>
+      <button class='operator' bindtap='selectCardOrOpeartor' id='('>(</button>
+      <button class='operator' bindtap='selectCardOrOpeartor' id=')'>)</button>
+    </view>
+  </view>
+  
+  <view>
+    {{expression}}
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>

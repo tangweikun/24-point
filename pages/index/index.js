@@ -4,10 +4,11 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Hello',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    expression: '',
   },
   //事件处理函数
   bindViewTap: function() {
@@ -49,6 +50,11 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  selectCardOrOpeartor: function(e) {
+    this.setData({
+      expression: this.data.expression + e.currentTarget.id,
     })
   }
 })
