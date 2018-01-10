@@ -29,18 +29,25 @@
         id="{{item.value}}"
         data-value="{{item.value}}"
         data-index="{{index}}"
+        data-type="card"
       >
         {{item.value}}
       </button>
     </view>
 
     <view class='operator-wrapper'>
-      <button class='operator' bindtap='selectCardOrOperator' id='+'>+</button>
-      <button class='operator' bindtap='selectCardOrOperator' id='-'>-</button>
-      <button class='operator' bindtap='selectCardOrOperator' id='*'>*</button>
-      <button class='operator' bindtap='selectCardOrOperator' id='/'>/</button>
-      <button class='operator' bindtap='selectCardOrOperator' id='('>(</button>
-      <button class='operator' bindtap='selectCardOrOperator' id=')'>)</button>
+      <button
+        wx:for="{{operators}}"
+        wx:key="{{index}}"
+        class='operator'
+        bindtap='selectCardOrOperator'
+        id="{{item}}"
+        data-value="{{item}}"
+        data-index="{{index}}"
+        data-type="operator"
+      >
+        {{item}}
+      </button>
     </view>
   </view>
   

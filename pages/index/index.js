@@ -9,6 +9,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     expression: '',
+    operators: ['+', '-', '*', '/', '(', ')'],
   },
   //事件处理函数
   bindViewTap: function() {
@@ -62,11 +63,18 @@ Page({
   },
   selectCardOrOperator: function(e) {
     console.log(e, '====')
-    const cards = this.data.cards
-    cards[e.currentTarget.dataset.index].isDisabled = true
-    this.setData({
-      expression: this.data.expression + e.currentTarget.dataset.value,
-      cards,
-    })
+    const { type, value, index } = e.currentTarget.dataset
+    const { expression, cards } = this.data
+    if (type === 'card') {
+      cards[index].isDisabled = true
+      this.setData({
+        expression: expression + value,
+        cards,
+      })
+    } else {
+      this.setData({
+        expression: expression + value,
+      })
+    }
   },
 })
