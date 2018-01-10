@@ -20,11 +20,9 @@
   </view> -->
   <view class='wrapper'>
     <view class='card-wrapper'>
-    <button class='card' bindtap='selectCardOrOperator' id='5'>5</button>
-    <button class='card' bindtap='selectCardOrOperator' id='5'>5</button>
-    <button class='card' bindtap='selectCardOrOperator' id='5'>5</button>
-    <button class='card' bindtap='selectCardOrOperator' id='1'>1</button>
+      <button wx:for="{{cards}}" wx:key="{{item.index}}" class='card' bindtap='selectCardOrOperator' id="{{item.value}}">{{item.value}}</button>
     </view>
+
     <view class='operator-wrapper'>
       <button class='operator' bindtap='selectCardOrOperator' id='+'>+</button>
       <button class='operator' bindtap='selectCardOrOperator' id='-'>-</button>
