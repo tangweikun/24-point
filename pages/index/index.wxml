@@ -37,6 +37,7 @@
 
     <view class='operator-wrapper'>
       <button
+        disabled="{{isReady}}"
         wx:for="{{operators}}"
         wx:key="{{index}}"
         class='operator'
@@ -53,6 +54,10 @@
   
   <view>
     {{expression}}
+  </view>
+
+  <view wx:if="{{isReady}}">
+    {{answer}}
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>

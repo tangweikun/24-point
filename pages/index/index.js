@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const util = require('../../utils/util')
 
 Page({
   data: {
@@ -8,8 +9,11 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    expression: '',
+    expression: [],
     operators: ['+', '-', '*', '/', '(', ')'],
+    isReady: false,
+    singleBrackets: [],
+    cards: [],
   },
   //事件处理函数
   bindViewTap: function() {
@@ -62,19 +66,24 @@ Page({
     })
   },
   selectCardOrOperator: function(e) {
-    console.log(e, '====')
     const { type, value, index } = e.currentTarget.dataset
-    const { expression, cards } = this.data
+    const { expression, cards, singleBrackets } = this.data
+    let foo = {}
+    let answer = false
     if (type === 'card') {
       cards[index].isDisabled = true
-      this.setData({
-        expression: expression + value,
-        cards,
-      })
+
+      foo = { expression: [...expression, value], cards, isReady }
     } else {
-      this.setData({
-        expression: expression + value,
-      })
+      if (value === '(') singleBrackets.push(value)
+      if (value === ')') singleBrackets.pop()
+      foo = { expression: [...expression, value], singleBrackets }
     }
+
+    const isReady =
+      cards.every(({ isDisabled }) => isDisabled) && singleBrackets.length === 0
+    if (isReady) answer = util.isConform([...expression, value])
+
+    this.setData({ ...foo, answer, isReady })
   },
 })
