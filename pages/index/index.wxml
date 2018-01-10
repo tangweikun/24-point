@@ -52,12 +52,18 @@
     </view>
   </view>
   
-  <view>
-    {{expression}}
+  <view class='expression-wrapper'>
+    <text
+      class='expression-text'
+      wx:for="{{expression}}"
+      wx:key="{{index}}"
+    >
+      {{item}}
+    </text>
   </view>
 
   <view wx:if="{{isReady}}">
-    {{answer}}
+    {{answer ? '正确' : '错误'}}
   </view>
   <view class="usermotto" bindtap='reset'>
     <text class="user-motto">重置</text>

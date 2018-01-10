@@ -58,3 +58,12 @@
   align-items: center;
   width: 100%;
 }
+
+.expression-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.expression-text {
+  margin-right: 15rpx;
+}
