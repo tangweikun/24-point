@@ -5,7 +5,6 @@ const util = require('../../utils/util')
 
 Page({
   data: {
-    motto: 'Hello',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -13,7 +12,12 @@ Page({
     operators: ['+', '-', '*', '/', '(', ')'],
     isReady: false,
     singleBrackets: [],
-    cards: [],
+    cards: [
+      { value: Math.ceil(Math.random() * 13), isDisabled: false },
+      { value: Math.ceil(Math.random() * 13), isDisabled: false },
+      { value: Math.ceil(Math.random() * 13), isDisabled: false },
+      { value: Math.ceil(Math.random() * 13), isDisabled: false },
+    ],
   },
   //事件处理函数
   bindViewTap: function() {
@@ -85,5 +89,19 @@ Page({
     if (isReady) answer = util.isConform([...expression, value])
 
     this.setData({ ...foo, answer, isReady })
+  },
+
+  reset: function(e) {
+    this.setData({
+      expression: [],
+      isReady: false,
+      singleBrackets: [],
+      cards: [
+        { value: Math.ceil(Math.random() * 13), isDisabled: false },
+        { value: Math.ceil(Math.random() * 13), isDisabled: false },
+        { value: Math.ceil(Math.random() * 13), isDisabled: false },
+        { value: Math.ceil(Math.random() * 13), isDisabled: false },
+      ],
+    })
   },
 })
