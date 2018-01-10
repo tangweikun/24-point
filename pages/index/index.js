@@ -20,10 +20,10 @@ Page({
     if (app.globalData.userInfo) {
       const randomNumber = () => Math.ceil(Math.random() * 13)
       const generateCards = () => [
-        { value: randomNumber(), isAvailable: true },
-        { value: randomNumber(), isAvailable: true },
-        { value: randomNumber(), isAvailable: true },
-        { value: randomNumber(), isAvailable: true },
+        { value: randomNumber(), isDisabled: false },
+        { value: randomNumber(), isDisabled: false },
+        { value: randomNumber(), isDisabled: false },
+        { value: randomNumber(), isDisabled: false },
       ]
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -61,8 +61,12 @@ Page({
     })
   },
   selectCardOrOperator: function(e) {
+    console.log(e, '====')
+    const cards = this.data.cards
+    cards[e.currentTarget.dataset.index].isDisabled = true
     this.setData({
-      expression: this.data.expression + e.currentTarget.id,
+      expression: this.data.expression + e.currentTarget.dataset.value,
+      cards,
     })
   },
 })
