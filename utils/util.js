@@ -97,4 +97,5 @@ const calculate = (num1, num2, operator) => {
 module.exports = {
   formatTime: formatTime,
   isConform: isConform,
+  calculate: calculate,
 }

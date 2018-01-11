@@ -62,9 +62,9 @@
     </text>
   </view>
 
-  <view wx:if="{{isReady}}">
+  <!-- <view wx:if="{{isReady}}">
     {{answer ? '正确' : '错误'}}
-  </view>
+  </view> -->
   <view class="usermotto" bindtap='reset'>
     <text class="user-motto">重置</text>
   </view>

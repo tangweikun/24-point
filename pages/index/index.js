@@ -8,10 +8,9 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    expression: [],
-    operators: ['+', '-', '*', '/', '(', ')'],
-    isReady: false,
-    singleBrackets: [],
+    operators: ['+', '-', '*', '/'],
+    currentOperator: null,
+    currentCard: null,
     cards: [
       { value: Math.ceil(Math.random() * 13), isDisabled: false },
       { value: Math.ceil(Math.random() * 13), isDisabled: false },
@@ -71,37 +70,49 @@ Page({
   },
   selectCardOrOperator: function(e) {
     const { type, value, index } = e.currentTarget.dataset
-    const { expression, cards, singleBrackets } = this.data
-    let foo = {}
-    let answer = false
-    if (type === 'card') {
-      cards[index].isDisabled = true
+    const { cards, currentOperator, currentCard } = this.data
 
-      foo = { expression: [...expression, value], cards, isReady }
+    const nextState = { cards, currentCard }
+    if (type === 'card') {
+      if (currentCard === null) {
+        nextState.currentCard = { value: cards[index].value, position: index }
+      } else if (currentCard.position === index) {
+        nextState.currentCard = null
+      } else if (currentCard.position !== index) {
+        if (currentOperator === null) {
+          nextState.currentCard = { value: cards[index].value, position: index }
+        } else {
+          nextState.currentOperator = null
+          const answer = util.calculate(
+            currentCard.value,
+            cards[index].value,
+            currentOperator,
+          )
+          nextState.currentCard = { value: answer, position: index }
+
+          nextState.cards[currentCard.position] = {
+            value: answer,
+            isDisabled: true,
+          }
+        }
+      }
     } else {
-      if (value === '(') singleBrackets.push(value)
-      if (value === ')') singleBrackets.pop()
-      foo = { expression: [...expression, value], singleBrackets }
+      nextState.currentOperator = currentOperator !== value ? value : null
     }
 
-    const isReady =
-      cards.every(({ isDisabled }) => isDisabled) && singleBrackets.length === 0
-    if (isReady) answer = util.isConform([...expression, value])
-
-    this.setData({ ...foo, answer, isReady })
+    this.setData({ ...nextState })
   },
 
   reset: function(e) {
     this.setData({
-      expression: [],
-      isReady: false,
-      singleBrackets: [],
       cards: [
         { value: Math.ceil(Math.random() * 13), isDisabled: false },
         { value: Math.ceil(Math.random() * 13), isDisabled: false },
         { value: Math.ceil(Math.random() * 13), isDisabled: false },
         { value: Math.ceil(Math.random() * 13), isDisabled: false },
       ],
+      currentCard: null,
+      currentOperator: null,
     })
   },
 })
