@@ -20,13 +20,26 @@
   margin-top: 200px;
 }
 
-.card {
+.card-normal {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: red;
+  color: #ffffff;
   width: 140rpx;
   height: 140rpx;
+  margin-bottom: 20rpx;
+  background-color: rgb(0, 255, 157);
+}
+
+.card-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140rpx;
+  height: 140rpx;
+  margin-bottom: 20rpx;
+  background-color: green;
+  color: #ffffff;
 }
 
 .operator {
@@ -47,9 +60,10 @@
 
 .card-wrapper {
   display: flex;
-  width: 90%;
+  width: 320rpx;
   margin-bottom: 40rpx;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .wrapper {
