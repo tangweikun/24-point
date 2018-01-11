@@ -1,27 +1,7 @@
-<!--index.wxml-->
 <view class="container">
-  <!-- <view class="userinfo">
-    <button
-      wx:if="{{!hasUserInfo && canIUse}}"
-      open-type="getUserInfo"
-      bindgetuserinfo="getUserInfo"
-    >
-      获取头像昵称
-    </button>
-    <block wx:else>
-      <image
-        bindtap="bindViewTap"
-        class="userinfo-avatar"
-        src="{{userInfo.avatarUrl}}"
-        background-size="cover"
-      />
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view> -->
   <view class='wrapper'>
     <view class='card-wrapper'>
       <button
-        
         wx:for="{{cards}}"
         wx:key="{{index}}"
         disabled="{{item.isDisabled}}"
@@ -63,10 +43,6 @@
       {{item}}
     </text>
   </view>
-
-  <!-- <view wx:if="{{isReady}}">
-    {{answer ? '正确' : '错误'}}
-  </view> -->
   <view class="usermotto" bindtap='reset'>
     <text class="user-motto">重置</text>
   </view>
