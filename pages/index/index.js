@@ -47,36 +47,45 @@ Page({
     this.setData({ userInfo: e.detail.userInfo, hasUserInfo: true })
   },
 
-  selectCardOrOperator: function(e) {
-    const { type, value, index } = e.currentTarget.dataset
+  selectOperator: function(e) {
+    const { value } = e.currentTarget.dataset
+    const { currentOperator } = this.data
+
+    this.setData({ currentOperator: currentOperator !== value ? value : null })
+  },
+
+  selectCard: function(e) {
+    const { value, index } = e.currentTarget.dataset
     const { cards, currentOperator, currentCard } = this.data
 
-    const nextState = { cards, currentCard }
-    if (type === 'card') {
-      if (currentCard === null) {
-        nextState.currentCard = { value: cards[index].value, position: index }
-      } else if (currentCard.position === index) {
-        nextState.currentCard = null
-      } else if (currentCard.position !== index) {
-        if (currentOperator === null) {
-          nextState.currentCard = { value: cards[index].value, position: index }
-        } else {
-          nextState.currentOperator = null
+    const nextState = {
+      cards,
+      currentCard: { value: cards[index].value, position: index },
+    }
+
+    if (currentCard !== null) {
+      Object.assign(nextState, { currentCard: null })
+
+      if (currentCard.position !== index) {
+        Object.assign(nextState, {
+          currentCard: { value: cards[index].value, position: index },
+        })
+
+        if (currentOperator !== null) {
           const answer = util.calculate(
             currentCard.value,
             cards[index].value,
             currentOperator,
           )
-          nextState.currentCard = { value: answer, position: index }
+
+          Object.assign(nextState, {
+            currentOperator: null,
+            currentCard: { value: answer, position: index },
+          })
           nextState.cards[currentCard.position].isDisabled = true
-          nextState.cards[index] = {
-            value: answer,
-            isDisabled: false,
-          }
+          nextState.cards[index] = { value: answer, isDisabled: false }
         }
       }
-    } else {
-      nextState.currentOperator = currentOperator !== value ? value : null
     }
 
     this.setData({ ...nextState })

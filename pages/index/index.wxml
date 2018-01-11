@@ -6,7 +6,7 @@
         wx:key="{{index}}"
         disabled="{{item.isDisabled}}"
         class="{{currentCard && currentCard.position === index ? 'card-active' : 'card-normal'}}"
-        bindtap='selectCardOrOperator'
+        bindtap='selectCard'
         id="{{item.value}}"
         data-value="{{item.value}}"
         data-index="{{index}}"
@@ -23,7 +23,7 @@
         wx:for="{{operators}}"
         wx:key="{{index}}"
         class='operator'
-        bindtap='selectCardOrOperator'
+        bindtap='selectOperator'
         id="{{item}}"
         data-value="{{item}}"
         data-index="{{index}}"
