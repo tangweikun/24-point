@@ -61,7 +61,6 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -89,10 +88,10 @@ Page({
             currentOperator,
           )
           nextState.currentCard = { value: answer, position: index }
-
-          nextState.cards[currentCard.position] = {
+          nextState.cards[currentCard.position].isDisabled = true
+          nextState.cards[index] = {
             value: answer,
-            isDisabled: true,
+            isDisabled: false,
           }
         }
       }

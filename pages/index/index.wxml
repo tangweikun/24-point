@@ -21,6 +21,7 @@
   <view class='wrapper'>
     <view class='card-wrapper'>
       <button
+        type="{{currentCard && currentCard.position === index ? 'primary' : 'default'}}"
         wx:for="{{cards}}"
         wx:key="{{index}}"
         disabled="{{item.isDisabled}}"
@@ -37,6 +38,7 @@
 
     <view class='operator-wrapper'>
       <button
+        type="{{currentOperator === item ? 'warn' : 'default'}}"
         disabled="{{isReady}}"
         wx:for="{{operators}}"
         wx:key="{{index}}"
