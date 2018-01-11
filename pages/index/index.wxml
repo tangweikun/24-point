@@ -10,7 +10,6 @@
         id="{{item.value}}"
         data-value="{{item.value}}"
         data-index="{{index}}"
-        data-type="card"
       >
         {{item.value}}
       </button>
@@ -27,7 +26,6 @@
         id="{{item}}"
         data-value="{{item}}"
         data-index="{{index}}"
-        data-type="operator"
       >
         {{item}}
       </button>
