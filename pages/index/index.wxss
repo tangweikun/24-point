@@ -81,3 +81,28 @@
 .expression-text {
   margin-right: 15rpx;
 }
+
+.numerator {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.denominator {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.fractional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.integer {
+  font-size: 50rpx;
+}
+
+.division {
+  height: 8rpx;
+  line-height: 8rpx;
+}

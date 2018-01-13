@@ -1,7 +1,7 @@
 <view class="container">
   <view class='wrapper'>
     <view class='card-wrapper'>
-      <button
+      <view
         wx:for="{{cards}}"
         wx:key="{{index}}"
         disabled="{{item.isDisabled}}"
@@ -11,8 +11,21 @@
         data-value="{{item.value}}"
         data-index="{{index}}"
       >
-        {{item.value}}
-      </button>
+        <view wx:if="{{item.alias[0] !== 0 || !item.alias[1] }}" class="integer">
+          {{item.alias[0]}}
+        </view>
+        <view class="fractional" wx:if="{{item.alias[1]}}">
+          <view class="numerator">
+            {{item.alias[1]}}
+          </view>
+          <view class="division">
+            -
+          </view>
+          <view class="denominator">
+            {{item.alias[2]}}
+          </view>
+        </view>
+      </view>
     </view>
 
     <view class='operator-wrapper'>

@@ -1,9 +1,13 @@
 const app = getApp()
 const util = require('../../utils/util')
+const fractional = require('../../utils/fractional')
 
 const randomNumber = () => Math.ceil(Math.random() * 13)
 const generateCards = () =>
-  [0, 1, 2, 3].map(() => ({ value: randomNumber(), isDisabled: false }))
+  [0, 1, 2, 3].map(() => {
+    const value = randomNumber()
+    return { value, isDisabled: false, alias: [value] }
+  })
 
 Page({
   data: {
@@ -83,10 +87,19 @@ Page({
             currentCard: { value: answer, position: index },
           })
           nextState.cards[currentCard.position].isDisabled = true
-          nextState.cards[index] = { value: answer, isDisabled: false }
+          nextState.cards[index] = {
+            value: answer,
+            isDisabled: false,
+            alias: fractional.noDecimal(
+              nextState.cards[currentCard.position].alias,
+              nextState.cards[index].alias,
+              currentOperator,
+            ),
+          }
         }
       }
     }
+    console.log(this.data.cards)
 
     this.setData({ ...nextState })
   },
