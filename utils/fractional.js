@@ -1,16 +1,17 @@
 function noDecimal(arr1, arr2, operator) {
   const [firstInteger, firstNumerator = 0, firstDenominator = 1] = arr1
   const [secondInteger, secondNumerator = 0, secondDenominator = 1] = arr2
-  const firstSign = Math.sign(firstInteger) || 1
-  const secondSign = Math.sign(secondInteger) || 1
+  const firstSign = Math.sign(firstInteger) || Math.sign(firstNumerator) || 1
+  const secondSign = Math.sign(secondInteger) || Math.sign(secondNumerator) || 1
 
   if (operator === '+' || operator === '-') {
     const first =
-      (firstNumerator + Math.abs(firstInteger) * firstDenominator) *
+      (Math.abs(firstNumerator) + Math.abs(firstInteger) * firstDenominator) *
       secondDenominator *
       firstSign
     const second =
-      (secondNumerator + Math.abs(secondInteger) * secondDenominator) *
+      (Math.abs(secondNumerator) +
+        Math.abs(secondInteger) * secondDenominator) *
       firstDenominator *
       secondSign
     const answer = calculate(first, second, operator)
@@ -31,9 +32,11 @@ function noDecimal(arr1, arr2, operator) {
 
   if (operator === '/') {
     const first =
-      (firstNumerator + Math.abs(firstInteger) * firstDenominator) * firstSign
+      (Math.abs(firstNumerator) + Math.abs(firstInteger) * firstDenominator) *
+      firstSign
     const second =
-      (secondNumerator + Math.abs(secondInteger) * secondDenominator) *
+      (Math.abs(secondNumerator) +
+        Math.abs(secondInteger) * secondDenominator) *
         secondSign || 1
 
     return fractionalSimplify(
