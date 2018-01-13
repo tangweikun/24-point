@@ -6,7 +6,7 @@ const randomNumber = () => Math.ceil(Math.random() * 13)
 const generateCards = () =>
   [0, 1, 2, 3].map(() => {
     const value = randomNumber()
-    return { value, isDisabled: false, alias: [value] }
+    return { value, isDisabled: false, alias: [value], state: 'normal' }
   })
 
 Page({
@@ -62,18 +62,23 @@ Page({
     const { value, index } = e.currentTarget.dataset
     const { cards, currentOperator, currentCard } = this.data
 
+    if (cards[index].state === 'disable') return
+
     const nextState = {
       cards,
       currentCard: { value: cards[index].value, position: index },
     }
+    nextState.cards[index].state = 'active'
 
     if (currentCard !== null) {
       Object.assign(nextState, { currentCard: null })
+      nextState.cards[currentCard.position].state = 'normal'
 
       if (currentCard.position !== index) {
         Object.assign(nextState, {
           currentCard: { value: cards[index].value, position: index },
         })
+        nextState.cards[currentCard.position].state = 'normal'
 
         if (currentOperator !== null) {
           const answer = util.calculate(
@@ -87,9 +92,11 @@ Page({
             currentCard: { value: answer, position: index },
           })
           nextState.cards[currentCard.position].isDisabled = true
+          nextState.cards[currentCard.position].state = 'disable'
           nextState.cards[index] = {
             value: answer,
             isDisabled: false,
+            state: 'active',
             alias: fractional.noDecimal(
               nextState.cards[currentCard.position].alias,
               nextState.cards[index].alias,

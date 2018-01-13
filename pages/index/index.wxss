@@ -42,6 +42,17 @@
   color: #ffffff;
 }
 
+.card-disable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140rpx;
+  height: 140rpx;
+  margin-bottom: 20rpx;
+  background-color: gray;
+  color: #ffffff;
+}
+
 .operator {
   color: red;
   width: 80rpx;
