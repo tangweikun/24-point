@@ -18,6 +18,7 @@ Page({
     currentOperator: null,
     currentCard: null,
     cards: generateCards(),
+    isFinish: false,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -106,9 +107,10 @@ Page({
         }
       }
     }
-    console.log(this.data.cards)
+    const isFinish =
+      nextState.cards.filter(({ state }) => state === 'disable').length === 3
 
-    this.setData({ ...nextState })
+    this.setData({ ...nextState, isFinish })
   },
 
   reset: function(e) {
@@ -116,6 +118,7 @@ Page({
       cards: generateCards(),
       currentCard: null,
       currentOperator: null,
+      isFinish: false,
     })
   },
 })

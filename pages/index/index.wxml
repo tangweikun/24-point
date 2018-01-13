@@ -1,5 +1,13 @@
 <view class="container">
-  <view class='wrapper'>
+  <view wx:if="{{isFinish}}" class='expression-wrapper'>
+    <text
+      class='expression-text'
+    >
+      {{currentCard.value === 24 ? '🎉恭喜答对' : '☹️错啦'}}
+    </text>
+  </view>
+
+  <view wx:else class='wrapper'>
     <view class='card-wrapper'>
       <view
         wx:for="{{cards}}"
@@ -43,17 +51,8 @@
       </button>
     </view>
   </view>
-  
-  <view class='expression-wrapper'>
-    <text
-      class='expression-text'
-      wx:for="{{expression}}"
-      wx:key="{{index}}"
-    >
-      {{item}}
-    </text>
-  </view>
+
   <view class="usermotto" bindtap='reset'>
-    <text class="user-motto">重置</text>
+    <text class="user-motto">下一题</text>
   </view>
 </view>
