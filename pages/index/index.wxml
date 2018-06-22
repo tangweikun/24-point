@@ -3,7 +3,7 @@
     <text
       class='expression-text'
     >
-      {{currentCard.value === 24 ? '🎉恭喜答对' : '☹️错啦'}}
+      {{currentCard.value === 24 ? '🎉恭喜答对' : '☹️答错啦'}}
     </text>
   </view>
 
