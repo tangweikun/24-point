@@ -1,5 +1,15 @@
-<view class="container">
-  <view wx:if="{{isFinish}}" class='expression-wrapper'>
+<view>
+  <view class="score">
+    <text>
+      总得分：{{totalOfCorrectAnswers}}
+    </text>
+    <text>
+      累计答题：{{totalOfAnswers}}
+    </text>
+  </view>
+
+  <view class="container">
+      <view wx:if="{{isFinish}}" class='expression-wrapper'>
     <text
       class='expression-text'
     >
@@ -54,5 +64,6 @@
 
   <view class="usermotto" bindtap='reset'>
     <text class="user-motto">下一题</text>
+  </view>
   </view>
 </view>

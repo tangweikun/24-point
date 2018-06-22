@@ -23,7 +23,6 @@ App({
                       userInfo: res2.userInfo,
                     },
                     success: response => {
-                      this.globalData.userInfo = res2.userInfo
                       this.globalData.openid = response.data.openid
                     },
                   })

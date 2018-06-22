@@ -19,6 +19,8 @@ Page({
     currentCard: null,
     cards: generateCards(),
     isFinish: false,
+    totalOfAnswers: 0,
+    totalOfCorrectAnswers: 0,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -128,12 +130,18 @@ Page({
           isCorrect: nextState.currentCard.value === 24,
         },
         success: res => {
-          console.log(res, '999')
+          this.setData({
+            totalOfCorrectAnswers: res.data.totalOfCorrectAnswers,
+            totalOfAnswers: res.data.totalOfAnswers,
+          })
         },
       })
     }
 
-    this.setData({ ...nextState, isFinish })
+    this.setData({
+      ...nextState,
+      isFinish,
+    })
   },
 
   reset: function(e) {

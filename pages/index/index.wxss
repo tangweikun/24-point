@@ -127,3 +127,8 @@
   height: 8rpx;
   line-height: 8rpx;
 }
+
+.score {
+  font-size: 22rpx;
+  padding-left: 30rpx;
+}
