@@ -1,0 +1,19 @@
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  padding: 50rpx;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-authorize {
+  width: 90%;
+}
+
+.profile-detail {
+  padding: 20rpx;
+}

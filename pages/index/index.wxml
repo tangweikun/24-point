@@ -8,12 +8,12 @@
     </text>
   </view>
 
-  <view class="container">
-    <view wx:if="{{isFinish}}" class='expression-wrapper'>
-      <text class='expression-text'>
-        {{currentCard.value === 24 ? '🎉恭喜答对' : '☹️答错啦'}}
-      </text>
-    </view>
+
+  <view wx:if="{{isFinish}}" class='expression-wrapper'>
+    <text class='expression-text'>
+      {{currentCard.value === 24 ? '🎉回答正确' : '☹️再接再厉'}}
+    </text>
+  </view>
 
   <view wx:else class='wrapper'>
     <view class='card-wrapper'>
@@ -64,5 +64,5 @@
     <view class='reset-or-skip' bindtap='skip'>下一题</view>
     <view wx:if="{{!isFinish}}" class='reset-or-skip' bindtap='reset'>重置</view>
   </view>
-  </view>
+
 </view>
