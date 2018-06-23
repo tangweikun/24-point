@@ -1,33 +1,11 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0 100rpx;
+  padding-top: 100rpx;
   box-sizing: border-box;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 100px;
 }
 
 .card-normal {
@@ -35,19 +13,19 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  width: 140rpx;
-  height: 140rpx;
-  margin-bottom: 20rpx;
-  background-color: rgb(0, 255, 157);
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  background-color: #6ddac8;
 }
 
 .card-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 140rpx;
-  height: 140rpx;
-  margin-bottom: 20rpx;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
   background-color: green;
   color: #ffffff;
 }
@@ -56,17 +34,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 140rpx;
-  height: 140rpx;
-  margin-bottom: 20rpx;
-  background-color: gray;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  background-color: #e5e5e5;
   color: #ffffff;
 }
 
 .operator {
   color: red;
-  width: 80rpx;
-  height: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -80,8 +58,9 @@
 }
 
 .card-wrapper {
+  flex-grow: 1;
   display: flex;
-  width: 320rpx;
+  width: 440rpx;
   margin-bottom: 40rpx;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -130,5 +109,9 @@
 
 .score {
   font-size: 22rpx;
-  padding-left: 30rpx;
+  padding-left: 40rpx;
+}
+
+.footer {
+  padding-top: 100rpx;
 }

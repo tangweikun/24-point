@@ -62,8 +62,8 @@
     </view>
   </view>
 
-  <view class="usermotto" bindtap='reset'>
-    <text class="user-motto">下一题</text>
+  <view class="footer">
+    <view bindtap='reset'>下一题</view>
   </view>
   </view>
 </view>
