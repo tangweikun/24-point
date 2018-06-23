@@ -1,14 +1,4 @@
 <view>
-  <view class="score">
-    <text>
-      总得分：{{totalOfCorrectAnswers}}
-    </text>
-    <text>
-      累计答题：{{totalOfAnswers}}
-    </text>
-  </view>
-
-
   <view wx:if="{{isFinish}}" class='expression-wrapper'>
     <text class='expression-text'>
       {{currentCard.value === 24 ? '🎉回答正确' : '☹️再接再厉'}}
