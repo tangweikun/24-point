@@ -84,7 +84,7 @@ function fractionalSimplify(numerator, denominator) {
   const sign = Math.sign(numerator) * Math.sign(denominator)
   const REMINDER = absNumerator % absDenominator
 
-  if (REMINDER === 0) return [sign * absNumerator / absDenominator]
+  if (REMINDER === 0) return [(sign * absNumerator) / absDenominator]
 
   const GREATEST_COMMON_DIVISOR = greatestCommonDivisor(
     absNumerator,
@@ -100,5 +100,5 @@ function fractionalSimplify(numerator, denominator) {
 }
 
 module.exports = {
-  noDecimal: noDecimal,
+  noDecimal,
 }
