@@ -9,6 +9,8 @@ const generateCards = () =>
     return { value, isDisabled: false, alias: [value], state: 'normal' }
   })
 
+const defaultCards = generateCards()
+
 Page({
   data: {
     userInfo: {},
@@ -17,7 +19,8 @@ Page({
     operators: ['+', '-', '*', '/'],
     currentOperator: null,
     currentCard: null,
-    cards: generateCards(),
+    cards: defaultCards,
+    initialCards: [...defaultCards],
     isFinish: false,
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
@@ -71,6 +74,7 @@ Page({
   },
 
   selectCard: function(e) {
+    console.log(this.data, '--')
     const { value, index } = e.currentTarget.dataset
     const { cards, currentOperator, currentCard } = this.data
     if (cards[index].state === 'disable') return
@@ -146,7 +150,18 @@ Page({
 
   reset: function(e) {
     this.setData({
-      cards: generateCards(),
+      cards: [...this.data.initialCards],
+      currentCard: null,
+      currentOperator: null,
+      isFinish: false,
+    })
+  },
+
+  skip: function(e) {
+    const newCards = generateCards()
+    this.setData({
+      cards: newCards,
+      initialCards: [...newCards],
       currentCard: null,
       currentOperator: null,
       isFinish: false,

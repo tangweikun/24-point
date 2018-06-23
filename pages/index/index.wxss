@@ -113,5 +113,10 @@
 }
 
 .footer {
-  padding-top: 100rpx;
+  padding-top: 80rpx;
+  display: flex;
+}
+
+.reset-or-skip {
+  padding: 50rpx;
 }
