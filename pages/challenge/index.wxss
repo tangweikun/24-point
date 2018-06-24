@@ -107,8 +107,7 @@
 }
 
 .footer {
-  display: flex;
-  justify-content: space-around;
+  padding: 60rpx;
 }
 
 .reset-or-skip {

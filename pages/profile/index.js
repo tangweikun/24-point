@@ -8,6 +8,8 @@ Page({
     totalOfCorrectAnswers: 0,
     ranking: 0,
     accuracy: 100,
+    challengeRanking: '-',
+    bestRecord: '-',
   },
 
   onLoad: function() {},
@@ -35,10 +37,12 @@ Page({
             },
             success: response => {
               const {
-                userInfo,
+                userInfo = {},
                 totalOfCorrectAnswers = '-',
                 totalOfAnswers = '-',
                 ranking = '-',
+                challengeRanking = '-',
+                bestRecord = '-',
               } = response.data
 
               app.globalData.userInfo = userInfo
@@ -46,6 +50,8 @@ Page({
                 totalOfCorrectAnswers,
                 totalOfAnswers,
                 ranking,
+                challengeRanking,
+                bestRecord,
                 isAuthorized: true,
                 accuracy:
                   ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) +

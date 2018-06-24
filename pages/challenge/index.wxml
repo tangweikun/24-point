@@ -6,7 +6,7 @@
   <view wx:else class='wrapper'>
     <view class="challenge-header">
       <view class="challenge-header-box">倒计时: {{countdown}}</view>
-      <view class="challenge-header-box">已完成: 7</view>
+      <view class="challenge-header-box">已完成: {{record}}</view>
     </view>
 
     <view class='card-wrapper'>

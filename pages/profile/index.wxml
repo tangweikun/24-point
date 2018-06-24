@@ -14,21 +14,29 @@
     </button>
     <view wx:else>
       <view class="profile-detail">
-        <label>排名：</label>
+        <label>限时排名：</label>
+        <label>{{challengeRanking}}</label>
+      </view>
+      <view class="profile-detail">
+        <label>限时挑战记录：</label>
+        <label>{{bestRecord}}</label>
+      </view>
+      <view class="profile-detail">
+        <label>正确答题数排名：</label>
         <label>{{ranking}}</label>
       </view>
       <view class="profile-detail">
-        <label>总得分：</label>
+        <label>正确答题数：</label>
         <label>{{totalOfCorrectAnswers}}</label>
       </view>
       <view class="profile-detail">
         <label>正确率：</label>
         <label>{{accuracy}}</label>
       </view>
-      <view class="profile-detail">
+      <!-- <view class="profile-detail">
         <label>累计答题：</label>
         <label>{{totalOfAnswers}}</label>
-      </view>
+      </view> -->
     </view>
   </view>
 

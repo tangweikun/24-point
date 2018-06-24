@@ -10,36 +10,80 @@ Page({
     currentCard: null,
     cards: defaultCards,
     initialCards: [...defaultCards],
-    isFinish: false,
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     isStart: false,
-    countdown: 10,
+    countdown: 30,
+    record: 0,
+  },
+
+  onShow: function() {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.request({
+            url: 'https://api.tangweikun.cn/getUserInfo',
+            method: 'post',
+            data: {
+              openid: app.globalData.openid,
+            },
+            success: response => {
+              const {
+                userInfo,
+                totalOfCorrectAnswers = '-',
+                totalOfAnswers = '-',
+                ranking = '-',
+              } = response.data
+
+              app.globalData.userInfo = userInfo
+              this.setData({
+                totalOfCorrectAnswers,
+                totalOfAnswers,
+                ranking,
+                isAuthorized: true,
+                accuracy:
+                  ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) +
+                  '%',
+              })
+            },
+          })
+        }
+      },
+    })
   },
 
   onShareAppMessage: function(res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
     return {
       title: '24点',
       path: '/pages/index/index',
     }
   },
 
-  onLoad: function() {},
-
   countdown: function() {
-    console.log('-----', this.data)
     const that = this
+    const { openid, userInfo } = app.globalData
 
-    if (this.data.countdown < 1 || !this.data.isStart) {
-      this.setData({ isStart: false })
+    if (this.data.countdown < 1) {
+      if (this.data.isStart) {
+        const foo = this.data.record
+
+        this.openAlert(foo)
+        wx.request({
+          url: 'https://api.tangweikun.cn/addChallenge',
+          method: 'post',
+          data: {
+            openid,
+            userInfo,
+            record: foo,
+          },
+          success: res => {
+            console.log(res)
+          },
+        })
+      }
     } else {
-      this.setData({
-        countdown: this.data.countdown - 1,
-      })
+      this.setData({ countdown: this.data.countdown - 1 })
+
       setTimeout(function() {
         that.countdown()
       }, 1000)
@@ -47,7 +91,15 @@ Page({
   },
 
   handleStart: function() {
-    this.setData({ isStart: true, countdown: 10 })
+    const newCards = generateCards()
+    this.setData({
+      isStart: true,
+      cards: [...newCards],
+      initialCards: [...newCards],
+      currentCard: null,
+      currentOperator: null,
+      countdown: 30,
+    })
     this.countdown()
   },
 
@@ -114,12 +166,25 @@ Page({
       const isCorrect = nextState.currentCard.value === 24
       if (isCorrect) {
         this.skip()
+        this.setData({ record: this.data.record + 1 })
       } else {
-        this.skip()
+        const foo = this.data.record
+        this.openAlert(foo)
+        wx.request({
+          url: 'https://api.tangweikun.cn/addChallenge',
+          method: 'post',
+          data: {
+            openid,
+            userInfo: app.globalData.userInfo,
+            record: foo,
+          },
+          success: res => {
+            console.log(res)
+          },
+        })
         this.setData({ isStart: false })
       }
 
-      this.openToast(isCorrect)
       wx.request({
         url: 'https://api.tangweikun.cn/increaseAnswersCount',
         method: 'post',
@@ -137,7 +202,6 @@ Page({
     } else {
       this.setData({
         ...nextState,
-        isFinish,
       })
     }
   },
@@ -147,15 +211,6 @@ Page({
       cards: [...this.data.initialCards],
       currentCard: null,
       currentOperator: null,
-      isFinish: false,
-    })
-  },
-
-  openToast: function(isCorrect) {
-    wx.showToast({
-      title: isCorrect ? '回答正确' : '再接再厉',
-      icon: 'success',
-      duration: 1000,
     })
   },
 
@@ -166,8 +221,16 @@ Page({
       initialCards: [...newCards],
       currentCard: null,
       currentOperator: null,
-      isFinish: false,
-      countdown: 10,
+      countdown: 30,
     })
+  },
+
+  openAlert: function(record) {
+    wx.showModal({
+      content: '本次挑战得分: ' + record,
+      showCancel: false,
+      success: function(res) {},
+    })
+    this.setData({ isStart: false, record: 0 })
   },
 })
