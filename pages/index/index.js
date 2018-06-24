@@ -1,22 +1,5 @@
 const app = getApp()
-const util = require('../../utils/util')
-const fractional = require('../../utils/fractional')
-const solution = require('../../utils/solution')
-
-const randomNumber = () => Math.ceil(Math.random() * 13)
-const generateCards = () => {
-  while (true) {
-    const values = [0, 1, 2, 3].map(x => randomNumber())
-    if (solution.hasSolutionOf24Point(values)) {
-      return values.map(value => ({
-        value,
-        isDisabled: false,
-        alias: [value],
-        state: 'normal',
-      }))
-    }
-  }
-}
+const { generateCards, noDecimal, calculate } = require('../../utils/index.js')
 
 const defaultCards = generateCards()
 
@@ -81,7 +64,7 @@ Page({
         nextState.cards[currentCard.position].state = 'normal'
 
         if (currentOperator !== null) {
-          const answer = util.calculate(
+          const answer = calculate(
             currentCard.value,
             cards[index].value,
             currentOperator,
@@ -97,7 +80,7 @@ Page({
             value: answer,
             isDisabled: false,
             state: 'active',
-            alias: fractional.noDecimal(
+            alias: noDecimal(
               nextState.cards[currentCard.position].alias,
               nextState.cards[index].alias,
               currentOperator,
