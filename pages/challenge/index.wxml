@@ -1,0 +1,59 @@
+<view class="page">
+  <view wx:if="{{!isStart}}" class='expression-wrapper'>
+      <button bindtap="handleStart">开始挑战</button>
+  </view>
+
+  <view wx:else class='wrapper'>
+    <view class="challenge-header">
+      <view class="challenge-header-box">倒计时: {{countdown}}</view>
+      <view class="challenge-header-box">已完成: 7</view>
+    </view>
+
+    <view class='card-wrapper'>
+      <view
+        wx:for="{{cards}}"
+        wx:key="{{index}}"
+        class="card-{{item.state}}"
+        bindtap="selectCard"
+        id="{{item.value}}"
+        data-value="{{item.value}}"
+        data-index="{{index}}"
+      >
+        <view wx:if="{{item.alias[0] !== 0 || !item.alias[1] }}" class="integer">
+          {{item.alias[0]}}
+        </view>
+        <view class="fractional" wx:if="{{item.alias[1]}}">
+          <view class="numerator">
+            {{item.alias[1]}}
+          </view>
+          <view class="division">
+            -
+          </view>
+          <view class="denominator">
+            {{item.alias[2]}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='operator-wrapper'>
+      <button
+        type="{{currentOperator === item ? 'warn' : 'default'}}"
+        disabled="{{isReady}}"
+        wx:for="{{operators}}"
+        wx:key="{{index}}"
+        class='operator'
+        bindtap='selectOperator'
+        id="{{item}}"
+        data-value="{{item}}"
+        data-index="{{index}}"
+      >
+        {{item}}
+      </button>
+    </view>
+
+    <view class="footer">
+      <view wx:if="{{!isFinish}}" class='reset-or-skip' bindtap='reset'>重置</view>
+    </view>
+  </view>
+</view>

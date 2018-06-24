@@ -1,0 +1,135 @@
+.card-normal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  background-color: #6ddac8;
+}
+
+.card-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  background-color: green;
+  color: #ffffff;
+}
+
+.card-disable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  background-color: #e5e5e5;
+  color: #ffffff;
+}
+
+.operator {
+  color: red;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.operator-wrapper {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.card-wrapper {
+  flex-grow: 1;
+  display: flex;
+  width: 440rpx;
+  margin-bottom: 40rpx;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20rpx 0 80rpx;
+}
+
+.expression-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50rpx;
+  height: 760rpx;
+}
+
+.expression-text {
+  margin-right: 15rpx;
+}
+
+.numerator {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.denominator {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.fractional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.integer {
+  font-size: 50rpx;
+}
+
+.division {
+  height: 8rpx;
+  line-height: 8rpx;
+}
+
+.score {
+  font-size: 22rpx;
+  padding-left: 40rpx;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.reset-or-skip {
+  padding: 50rpx;
+}
+
+.challenge-header {
+  justify-content: space-between;
+  width: 70%;
+  display: flex;
+  padding: 0 0 120rpx;
+}
+
+.challenge-header-box {
+  width: 210rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #6ddac8;
+  border-radius: 30rpx;
+  color: #6ddac8;
+  font-size: 30rpx;
+}
