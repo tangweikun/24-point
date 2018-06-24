@@ -12,6 +12,17 @@ Page({
 
   onLoad: function() {},
 
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '24点',
+      path: '/pages/index/index',
+    }
+  },
+
   onShow: function() {
     wx.getSetting({
       success: res => {
