@@ -19,7 +19,7 @@ Page({
     }
     return {
       title: '24点',
-      path: '/pages/index/index',
+      path: '/pages/profile/index',
     }
   },
 
