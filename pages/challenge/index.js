@@ -19,7 +19,7 @@ Page({
     gameOver: false,
   },
 
-  onShow: function() {
+  onLoad: function() {
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {

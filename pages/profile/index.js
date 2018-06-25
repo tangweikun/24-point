@@ -12,8 +12,6 @@ Page({
     bestRecord: '-',
   },
 
-  onLoad: function() {},
-
   onShareAppMessage: function(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -25,7 +23,7 @@ Page({
     }
   },
 
-  onShow: function() {
+  onLoad: function() {
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -77,5 +75,45 @@ Page({
       },
     })
     this.setData({ isAuthorized: true })
+  },
+
+  onPullDownRefresh() {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.request({
+            url: 'https://api.tangweikun.cn/getUserInfo',
+            method: 'post',
+            data: {
+              openid: app.globalData.openid,
+            },
+            success: response => {
+              const {
+                userInfo = {},
+                totalOfCorrectAnswers = '-',
+                totalOfAnswers = '-',
+                ranking = '-',
+                challengeRanking = '-',
+                bestRecord = '-',
+              } = response.data
+
+              app.globalData.userInfo = userInfo
+              this.setData({
+                totalOfCorrectAnswers,
+                totalOfAnswers,
+                ranking,
+                challengeRanking,
+                bestRecord,
+                isAuthorized: true,
+                accuracy:
+                  ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) +
+                  '%',
+              })
+            },
+          })
+        }
+      },
+    })
+    wx.stopPullDownRefresh()
   },
 })
