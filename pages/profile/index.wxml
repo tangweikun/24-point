@@ -21,10 +21,10 @@
         <label>限时挑战记录：</label>
         <label>{{bestRecord}}</label>
       </view>
-      <view class="profile-detail">
+      <!-- <view class="profile-detail">
         <label>正确答题数排名：</label>
         <label>{{ranking}}</label>
-      </view>
+      </view> -->
       <view class="profile-detail">
         <label>正确答题数：</label>
         <label>{{totalOfCorrectAnswers}}</label>

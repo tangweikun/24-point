@@ -1,8 +1,7 @@
 <view>
   <view wx:if="{{isFinish}}" class='expression-wrapper'>
-    <text class='expression-text'>
-      {{currentCard.value === 24 ? '🎉回答正确' : '☹️再接再厉'}}
-    </text>
+    <view class="challenge-record">再接再厉!</view>
+    <view class="challenge-recommend">推荐算法: {{recommendSolution}}</view>
   </view>
 
   <view wx:else class='wrapper'>

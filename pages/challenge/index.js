@@ -8,13 +8,15 @@ Page({
     operators: ['+', '-', '*', '/'],
     currentOperator: null,
     currentCard: null,
-    cards: defaultCards,
-    initialCards: [...defaultCards],
+    cards: defaultCards.cards,
+    initialCards: [...defaultCards.cards],
+    recommendSolution: defaultCards.recommendSolution,
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     isStart: false,
-    countdown: 30,
+    countdown: 10,
     record: 0,
+    gameOver: false,
   },
 
   onShow: function() {
@@ -94,11 +96,14 @@ Page({
     const newCards = generateCards()
     this.setData({
       isStart: true,
-      cards: [...newCards],
-      initialCards: [...newCards],
+      gameOver: false,
+      cards: [...newCards.cards],
+      initialCards: [...newCards.cards],
+      recommendSolution: newCards.recommendSolution,
       currentCard: null,
       currentOperator: null,
-      countdown: 30,
+      countdown: 10,
+      record: 0,
     })
     this.countdown()
   },
@@ -182,7 +187,7 @@ Page({
             console.log(res)
           },
         })
-        this.setData({ isStart: false })
+        this.setData({ isStart: false, gameOver: true })
       }
 
       wx.request({
@@ -217,20 +222,25 @@ Page({
   skip: function(e) {
     const newCards = generateCards()
     this.setData({
-      cards: [...newCards],
-      initialCards: [...newCards],
+      cards: [...newCards.cards],
+      initialCards: [...newCards.cards],
+      recommendSolution: newCards.recommendSolution,
       currentCard: null,
       currentOperator: null,
-      countdown: 30,
+      countdown: 10,
     })
   },
 
   openAlert: function(record) {
-    wx.showModal({
-      content: '本次挑战得分: ' + record,
-      showCancel: false,
-      success: function(res) {},
+    this.setData({
+      gameOver: true,
+      isStart: false,
     })
-    this.setData({ isStart: false, record: 0 })
+    // wx.showModal({
+    //   content: '本次挑战得分: ' + record,
+    //   showCancel: false,
+    //   success: function(res) {},
+    // })
+    // this.setData({ isStart: false, record: 0 })
   },
 })

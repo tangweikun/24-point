@@ -70,6 +70,7 @@
   align-items: center;
   font-size: 50rpx;
   height: 760rpx;
+  flex-direction: column;
 }
 
 .expression-text {
@@ -131,4 +132,16 @@
   border-radius: 30rpx;
   color: #6ddac8;
   font-size: 30rpx;
+}
+
+.challenge-record {
+  font-size: 40rpx;
+  color: #6ddac8;
+  padding: 40rpx;
+}
+
+.challenge-recommend {
+  font-size: 40rpx;
+  color: #6ddac8;
+  padding: 0 0 60rpx;
 }

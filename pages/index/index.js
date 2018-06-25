@@ -8,8 +8,9 @@ Page({
     operators: ['+', '-', '*', '/'],
     currentOperator: null,
     currentCard: null,
-    cards: defaultCards,
-    initialCards: [...defaultCards],
+    cards: defaultCards.cards,
+    initialCards: [...defaultCards.cards],
+    recommendSolution: defaultCards.recommendSolution,
     isFinish: false,
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
@@ -110,10 +111,14 @@ Page({
       })
     }
 
-    this.setData({
-      ...nextState,
-      isFinish,
-    })
+    if (isFinish && nextState.currentCard.value === 24) {
+      this.skip()
+    } else {
+      this.setData({
+        ...nextState,
+        isFinish,
+      })
+    }
   },
 
   reset: function(e) {
@@ -128,8 +133,9 @@ Page({
   skip: function(e) {
     const newCards = generateCards()
     this.setData({
-      cards: newCards,
-      initialCards: [...newCards],
+      cards: newCards.cards,
+      initialCards: [...newCards.cards],
+      recommendSolution: newCards.recommendSolution,
       currentCard: null,
       currentOperator: null,
       isFinish: false,
