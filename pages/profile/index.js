@@ -7,7 +7,7 @@ Page({
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     ranking: 0,
-    accuracy: 100,
+    accuracy: '100%',
     challengeRanking: '-',
     bestRecord: '-',
   },
@@ -43,6 +43,13 @@ Page({
                 bestRecord = '-',
               } = response.data
 
+              const accuracy =
+                totalOfAnswers === '-'
+                  ? '-'
+                  : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(
+                      2,
+                    ) + '%'
+
               app.globalData.userInfo = userInfo
               this.setData({
                 totalOfCorrectAnswers,
@@ -51,9 +58,7 @@ Page({
                 challengeRanking,
                 bestRecord,
                 isAuthorized: true,
-                accuracy:
-                  ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) +
-                  '%',
+                accuracy,
               })
             },
           })
@@ -63,18 +68,20 @@ Page({
   },
 
   bindGetUserInfo: function(e) {
-    wx.request({
-      url: 'https://api.tangweikun.cn/updateUserInfo',
-      method: 'post',
-      data: {
-        openid: app.globalData.openid,
-        userInfo: e.detail.userInfo,
-      },
-      success: response => {
-        console.log(response)
-      },
-    })
-    this.setData({ isAuthorized: true })
+    if (app.globalData.openid) {
+      wx.request({
+        url: 'https://api.tangweikun.cn/updateUserInfo',
+        method: 'post',
+        data: {
+          openid: app.globalData.openid,
+          userInfo: e.detail.userInfo,
+        },
+        success: response => {
+          console.log(response)
+        },
+      })
+      this.setData({ isAuthorized: true })
+    }
   },
 
   onPullDownRefresh() {

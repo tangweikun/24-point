@@ -14,7 +14,7 @@ Page({
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     isStart: false,
-    countdown: 10,
+    countdown: 31,
     record: 0,
     gameOver: false,
   },
@@ -56,8 +56,8 @@ Page({
 
   onShareAppMessage: function(res) {
     return {
-      title: '24点',
-      path: '/pages/index/index',
+      title: '限时挑战',
+      path: '/pages/challenge/index',
     }
   },
 
@@ -65,7 +65,7 @@ Page({
     const that = this
     const { openid, userInfo } = app.globalData
 
-    if (this.data.countdown < 1) {
+    if (this.data.countdown < 2) {
       if (this.data.isStart) {
         const foo = this.data.record
 
@@ -102,7 +102,7 @@ Page({
       recommendSolution: newCards.recommendSolution,
       currentCard: null,
       currentOperator: null,
-      countdown: 10,
+      countdown: 31,
       record: 0,
     })
     this.countdown()
@@ -227,7 +227,7 @@ Page({
       recommendSolution: newCards.recommendSolution,
       currentCard: null,
       currentOperator: null,
-      countdown: 10,
+      countdown: 31,
     })
   },
 

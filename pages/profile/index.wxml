@@ -21,10 +21,6 @@
         <label>限时挑战记录：</label>
         <label>{{bestRecord}}</label>
       </view>
-      <!-- <view class="profile-detail">
-        <label>正确答题数排名：</label>
-        <label>{{ranking}}</label>
-      </view> -->
       <view class="profile-detail">
         <label>正确答题数：</label>
         <label>{{totalOfCorrectAnswers}}</label>
@@ -33,10 +29,18 @@
         <label>正确率：</label>
         <label>{{accuracy}}</label>
       </view>
-      <!-- <view class="profile-detail">
-        <label>累计答题：</label>
-        <label>{{totalOfAnswers}}</label>
-      </view> -->
+
+      <view class="feedback">
+        <view class="profile-detail">
+          更多功能持续更新中,敬请期待!!!
+        </view>
+        <view class="profile-detail">
+          反馈请发送至 819573105@qq.com
+        </view>
+        <view class="profile-detail">
+          下拉可刷新限时排名
+        </view>
+      </view>
     </view>
   </view>
 

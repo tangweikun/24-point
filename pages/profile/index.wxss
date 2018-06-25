@@ -17,3 +17,8 @@
 .profile-detail {
   padding: 20rpx;
 }
+
+.feedback {
+  font-size: 28rpx;
+  padding-top: 120rpx;
+}
