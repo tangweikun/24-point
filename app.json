@@ -9,7 +9,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "普通玩法"
+        "text": "经典模式"
       },
       {
         "pagePath": "pages/challenge/index",

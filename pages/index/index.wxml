@@ -34,7 +34,7 @@
 
     <view class='operator-wrapper'>
       <button
-        type="{{currentOperator === item ? 'warn' : 'default'}}"
+        type="{{selectedOperator === item ? 'warn' : 'default'}}"
         disabled="{{isReady}}"
         wx:for="{{operators}}"
         wx:key="{{index}}"
