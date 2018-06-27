@@ -18,12 +18,18 @@ Page({
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     isStart: false,
-    countdown: 31,
+    countdown: 30,
     record: 0,
     gameOver: false,
+    onThisPage: true,
+  },
+
+  onUnload: function() {
+    this.setData({ onThisPage: false })
   },
 
   onLoad: function() {
+    this.handleStart()
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -66,6 +72,8 @@ Page({
   },
 
   countdown: function() {
+    if (!this.data.onThisPage || this.data.gameOver) return
+
     const that = this
     const { openid, userInfo } = app.globalData
 
@@ -106,7 +114,7 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 31,
+      countdown: 30,
       record: 0,
     })
     this.countdown()
@@ -232,7 +240,7 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 31,
+      countdown: 30,
     })
   },
 

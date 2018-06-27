@@ -3,17 +3,18 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/profile/index",
-    "pages/challenge/index"
+    "pages/challenge/index",
+    "pages/home/index"
   ],
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "经典模式"
+        "text": "随便试试"
       },
       {
-        "pagePath": "pages/challenge/index",
-        "text": "限时挑战"
+        "pagePath": "pages/home/index",
+        "text": "更多模式"
       },
       {
         "pagePath": "pages/profile/index",

@@ -1,0 +1,20 @@
+<view class="profile-container">
+  <view class="avatar">
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+
+  <view class="home-circle-wrapper">
+      <view
+        wx:for="{{gamePlay}}"
+        class="{{item.isReady ? 'home-circle' : 'home-circle-disable'}}"
+        bindtap="goNewPage"
+        wx:key="{{index}}"
+        data-url="{{item.url}}"
+        data-ready="{{item.isReady}}"
+        data-index="{{index}}"
+        id="{{item}}"
+      >
+        {{item.text}}
+      </view>
+    </view>
+</view>

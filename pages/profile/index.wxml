@@ -10,7 +10,7 @@
       bindgetuserinfo="bindGetUserInfo"
       type="primary"
     >
-      授权登录
+      查看战绩
     </button>
     <view wx:else>
       <view class="profile-detail">

@@ -1,5 +1,5 @@
 <view class="page">
-  <view wx:if="{{!isStart}}" class='expression-wrapper'>
+  <view wx:if="{{gameOver}}" class='expression-wrapper'>
       <view class="challenge-record" wx:if="{{gameOver}}">挑战成绩: {{record}}</view>
       <view class="challenge-recommend" wx:if="{{gameOver}}">推荐算法: {{recommendSolution}}</view>
       <button type="primary" bindtap="handleStart">开始挑战</button>

@@ -1,0 +1,60 @@
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  padding: 50rpx;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-authorize {
+  width: 90%;
+}
+
+.profile-detail {
+  padding: 20rpx;
+}
+
+.feedback {
+  font-size: 28rpx;
+  padding-top: 120rpx;
+}
+
+.home-circle {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 90rpx;
+  border: 8rpx solid #6ddac8;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  padding: 50rpx;
+  margin-bottom: 80rpx;
+}
+
+.home-circle-disable {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 90rpx;
+  border: 8rpx solid #e5e5e5;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  padding: 50rpx;
+  margin-bottom: 80rpx;
+}
+
+.home-circle-wrapper {
+  display: flex;
+  width: 440rpx;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 100rpx;
+}

@@ -37,11 +37,12 @@ Page({
   selectCard: function(e) {
     const { value, index } = e.currentTarget.dataset
     const { cards, selectedOperator, selectedCard } = this.data
+    const currentCard = cards[index].value
     if (cards[index].state === 'disable') return
 
     const nextState = {
       cards,
-      selectedCard: { value: cards[index].value, position: index },
+      selectedCard: { value: currentCard, position: index },
     }
     nextState.cards[index].state = 'active'
 
@@ -51,14 +52,14 @@ Page({
 
       if (selectedCard.position !== index) {
         Object.assign(nextState, {
-          selectedCard: { value: cards[index].value, position: index },
+          selectedCard: { value: currentCard, position: index },
         })
         nextState.cards[selectedCard.position].state = 'normal'
 
         if (selectedOperator !== null) {
           const answer = calculate(
             selectedCard.value,
-            cards[index].value,
+            currentCard,
             selectedOperator,
           )
 
@@ -80,18 +81,19 @@ Page({
         }
       }
     }
-    console.log(this.data)
+
     const isFinish =
       nextState.cards.filter(({ state }) => state === 'disable').length === 3
-
     const openid = app.globalData.openid
+    const isCorrect = nextState.selectedCard.value === 24
+
     if (isFinish && openid !== '') {
       wx.request({
         url: 'https://api.tangweikun.cn/increaseAnswersCount',
         method: 'post',
         data: {
           openid,
-          isCorrect: nextState.selectedCard.value === 24,
+          isCorrect,
         },
         success: res => {
           console.log(res)
@@ -99,13 +101,10 @@ Page({
       })
     }
 
-    if (isFinish && nextState.selectedCard.value === 24) {
+    if (isFinish && isCorrect) {
       this.skip()
     } else {
-      this.setData({
-        ...nextState,
-        isFinish,
-      })
+      this.setData({ ...nextState, isFinish })
     }
   },
 
