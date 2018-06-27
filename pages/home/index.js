@@ -10,7 +10,7 @@ Page({
       },
       {
         text: '你问我答',
-        url: '/pages/challenge/index',
+        url: '/pages/solution/index',
         isReady: true,
       },
       {

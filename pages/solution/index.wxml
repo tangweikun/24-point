@@ -1,0 +1,30 @@
+<view class="profile-container">
+  <view class="solution-answer">
+    推荐算法: {{solution}}
+  </view>
+
+  <view class="solution-solution-wrapper">
+    <view
+      wx:for="{{[0,1,2,3]}}"
+      class='solution-card-active'
+      wx:key="{{index}}"
+      id="{{item}}"
+    >
+      {{selectedCards[index]}}
+    </view>
+  </view>
+
+  <view class="solution-cards-wrapper">
+      <view
+        wx:for="{{cards}}"
+        class='solution-card-normal'
+        bindtap="selectCard"
+        wx:key="{{index}}"
+        data-value="{{item}}"
+        data-index="{{index}}"
+        id="{{item}}"
+      >
+        {{item}}
+      </view>
+    </view>
+</view>

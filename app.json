@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/profile/index",
     "pages/challenge/index",
-    "pages/home/index"
+    "pages/home/index",
+    "pages/solution/index"
   ],
   "tabBar": {
     "list": [
