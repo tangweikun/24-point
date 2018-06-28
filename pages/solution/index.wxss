@@ -9,15 +9,10 @@
   flex-wrap: wrap;
 }
 
-.profile-container {
+.solution-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.feedback {
-  font-size: 28rpx;
-  padding-top: 120rpx;
 }
 
 .solution-card-normal {

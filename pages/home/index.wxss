@@ -4,23 +4,10 @@
   padding: 50rpx;
 }
 
-.profile-container {
+.home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.profile-authorize {
-  width: 90%;
-}
-
-.profile-detail {
-  padding: 20rpx;
-}
-
-.feedback {
-  font-size: 28rpx;
-  padding-top: 120rpx;
 }
 
 .home-circle {

@@ -14,7 +14,7 @@ Page({
         isReady: true,
       },
       {
-        text: '闯关模式',
+        text: '分秒必争',
         url: '',
         isReady: false,
       },
@@ -24,6 +24,20 @@ Page({
         isReady: false,
       },
     ],
+  },
+
+  onLoad: function() {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function(res2) {
+              app.globalData.userInfo = res2.userInfo
+            },
+          })
+        }
+      },
+    })
   },
 
   onShareAppMessage: function(res) {

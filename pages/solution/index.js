@@ -11,7 +11,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: '24点',
-      path: '/pages/profile/index',
+      path: '/pages/solution/index',
     }
   },
 

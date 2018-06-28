@@ -1,4 +1,4 @@
-<view class="profile-container">
+<view class="solution-container">
   <view class="solution-answer">
     推荐算法: {{solution}}
   </view>

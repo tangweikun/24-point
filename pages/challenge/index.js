@@ -25,43 +25,24 @@ Page({
   },
 
   onUnload: function() {
+    const { openid, userInfo } = app.globalData
+    wx.request({
+      url: 'https://api.tangweikun.cn/addChallenge',
+      method: 'post',
+      data: {
+        openid,
+        userInfo,
+        record: this.data.record,
+      },
+      success: res => {
+        console.log(res)
+      },
+    })
     this.setData({ onThisPage: false })
   },
 
   onLoad: function() {
     this.handleStart()
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.request({
-            url: 'https://api.tangweikun.cn/getUserInfo',
-            method: 'post',
-            data: {
-              openid: app.globalData.openid,
-            },
-            success: response => {
-              const {
-                userInfo,
-                totalOfCorrectAnswers = '-',
-                totalOfAnswers = '-',
-                ranking = '-',
-              } = response.data
-
-              app.globalData.userInfo = userInfo
-              this.setData({
-                totalOfCorrectAnswers,
-                totalOfAnswers,
-                ranking,
-                isAuthorized: true,
-                accuracy:
-                  ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) +
-                  '%',
-              })
-            },
-          })
-        }
-      },
-    })
   },
 
   onShareAppMessage: function(res) {
