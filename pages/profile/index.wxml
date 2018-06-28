@@ -14,31 +14,42 @@
     </button>
     <view wx:else>
       <view class="profile-detail">
-        <label>限时排名：</label>
-        <label>{{challengeRanking}}</label>
+        <label>分秒必争排名:</label>
+        <label>【第{{type1Ranking}}名】</label>
       </view>
       <view class="profile-detail">
-        <label>过关斩将记录：</label>
-        <label>{{bestRecord}}</label>
+        <label>分秒必争最佳成绩:</label>
+        <label>【{{type1Record}}题】</label>
+      </view>
+      
+      <view class="profile-detail">
+        <label>过关斩将排名:</label>
+        <!-- TODO:改用 type2Ranking 代替 -->
+        <label>【第{{challengeRanking}}名】</label>
       </view>
       <view class="profile-detail">
-        <label>正确答题数：</label>
-        <label>{{totalOfCorrectAnswers}}</label>
+        <label>过关斩将最佳成绩:</label>
+        <!-- TODO:改用 type2Record 代替 -->
+        <label>【连过{{bestRecord}}关】</label>
       </view>
+      <!-- <view class="profile-detail">
+        <label>正确答题数:</label>
+        <label>【{{totalOfCorrectAnswers}}】</label>
+      </view> -->
       <view class="profile-detail">
-        <label>正确率：</label>
-        <label>{{accuracy}}</label>
+        <label>答题正确率:</label>
+        <label>【{{accuracy}}】</label>
       </view>
 
       <view class="feedback">
         <view class="profile-detail">
           更多功能持续更新中,敬请期待!!!
         </view>
-        <view class="profile-detail">
+        <!-- <view class="profile-detail">
           反馈请发送至 819573105@qq.com
-        </view>
+        </view> -->
         <view class="profile-detail">
-          下拉可刷新限时排名
+          下拉可刷新排名
         </view>
       </view>
     </view>

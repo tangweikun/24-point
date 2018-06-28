@@ -26,16 +26,16 @@ Page({
 
   onUnload: function() {
     const { openid, userInfo } = app.globalData
-    const { gameOver } = this.data
+    const { gameOver, record } = this.data
 
-    if (!gameOver) {
+    if (!gameOver && record > 0) {
       wx.request({
         url: 'https://api.tangweikun.cn/addChallenge',
         method: 'post',
         data: {
           openid,
           userInfo,
-          record: this.data.record,
+          record,
         },
         success: res => {
           console.log(res)

@@ -4,6 +4,11 @@ Page({
   data: {
     gamePlay: [
       {
+        text: '分秒必争',
+        url: '/pages/gameplay-1/index',
+        isReady: true,
+      },
+      {
         text: '过关斩将',
         url: '/pages/challenge/index',
         isReady: true,
@@ -11,11 +16,6 @@ Page({
       {
         text: '你问我答',
         url: '/pages/solution/index',
-        isReady: true,
-      },
-      {
-        text: '分秒必争',
-        url: '/pages/gameplay-1/index',
         isReady: true,
       },
       {
@@ -43,7 +43,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: '24点',
-      path: '/pages/profile/index',
+      path: '/pages/home/index',
     }
   },
 

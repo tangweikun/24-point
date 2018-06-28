@@ -8,6 +8,20 @@
   box-sizing: border-box;
 }
 
+.rule {
+  position: fixed;
+  left: 40rpx;
+  top: 40rpx;
+  font-size: 24rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  width: 100rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+}
+
 .card-normal {
   display: flex;
   align-items: center;

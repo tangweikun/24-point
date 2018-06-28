@@ -27,16 +27,17 @@ Page({
 
   onUnload: function() {
     const { openid, userInfo } = app.globalData
-    const { gameOver } = this.data
-    if (!gameOver) {
+    const { gameOver, record, totalTime } = this.data
+
+    if (!gameOver && record > 0) {
       wx.request({
         url: 'https://api.tangweikun.cn/addChallenge',
         method: 'post',
         data: {
           openid,
           userInfo,
-          record: this.data.record,
-          totalTime: this.data.totalTime,
+          record,
+          totalTime,
           gameplay: 'TYPE_1',
         },
         success: res => {
@@ -178,12 +179,17 @@ Page({
     if (isFinish && openid !== '') {
       const isCorrect = nextState.selectedCard.value === 24
       if (isCorrect) {
+        this.showToast('答对 +10s', 'success')
         this.skip()
         this.setData({
           record: this.data.record + 1,
           countdown: this.data.countdown + 10,
         })
       } else {
+        this.showToast('答错 -5s', 'none')
+        this.setData({
+          countdown: this.data.countdown - 5,
+        })
         const foo = this.data.record
         const bar = this.data.totalTime
         this.skip()
@@ -215,6 +221,14 @@ Page({
       cards: [...this.data.initialCards],
       selectedCard: null,
       selectedOperator: null,
+    })
+  },
+
+  showToast: function(title, icon) {
+    wx.showToast({
+      title,
+      icon,
+      duration: 800,
     })
   },
 
