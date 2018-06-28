@@ -15,8 +15,8 @@ Page({
       },
       {
         text: '分秒必争',
-        url: '',
-        isReady: false,
+        url: '/pages/gameplay-1/index',
+        isReady: true,
       },
       {
         text: '王者对战',

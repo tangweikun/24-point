@@ -18,8 +18,9 @@ Page({
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     isStart: false,
-    countdown: 30,
+    countdown: 120,
     record: 0,
+    totalTime: 0,
     gameOver: false,
     onThisPage: true,
   },
@@ -27,7 +28,6 @@ Page({
   onUnload: function() {
     const { openid, userInfo } = app.globalData
     const { gameOver } = this.data
-
     if (!gameOver) {
       wx.request({
         url: 'https://api.tangweikun.cn/addChallenge',
@@ -36,6 +36,8 @@ Page({
           openid,
           userInfo,
           record: this.data.record,
+          totalTime: this.data.totalTime,
+          gameplay: 'TYPE_1',
         },
         success: res => {
           console.log(res)
@@ -52,8 +54,8 @@ Page({
 
   onShareAppMessage: function(res) {
     return {
-      title: '过关斩将',
-      path: '/pages/challenge/index',
+      title: '分秒必争',
+      path: '/pages/gameplay-1/index',
     }
   },
 
@@ -66,8 +68,9 @@ Page({
     if (this.data.countdown < 2) {
       if (this.data.isStart) {
         const foo = this.data.record
+        const bar = this.data.totalTime
 
-        this.openAlert(foo)
+        this.openAlert()
         wx.request({
           url: 'https://api.tangweikun.cn/addChallenge',
           method: 'post',
@@ -75,6 +78,8 @@ Page({
             openid,
             userInfo,
             record: foo,
+            totalTime: bar,
+            gameplay: 'TYPE_1',
           },
           success: res => {
             console.log(res)
@@ -82,7 +87,10 @@ Page({
         })
       }
     } else {
-      this.setData({ countdown: this.data.countdown - 1 })
+      this.setData({
+        countdown: this.data.countdown - 1,
+        totalTime: this.data.totalTime + 1,
+      })
 
       setTimeout(function() {
         that.countdown()
@@ -100,8 +108,9 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 30,
+      countdown: 120,
       record: 0,
+      totalTime: 0,
     })
     this.countdown()
   },
@@ -170,23 +179,14 @@ Page({
       const isCorrect = nextState.selectedCard.value === 24
       if (isCorrect) {
         this.skip()
-        this.setData({ record: this.data.record + 1 })
+        this.setData({
+          record: this.data.record + 1,
+          countdown: this.data.countdown + 10,
+        })
       } else {
         const foo = this.data.record
-        this.openAlert(foo)
-        wx.request({
-          url: 'https://api.tangweikun.cn/addChallenge',
-          method: 'post',
-          data: {
-            openid,
-            userInfo: app.globalData.userInfo,
-            record: foo,
-          },
-          success: res => {
-            console.log(res)
-          },
-        })
-        this.setData({ isStart: false, gameOver: true })
+        const bar = this.data.totalTime
+        this.skip()
       }
 
       wx.request({
@@ -226,7 +226,6 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 30,
     })
   },
 
@@ -235,11 +234,5 @@ Page({
       gameOver: true,
       isStart: false,
     })
-    // wx.showModal({
-    //   content: '本次挑战得分: ' + record,
-    //   showCancel: false,
-    //   success: function(res) {},
-    // })
-    // this.setData({ isStart: false, record: 0 })
   },
 })

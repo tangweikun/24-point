@@ -5,7 +5,8 @@
     "pages/profile/index",
     "pages/challenge/index",
     "pages/home/index",
-    "pages/solution/index"
+    "pages/solution/index",
+    "pages/gameplay-1/index"
   ],
   "tabBar": {
     "list": [

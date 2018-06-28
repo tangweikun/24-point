@@ -18,7 +18,7 @@
         <label>{{challengeRanking}}</label>
       </view>
       <view class="profile-detail">
-        <label>限时挑战记录：</label>
+        <label>过关斩将记录：</label>
         <label>{{bestRecord}}</label>
       </view>
       <view class="profile-detail">
