@@ -1,4 +1,5 @@
 const app = getApp()
+const { BASE_URL } = require('../../constants/index.js')
 
 Page({
   data: {
@@ -37,7 +38,7 @@ Page({
     const { openid } = app.globalData
     if (openid !== '') {
       wx.request({
-        url: 'https://api.tangweikun.cn/getRanking',
+        url: `${BASE_URL}/getRanking`,
         method: 'post',
         data: {
           openid: app.globalData.openid,
@@ -64,7 +65,7 @@ Page({
     this.getRanking()
 
     wx.request({
-      url: 'https://api.tangweikun.cn/getUserInfo',
+      url: `${BASE_URL}/getUserInfo`,
       method: 'post',
       data: {
         openid: app.globalData.openid,
@@ -101,7 +102,7 @@ Page({
   bindGetUserInfo: function(e) {
     if (app.globalData.openid) {
       wx.request({
-        url: 'https://api.tangweikun.cn/updateUserInfo',
+        url: `${BASE_URL}/updateUserInfo`,
         method: 'post',
         data: {
           openid: app.globalData.openid,

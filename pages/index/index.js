@@ -5,7 +5,7 @@ const {
   calculate,
 } = require('../../utils/index.js')
 
-const { OPERATORS } = require('../../constants/index.js')
+const { OPERATORS, BASE_URL } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
@@ -100,7 +100,7 @@ Page({
 
     if (isFinish && openid !== '') {
       wx.request({
-        url: 'https://api.tangweikun.cn/increaseAnswersCount',
+        url: `${BASE_URL}/increaseAnswersCount`,
         method: 'post',
         data: {
           openid,

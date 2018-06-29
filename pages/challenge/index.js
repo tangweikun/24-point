@@ -4,7 +4,7 @@ const {
   noDecimal,
   calculate,
 } = require('../../utils/index.js')
-const { OPERATORS } = require('../../constants/index.js')
+const { OPERATORS, BASE_URL } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
@@ -31,7 +31,7 @@ Page({
 
     if (!gameOver && record > 0) {
       wx.request({
-        url: 'https://api.tangweikun.cn/addChallenge',
+        url: `${BASE_URL}/addChallenge`,
         method: 'post',
         data: {
           openid,
@@ -71,7 +71,7 @@ Page({
 
         this.openAlert(foo)
         wx.request({
-          url: 'https://api.tangweikun.cn/addChallenge',
+          url: `${BASE_URL}/addChallenge`,
           method: 'post',
           data: {
             openid,
@@ -178,7 +178,7 @@ Page({
         const foo = this.data.record
         this.openAlert(foo)
         wx.request({
-          url: 'https://api.tangweikun.cn/addChallenge',
+          url: `${BASE_URL}/addChallenge`,
           method: 'post',
           data: {
             openid,
@@ -194,7 +194,7 @@ Page({
       }
 
       wx.request({
-        url: 'https://api.tangweikun.cn/increaseAnswersCount',
+        url: `${BASE_URL}/increaseAnswersCount`,
         method: 'post',
         data: {
           openid,
