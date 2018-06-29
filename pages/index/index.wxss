@@ -137,7 +137,14 @@
 }
 
 .reset-or-skip {
-  padding: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #6ddac8;
+  color: #ffffff;
+  width: 200rpx;
+  height: 70rpx;
+  border-radius: 40rpx;
 }
 
 .challenge-record {

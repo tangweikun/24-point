@@ -12,15 +12,15 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "随便试试"
+        "text": "随便玩玩"
       },
       {
         "pagePath": "pages/home/index",
-        "text": "更多模式"
+        "text": "更多玩法"
       },
       {
         "pagePath": "pages/profile/index",
-        "text": "战绩"
+        "text": "排名"
       }
     ]
   },

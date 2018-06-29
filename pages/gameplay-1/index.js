@@ -127,7 +127,13 @@ Page({
 
   selectCard: function(e) {
     const { value, index } = e.currentTarget.dataset
-    const { cards, selectedOperator, selectedCard } = this.data
+    const {
+      cards,
+      selectedOperator,
+      selectedCard,
+      record,
+      countdown,
+    } = this.data
     if (cards[index].state === 'disable') return
 
     const nextState = {
@@ -179,19 +185,18 @@ Page({
     if (isFinish && openid !== '') {
       const isCorrect = nextState.selectedCard.value === 24
       if (isCorrect) {
-        this.showToast('答对 +10s', 'success')
+        const awardTime = this.calculateAwardTime()
+        this.showToast(`答对 +${awardTime}s`, 'success')
         this.skip()
         this.setData({
-          record: this.data.record + 1,
-          countdown: this.data.countdown + 10,
+          record: record + 1,
+          countdown: countdown + awardTime,
         })
       } else {
         this.showToast('答错 -5s', 'none')
         this.setData({
-          countdown: this.data.countdown - 5,
+          countdown: countdown - 5,
         })
-        const foo = this.data.record
-        const bar = this.data.totalTime
         this.skip()
       }
 
@@ -222,6 +227,15 @@ Page({
       selectedCard: null,
       selectedOperator: null,
     })
+  },
+
+  calculateAwardTime: function() {
+    const record = this.data.record + 1
+
+    if (record % 24 === 0) return 24 + record / 12
+    if (record <= 6) return 10
+    if (record <= 16) return 6
+    return Math.round(Math.random() * 9) + 1
   },
 
   showToast: function(title, icon) {
