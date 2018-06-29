@@ -4,12 +4,13 @@ const {
   noDecimal,
   calculate,
 } = require('../../utils/index.js')
+const { OPERATORS } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
 Page({
   data: {
-    operators: ['+', '-', '*', '/'],
+    operators: OPERATORS,
     selectedOperator: null,
     selectedCard: null,
     cards: cardsAndRecommendSolution.cards,

@@ -5,11 +5,13 @@ const {
   calculate,
 } = require('../../utils/index.js')
 
+const { OPERATORS } = require('../../constants/index.js')
+
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
 Page({
   data: {
-    operators: ['+', '-', '*', '/'],
+    operators: OPERATORS,
     selectedOperator: null,
     selectedCard: null,
     cards: cardsAndRecommendSolution.cards,
@@ -95,7 +97,6 @@ Page({
     const isFinish =
       nextState.cards.filter(({ state }) => state === 'disable').length === 3
     const openid = app.globalData.openid
-    
 
     if (isFinish && openid !== '') {
       wx.request({
