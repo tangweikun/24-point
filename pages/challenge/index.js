@@ -36,6 +36,7 @@ Page({
           openid,
           userInfo,
           record,
+          gameplay: 'TYPE_2',
         },
         success: res => {
           console.log(res)
@@ -75,6 +76,7 @@ Page({
             openid,
             userInfo,
             record: foo,
+            gameplay: 'TYPE_2',
           },
           success: res => {
             console.log(res)
@@ -181,6 +183,7 @@ Page({
             openid,
             userInfo: app.globalData.userInfo,
             record: foo,
+            gameplay: 'TYPE_2',
           },
           success: res => {
             console.log(res)
@@ -235,11 +238,5 @@ Page({
       gameOver: true,
       isStart: false,
     })
-    // wx.showModal({
-    //   content: '本次挑战得分: ' + record,
-    //   showCancel: false,
-    //   success: function(res) {},
-    // })
-    // this.setData({ isStart: false, record: 0 })
   },
 })

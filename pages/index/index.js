@@ -95,7 +95,7 @@ Page({
     const isFinish =
       nextState.cards.filter(({ state }) => state === 'disable').length === 3
     const openid = app.globalData.openid
-    const isCorrect = nextState.selectedCard.value === 24
+    
 
     if (isFinish && openid !== '') {
       wx.request({
@@ -103,7 +103,7 @@ Page({
         method: 'post',
         data: {
           openid,
-          isCorrect,
+          isCorrect: nextState.selectedCard.value === 24,
         },
         success: res => {
           console.log(res)
@@ -111,7 +111,7 @@ Page({
       })
     }
 
-    if (isFinish && isCorrect) {
+    if (isFinish && nextState.selectedCard.value === 24) {
       this.skip()
     } else {
       this.setData({ ...nextState, isFinish })
