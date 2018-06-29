@@ -1,0 +1,3 @@
+<view class="button-wrapper">
+  <slot></slot>
+</view>
