@@ -19,7 +19,7 @@ Page({
     totalOfAnswers: 0,
     totalOfCorrectAnswers: 0,
     isStart: false,
-    countdown: 120,
+    countdown: 100,
     record: 0,
     totalTime: 0,
     gameOver: false,
@@ -110,7 +110,7 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 120,
+      countdown: 100,
       record: 0,
       totalTime: 0,
     })
