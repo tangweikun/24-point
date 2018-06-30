@@ -5,7 +5,7 @@ const {
   calculate,
 } = require('../../utils/index.js')
 
-const { OPERATORS, BASE_URL } = require('../../constants/index.js')
+const { OPERATORS, BASE_URL, RULE } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
@@ -31,8 +31,7 @@ Page({
     wx.showModal({
       showCancel: false,
       title: '规则',
-      content:
-        '玩家得到4个1~13之间的数字，运用这个4个数字进行加减乘除四则运算来算出24',
+      content: RULE,
       success: function(res) {},
     })
   },

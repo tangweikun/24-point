@@ -1,4 +1,5 @@
-//app.js
+const { BASE_URL } = require('./constants/index.js')
+
 App({
   onLaunch: function() {
     // 展示本地存储能力
@@ -11,12 +12,40 @@ App({
         wx.request({
           url: 'https://api.tangweikun.cn/createuser',
           method: 'post',
-          data: {
-            code: res.code,
-            userInfo: {},
-          },
+          data: { code: res.code },
           success: response => {
-            this.globalData.openid = response.data.openid
+            const {
+              openid,
+              userInfo,
+              totalOfCorrectAnswers,
+              totalOfAnswers,
+            } = response.data
+
+            this.globalData.openid = openid
+            this.globalData.userInfo = userInfo
+
+            wx.request({
+              url: 'https://api.tangweikun.cn/getRanking',
+              method: 'post',
+              data: { openid: response.data.openid },
+              success: res2 => {
+                const {
+                  type1Ranking,
+                  type1Record,
+                  type2Ranking,
+                  type2Record,
+                } = res2.data
+
+                this.globalData.gameData = {
+                  type1Ranking,
+                  type1Record,
+                  type2Ranking,
+                  type2Record,
+                  totalOfCorrectAnswers,
+                  totalOfAnswers,
+                }
+              },
+            })
           },
         })
 
@@ -26,7 +55,9 @@ App({
       },
     })
   },
+
   globalData: {
     userInfo: null,
+    gameData: null,
   },
 })

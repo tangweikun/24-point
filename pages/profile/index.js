@@ -5,16 +5,11 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isAuthorized: false,
-    totalOfAnswers: 0,
-    totalOfCorrectAnswers: 0,
-    ranking: 0,
+    totalOfAnswers: '--',
+    totalOfCorrectAnswers: '--',
     accuracy: '100%',
     challengeRanking: '--',
     bestRecord: '--',
-    type1Ranking: '--',
-    type1Record: 0,
-    type2Ranking: '--',
-    type2Record: 0,
   },
 
   onShareAppMessage: function(res) {
@@ -28,7 +23,19 @@ Page({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          this.refreshUserInfo()
+          if (app.globalData.userInfo && app.globalData.gameData) {
+            this.setData({
+              isAuthorized: true,
+              type1Ranking: app.globalData.gameData.type1Ranking,
+              type1Record: app.globalData.gameData.type1Record,
+              type2Ranking: app.globalData.gameData.type2Ranking,
+              type2Record: app.globalData.gameData.type2Record,
+            })
+            this.refreshUserInfo()
+          } else {
+            this.getRanking()
+            this.refreshUserInfo()
+          }
         }
       },
     })
@@ -62,8 +69,6 @@ Page({
   },
 
   refreshUserInfo() {
-    this.getRanking()
-
     wx.request({
       url: `${BASE_URL}/getUserInfo`,
       method: 'post',
@@ -75,7 +80,6 @@ Page({
           userInfo = {},
           totalOfCorrectAnswers = '--',
           totalOfAnswers = '--',
-          ranking = '--',
           challengeRanking = '--',
           bestRecord = '--',
         } = response.data
@@ -89,7 +93,6 @@ Page({
         this.setData({
           totalOfCorrectAnswers,
           totalOfAnswers,
-          ranking,
           challengeRanking,
           bestRecord,
           isAuthorized: true,
@@ -121,6 +124,7 @@ Page({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           this.refreshUserInfo()
+          this.getRanking()
         }
       },
     })
