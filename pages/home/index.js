@@ -5,7 +5,7 @@ const {
   calculate,
 } = require('../../utils/index.js')
 
-const { OPERATORS, BASE_URL, RULE } = require('../../constants/index.js')
+const { OPERATORS, BASE_URL } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
@@ -25,15 +25,6 @@ Page({
       title: '24点',
       path: '/pages/index/index',
     }
-  },
-
-  showRule: function() {
-    wx.showModal({
-      showCancel: false,
-      title: '规则',
-      content: RULE,
-      success: function(res) {},
-    })
   },
 
   selectOperator: function(e) {

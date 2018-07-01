@@ -1,4 +1,5 @@
 <view class="home-container">
+  <view class="rule" bindtap="showRule">规则</view>
   <view class="avatar">
     <open-data type="userAvatarUrl"></open-data>
   </view>
@@ -6,6 +7,7 @@
   <view class="home-circle-wrapper">
       <view
         wx:for="{{gamePlay}}"
+        style="{{item.isHot ? 'border-color: #45C277' : ''}}"
         class="{{item.isReady ? 'home-circle' : 'home-circle-disable'}}"
         bindtap="goNewPage"
         wx:key="{{index}}"

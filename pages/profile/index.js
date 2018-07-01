@@ -4,12 +4,13 @@ const { BASE_URL } = require('../../constants/index.js')
 Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isAuthorized: false,
+    isAuthorized: true,
     totalOfAnswers: '--',
     totalOfCorrectAnswers: '--',
     accuracy: '100%',
     challengeRanking: '--',
     bestRecord: '--',
+    f: app.globalData.gameData,
     avatarUrl:
       'https://wx.qlogo.cn/mmopen/vi_32/eXrWeb45sjCs0Z0teC8WDU5VFdYGt5BAbYZOf0JicOSlK94BOWj6NgjUbCE1Adx6Kria0FVLxya3JkLn2DQicDpPA/132',
   },
@@ -22,39 +23,27 @@ Page({
   },
 
   onLoad: function() {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          if (app.globalData.userInfo && app.globalData.gameData) {
-            const { avatarUrl = '' } = app.globalData.userInfo
-            const {
-              totalOfCorrectAnswers,
-              totalOfAnswers,
-            } = app.globalData.gameData
-            console.log('----', totalOfAnswers, app.globalData)
-            const accuracy =
-              totalOfAnswers === undefined
-                ? '-'
-                : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) +
-                  '%'
+    if (app.globalData.userInfo && app.globalData.gameData) {
+      const { avatarUrl = '' } = app.globalData.userInfo
+      const { totalOfCorrectAnswers, totalOfAnswers } = app.globalData.gameData
+      const accuracy =
+        totalOfAnswers === undefined
+          ? '-'
+          : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
 
-            this.setData({
-              isAuthorized: true,
-              type1Ranking: app.globalData.gameData.type1Ranking,
-              type1Record: app.globalData.gameData.type1Record,
-              type2Ranking: app.globalData.gameData.type2Ranking,
-              type2Record: app.globalData.gameData.type2Record,
-              avatarUrl,
-              accuracy,
-              totalOfAnswers,
-            })
-          } else {
-            this.getRanking()
-            this.refreshUserInfo()
-          }
-        }
-      },
-    })
+      this.setData({
+        isAuthorized: true,
+        type1Ranking: app.globalData.gameData.type1Ranking,
+        type1Record: app.globalData.gameData.type1Record,
+        type2Ranking: app.globalData.gameData.type2Ranking,
+        type2Record: app.globalData.gameData.type2Record,
+        avatarUrl,
+        accuracy,
+        totalOfAnswers,
+      })
+    } else {
+      this.setData({ isAuthorized: false })
+    }
   },
 
   getRanking: function() {
@@ -133,6 +122,7 @@ Page({
         },
       })
       this.refreshUserInfo()
+      this.getRanking()
     }
   },
 

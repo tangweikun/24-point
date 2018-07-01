@@ -1,12 +1,14 @@
+page {
+  background: #7fd6af;
+}
+
 .avatar {
-  border-radius: 100rpx;
+  border-radius: 200rpx;
   box-sizing: border-box;
   border: 10rpx solid #ffffff;
 }
 
 .avatar-wrapper {
-  width: 200rpx;
-  height: 200rpx;
   padding: 50rpx;
 }
 
@@ -17,7 +19,7 @@
   box-sizing: border-box;
   border: 5rpx solid #ffffff;
   font-size: 36rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 40rpx;
 }
 
 .ranking-title {
@@ -38,11 +40,9 @@
 }
 
 .profile-container {
-  background: #7fd6af;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 1100rpx;
   color: #ffffff;
 }
 
@@ -56,5 +56,5 @@
 
 .feedback {
   font-size: 28rpx;
-  padding-top: 80rpx;
+  padding-top: 100rpx;
 }

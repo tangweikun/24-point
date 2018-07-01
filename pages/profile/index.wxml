@@ -61,7 +61,7 @@
         </view>     
       </view>
 
-      <view class="feedback">
+      <!-- <view class="feedback">
         <view>
           更多功能持续更新中,敬请期待!!!
         </view>
@@ -71,7 +71,7 @@
         <view>
           下拉可刷新排名
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
 
