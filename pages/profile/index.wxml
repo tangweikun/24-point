@@ -1,6 +1,11 @@
 <view class="profile-container">
-  <view class="avatar">
-    <open-data type="userAvatarUrl"></open-data>
+  <view class="avatar-wrapper">
+    <image
+      class="avatar"
+      mode="aspectFit"
+      style="width: 100px; height: 100px;"
+      src="{{avatarUrl}}">
+    </image>
   </view>
 
   <view class="profile-authorize">
@@ -12,43 +17,58 @@
     >
       登录查看排名
     </button>
+
     <view wx:else>
-      <view class="profile-detail">
-        <label>分秒必争排名:</label>
-        <label>【第{{type1Ranking}}名】</label>
+      <view class="ranking-wrapper">
+        <view class="ranking-title">战绩</view>
+        <view class="ranking-detail">
+          <view class="ranking-detail-left">
+            <label>正确率:</label>
+            <label>{{accuracy}}</label>
+          </view>
+          <view class="ranking-detail-right">
+            <label>经验值:</label>
+            <label>{{totalOfAnswers}}</label>
+          </view>
+        </view>
       </view>
-      <view class="profile-detail">
-        <label>分秒必争最佳成绩:</label>
-        <label>【{{type1Record}}题】</label>
+
+      <view class="ranking-wrapper">
+        <view class="ranking-title">分秒必争</view>
+        <view class="ranking-detail">
+          <view class="ranking-detail-left">
+            <label>排名:</label>
+            <label>第{{type1Ranking}}名</label>
+          </view>
+          <view class="ranking-detail-right">
+            <label>最佳成绩:</label>
+            <label>{{type1Record}}题</label>
+          </view>
+        </view>
       </view>
-      
-      <view class="profile-detail">
-        <label>过关斩将排名:</label>
-        <!-- TODO:改用 type2Ranking 代替 -->
-        <label>【第{{challengeRanking}}名】</label>
-      </view>
-      <view class="profile-detail">
-        <label>过关斩将最佳成绩:</label>
-        <!-- TODO:改用 type2Record 代替 -->
-        <label>【连过{{bestRecord}}关】</label>
-      </view>
-      <!-- <view class="profile-detail">
-        <label>正确答题数:</label>
-        <label>【{{totalOfCorrectAnswers}}】</label>
-      </view> -->
-      <view class="profile-detail">
-        <label>答题正确率:</label>
-        <label>【{{accuracy}}】</label>
+
+      <view class="ranking-wrapper">
+        <view class="ranking-title">过关斩将</view>
+        <view class="ranking-detail">
+          <view class="ranking-detail-left">
+            <label>排名:</label>
+            <label>第{{type2Ranking}}名</label>
+          </view>
+          <view class="ranking-detail-right">
+            <label>最佳成绩:</label>
+            <label>{{type2Record}}连斩</label>
+          </view>
+        </view>     
       </view>
 
       <view class="feedback">
-        <view class="profile-detail">
+        <view>
           更多功能持续更新中,敬请期待!!!
         </view>
-        <!-- <view class="profile-detail">
+        <view>
           反馈请发送至 819573105@qq.com
-        </view> -->
-        <view class="profile-detail">
+        </view>
+        <view>
           下拉可刷新排名
         </view>
       </view>

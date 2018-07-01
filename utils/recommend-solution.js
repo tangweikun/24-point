@@ -133,8 +133,6 @@ function recommendSolution(i1, i2, i4, i8) {
   return null
 }
 
-console.log(recommendSolution(6, 2, 3, 4))
-
 module.exports = {
   recommendSolution,
 }

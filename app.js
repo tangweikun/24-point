@@ -10,7 +10,7 @@ App({
     wx.login({
       success: res => {
         wx.request({
-          url: 'https://api.tangweikun.cn/createuser',
+          url: `${BASE_URL}/createuser`,
           method: 'post',
           data: { code: res.code },
           success: response => {
@@ -25,7 +25,7 @@ App({
             this.globalData.userInfo = userInfo
 
             wx.request({
-              url: 'https://api.tangweikun.cn/getRanking',
+              url: `${BASE_URL}/getRanking`,
               method: 'post',
               data: { openid: response.data.openid },
               success: res2 => {
