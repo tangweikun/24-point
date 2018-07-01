@@ -55,7 +55,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: '过关斩将',
-      path: '/pages/challenge/index',
+      path: '/pages/gameplay-2/index',
     }
   },
 

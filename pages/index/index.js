@@ -6,7 +6,7 @@ Page({
     gamePlay: [
       {
         text: '过关斩将',
-        url: '/pages/challenge/index',
+        url: '/pages/gameplay-2/index',
         isReady: true,
         isHot: false,
       },
