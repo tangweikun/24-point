@@ -18,7 +18,7 @@ Page({
       },
       {
         text: '随便玩玩',
-        url: '/pages/home/index',
+        url: '/pages/gameplay-0/index',
         isReady: true,
         isHot: false,
       },
@@ -69,7 +69,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: '24点',
-      path: '/pages/home/index',
+      path: '/pages/index/index',
     }
   },
 
