@@ -1,57 +1,141 @@
 const app = getApp()
+const {
+  generateCardsAndRecommendSolution,
+  noDecimal,
+  calculate,
+} = require('../../utils/index.js')
+
+const { OPERATORS, BASE_URL, RULE } = require('../../constants/index.js')
+
+const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
 Page({
   data: {
-    gamePlay: [
-      {
-        text: '分秒必争',
-        url: '/pages/gameplay-1/index',
-        isReady: true,
-      },
-      {
-        text: '过关斩将',
-        url: '/pages/challenge/index',
-        isReady: true,
-      },
-      {
-        text: '你问我答',
-        url: '/pages/solution/index',
-        isReady: true,
-      },
-      {
-        text: '王者对战',
-        url: '',
-        isReady: false,
-      },
-    ],
-  },
-
-  onLoad: function() {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function(res2) {
-              app.globalData.userInfo = res2.userInfo
-            },
-          })
-        }
-      },
-    })
+    operators: OPERATORS,
+    selectedOperator: null,
+    selectedCard: null,
+    cards: cardsAndRecommendSolution.cards,
+    initialCards: [...cardsAndRecommendSolution.cards],
+    recommendSolution: cardsAndRecommendSolution.recommendSolution,
+    isFinish: false,
   },
 
   onShareAppMessage: function(res) {
     return {
       title: '24点',
-      path: '/pages/home/index',
+      path: '/pages/index/index',
     }
   },
 
-  goNewPage: function(e) {
-    const { url, ready } = e.currentTarget.dataset
+  showRule: function() {
+    wx.showModal({
+      showCancel: false,
+      title: '规则',
+      content: RULE,
+      success: function(res) {},
+    })
+  },
 
-    if (ready) {
-      wx.navigateTo({ url })
+  selectOperator: function(e) {
+    const { value } = e.currentTarget.dataset
+    const { selectedOperator } = this.data
+
+    this.setData({
+      selectedOperator: selectedOperator !== value ? value : null,
+    })
+  },
+
+  selectCard: function(e) {
+    const { value, index } = e.currentTarget.dataset
+    const { cards, selectedOperator, selectedCard } = this.data
+    const currentCard = cards[index].value
+    if (cards[index].state === 'disable') return
+
+    const nextState = {
+      cards,
+      selectedCard: { value: currentCard, position: index },
     }
+    nextState.cards[index].state = 'active'
+
+    if (selectedCard !== null) {
+      Object.assign(nextState, { selectedCard: null })
+      nextState.cards[selectedCard.position].state = 'normal'
+
+      if (selectedCard.position !== index) {
+        Object.assign(nextState, {
+          selectedCard: { value: currentCard, position: index },
+        })
+        nextState.cards[selectedCard.position].state = 'normal'
+
+        if (selectedOperator !== null) {
+          const answer = calculate(
+            selectedCard.value,
+            currentCard,
+            selectedOperator,
+          )
+
+          Object.assign(nextState, {
+            selectedOperator: null,
+            selectedCard: { value: answer, position: index },
+          })
+
+          nextState.cards[selectedCard.position].state = 'disable'
+          nextState.cards[index] = {
+            value: answer,
+            state: 'active',
+            alias: noDecimal(
+              nextState.cards[selectedCard.position].alias,
+              nextState.cards[index].alias,
+              selectedOperator,
+            ),
+          }
+        }
+      }
+    }
+
+    const isFinish =
+      nextState.cards.filter(({ state }) => state === 'disable').length === 3
+    const openid = app.globalData.openid
+
+    if (isFinish && openid !== '') {
+      wx.request({
+        url: `${BASE_URL}/increaseAnswersCount`,
+        method: 'post',
+        data: {
+          openid,
+          isCorrect: nextState.selectedCard.value === 24,
+        },
+        success: res => {
+          console.log(res)
+        },
+      })
+    }
+
+    if (isFinish && nextState.selectedCard.value === 24) {
+      this.skip()
+    } else {
+      this.setData({ ...nextState, isFinish })
+    }
+  },
+
+  reset: function(e) {
+    this.setData({
+      cards: [...this.data.initialCards],
+      selectedCard: null,
+      selectedOperator: null,
+      isFinish: false,
+    })
+  },
+
+  skip: function(e) {
+    const newCards = generateCardsAndRecommendSolution()
+    this.setData({
+      cards: newCards.cards,
+      initialCards: [...newCards.cards],
+      recommendSolution: newCards.recommendSolution,
+      selectedCard: null,
+      selectedOperator: null,
+      isFinish: false,
+    })
   },
 })

@@ -8,22 +8,6 @@
     "pages/solution/index",
     "pages/gameplay-1/index"
   ],
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "随便玩玩"
-      },
-      {
-        "pagePath": "pages/home/index",
-        "text": "更多玩法"
-      },
-      {
-        "pagePath": "pages/profile/index",
-        "text": "排名"
-      }
-    ]
-  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#6ddac8",
