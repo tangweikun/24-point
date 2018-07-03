@@ -82,7 +82,7 @@ Page({
       },
       success: response => {
         const {
-          userInfo = {},
+          userInfo = { avatarUrl: '' },
           totalOfCorrectAnswers = '--',
           totalOfAnswers = '--',
           challengeRanking = '--',
