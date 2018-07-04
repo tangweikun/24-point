@@ -15,7 +15,7 @@
       bindgetuserinfo="bindGetUserInfo"
       type="primary"
     >
-      登录查看排名
+      查看排名
     </button>
 
     <view wx:else>
