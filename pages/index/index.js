@@ -1,5 +1,5 @@
 const app = getApp()
-const { RULE } = require('../../constants/index.js')
+const { RULE, GAMEPLAY } = require('../../constants/index.js')
 
 Page({
   data: {
@@ -62,6 +62,15 @@ Page({
       showCancel: false,
       title: '规则',
       content: RULE,
+      success: function(res) {},
+    })
+  },
+
+  showGameplay: function() {
+    wx.showModal({
+      showCancel: false,
+      title: '玩法',
+      content: GAMEPLAY,
       success: function(res) {},
     })
   },

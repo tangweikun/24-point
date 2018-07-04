@@ -25,6 +25,20 @@
   border-radius: 20rpx;
 }
 
+.gameplay {
+  position: fixed;
+  right: 40rpx;
+  top: 40rpx;
+  font-size: 24rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  width: 100rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+}
+
 .home-circle {
   width: 180rpx;
   height: 180rpx;

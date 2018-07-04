@@ -234,9 +234,9 @@ Page({
     const record = this.data.record + 1
 
     if (record % 24 === 0) return 24 + record / 12
-    if (record <= 6) return 10
-    if (record <= 16) return 6
-    return Math.round(Math.random() * 9) + 1
+    if (record <= 6) return 15
+    if (record <= 16) return 8
+    return 15
   },
 
   showToast: function(title, icon) {
