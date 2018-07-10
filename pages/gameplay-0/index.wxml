@@ -12,6 +12,7 @@
         class="card-{{item.state}}"
         bindtap="selectCard"
         id="{{item.value}}"
+        data-state="{{item.state}}"
         data-value="{{item.value}}"
         data-index="{{index}}"
       >

@@ -37,50 +37,48 @@ Page({
   },
 
   selectCard: function(e) {
-    const { value, index } = e.currentTarget.dataset
+    const { value, index, state } = e.currentTarget.dataset
     const { cards, selectedOperator, selectedCard } = this.data
-    const currentCard = cards[index].value
-    if (cards[index].state === 'disable') return
+
+    if (state === 'disable') return
 
     const nextState = {
       cards,
-      selectedCard: { value: currentCard, position: index },
+      selectedCard: { value, position: index },
     }
+
     nextState.cards[index].state = 'active'
 
     if (selectedCard !== null) {
-      Object.assign(nextState, { selectedCard: null })
-      nextState.cards[selectedCard.position].state = 'normal'
-
+      const selectCardPosition = selectedCard.position
       if (selectedCard.position !== index) {
         Object.assign(nextState, {
-          selectedCard: { value: currentCard, position: index },
+          selectedCard: { value, position: index },
         })
-        nextState.cards[selectedCard.position].state = 'normal'
+        nextState.cards[selectCardPosition].state = 'normal'
 
         if (selectedOperator !== null) {
-          const answer = calculate(
-            selectedCard.value,
-            currentCard,
-            selectedOperator,
-          )
+          const answer = calculate(selectedCard.value, value, selectedOperator)
 
           Object.assign(nextState, {
             selectedOperator: null,
             selectedCard: { value: answer, position: index },
           })
 
-          nextState.cards[selectedCard.position].state = 'disable'
+          nextState.cards[selectCardPosition].state = 'disable'
           nextState.cards[index] = {
             value: answer,
             state: 'active',
             alias: noDecimal(
-              nextState.cards[selectedCard.position].alias,
+              nextState.cards[selectCardPosition].alias,
               nextState.cards[index].alias,
               selectedOperator,
             ),
           }
         }
+      } else {
+        Object.assign(nextState, { selectedCard: null })
+        nextState.cards[selectCardPosition].state = 'normal'
       }
     }
 
