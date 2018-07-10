@@ -7,8 +7,8 @@
 
   <view wx:else class='wrapper'>
     <view class="challenge-header">
-      <view class="challenge-header-box">倒计时: {{countdown}}</view>
-      <view class="challenge-header-box">已完成: {{record}}</view>
+      <custom-button theme="THEME-2" text="倒计时: {{countdown}}"></custom-button>
+      <custom-button theme="THEME-2" text="已完成: {{record}}"></custom-button>
     </view>
 
     <view class='card-wrapper'>

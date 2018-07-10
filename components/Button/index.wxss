@@ -1,4 +1,4 @@
-.button-wrapper {
+.THEME-1 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,4 +7,16 @@
   width: 200rpx;
   height: 70rpx;
   border-radius: 40rpx;
+}
+
+.THEME-2 {
+  width: 210rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #6ddac8;
+  border-radius: 30rpx;
+  color: #6ddac8;
+  font-size: 30rpx;
 }
