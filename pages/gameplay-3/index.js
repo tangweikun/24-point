@@ -13,19 +13,20 @@ const {
 } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
-const luckyTime = Math.floor(Math.random() * 60) + 15
+const luckyTime = Math.floor(Math.random() * 40) + 10
 
 Page({
   data: {
     isReady: false,
     luckyTime,
-    reminder: 8,
+    reminder: 10,
     countdown: 60,
     myScore: 0,
     rivalScore: 0,
-    myReward: 0,
-    rivalReward: 0,
-    countdownBeforeStart: 7,
+    myReward: '+0',
+    rivalReward: '+0',
+    result: '',
+    countdownBeforeStart: 5,
     isStart: true,
     gameOver: false,
     onThisPage: true,
@@ -62,13 +63,25 @@ Page({
   },
 
   handleCountdownBeforeStart: function() {
-    const { countdownBeforeStart, isStart, reminder } = this.data
+    const {
+      countdownBeforeStart,
+      isStart,
+      reminder,
+      myScore,
+      rivalScore,
+    } = this.data
     if (isStart) return
 
     const that = this
     if (countdownBeforeStart < 2) {
       if (reminder === 0) {
-        this.setData({ gameOver: true })
+        const result =
+          myScore > rivalScore
+            ? '胜利'
+            : myScore === rivalScore
+              ? '平局'
+              : '失败'
+        this.setData({ gameOver: true, result })
       } else {
         this._handleStart()
       }
@@ -88,7 +101,6 @@ Page({
       luckyTime,
       rivalScore,
       isStart,
-      rivalReward,
     } = this.data
 
     if (!onThisPage || gameOver || !isStart) return
@@ -98,10 +110,10 @@ Page({
       this.setData({ isStart: false })
       this.handleCountdownBeforeStart()
     } else {
-      if (luckyTime === countdown) {
+      if (luckyTime === 60 - countdown) {
         this.setData({
           rivalScore: rivalScore + 2,
-          rivalReward: 2,
+          rivalReward: '+2',
           isStart: false,
         })
         this.handleCountdownBeforeStart()
@@ -131,13 +143,7 @@ Page({
 
   _selectCard: function(e) {
     const { value, index, state } = e.currentTarget.dataset
-    const {
-      cards,
-      selectedOperator,
-      selectedCard,
-      myScore,
-      myReward,
-    } = this.data
+    const { cards, selectedOperator, selectedCard, myScore } = this.data
 
     if (state === 'disable') return
 
@@ -202,8 +208,7 @@ Page({
         myScore:
           nextState.selectedCard.value === 24 ? myScore + 2 : myScore - 1,
         isStart: false,
-        myReward:
-          nextState.selectedCard.value === 24 ? myReward + 2 : myReward - 1,
+        myReward: nextState.selectedCard.value === 24 ? '+2' : '-1',
       })
 
       this.handleCountdownBeforeStart()
@@ -235,13 +240,13 @@ Page({
       selectedCard: null,
       selectedOperator: null,
       countdown: 60,
-      luckyTime: Math.floor(Math.random() * 10) + 3,
+      luckyTime: Math.floor(Math.random() * 40) + 10,
       isStart: true,
-      countdownBeforeStart: 7,
+      countdownBeforeStart: 5,
       reminder: this.data.reminder - 1,
       isReady: true,
-      myReward: 0,
-      rivalReward: 0,
+      myReward: '+0',
+      rivalReward: '+0',
     })
   },
 })

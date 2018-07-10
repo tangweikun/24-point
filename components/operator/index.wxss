@@ -1,5 +1,5 @@
 .operator-normal {
-  color: red;
+  color: #c1479f;
   width: 100rpx;
   height: 100rpx;
   text-align: center;
@@ -12,7 +12,7 @@
 
 .operator-active {
   color: #ffffff;
-  background: red;
+  background: #c1479f;
   width: 100rpx;
   height: 100rpx;
   text-align: center;

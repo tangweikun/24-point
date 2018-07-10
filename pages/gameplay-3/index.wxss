@@ -94,7 +94,7 @@
   justify-content: center;
   align-items: center;
   font-size: 50rpx;
-  height: 760rpx;
+  padding-top: 200rpx;
   flex-direction: column;
 }
 
@@ -146,7 +146,7 @@
 .challenge-recommend {
   font-size: 40rpx;
   color: #6ddac8;
-  padding: 0 0 60rpx;
+  padding: 200rpx 0 60rpx;
 }
 
 .header-wrapper {
@@ -156,7 +156,7 @@
 }
 
 .avatar {
-  border-radius: 50rpx;
+  border-radius: 100rpx;
   box-sizing: border-box;
   border: 10rpx solid #ffffff;
 }
@@ -168,4 +168,62 @@
   text-align: center;
   border-radius: 100rpx;
   border: 10rpx solid #6ddac8;
+}
+
+.looking-rival {
+  text-align: center;
+  margin-top: 400rpx;
+  font-size: 50rpx;
+  color: #6ddac8;
+}
+
+.reset {
+  width: 210rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #6ddac8;
+  border-radius: 30rpx;
+  color: #6ddac8;
+  font-size: 30rpx;
+}
+
+.result-wrapper-my {
+  width: 50%;
+  text-align: left;
+  padding: 15rpx 0 0 30rpx;
+  background: red;
+  align-self: flex-start;
+  box-sizing: border-box;
+  border-bottom-right-radius: 100rpx;
+  border-top-right-radius: 100rpx;
+  color: #ffffff;
+  font-size: 80rpx;
+}
+
+.result-wrapper-rival {
+  width: 50%;
+  text-align: right;
+  padding: 15rpx 30rpx 0 0;
+  background: green;
+  align-self: flex-end;
+  box-sizing: border-box;
+  border-bottom-left-radius: 100rpx;
+  border-top-left-radius: 100rpx;
+  color: #ffffff;
+  font-size: 80rpx;
+}
+
+.gameOver-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.win {
+  color: #6ddac8;
+  font-size: 120rpx;
+  font-weight: bold;
+  padding: 180rpx;
 }

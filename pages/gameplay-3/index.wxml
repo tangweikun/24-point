@@ -1,20 +1,52 @@
 <view>
-  <view wx:if="{{gameOver}}">
-    比赛结束
-    {{myScore}}
-    ：
-    {{rivalScore}}
+  <view wx:if="{{gameOver}}" class="gameOver-wrapper">
+    <view class="win">{{result}}</view>
+    <view class="result-wrapper-my">
+      <image
+        class="avatar"
+        mode="aspectFit"
+        style="width: 50px; height: 50px;"
+        src="{{myAvatarUrl}}">
+      </image>
+      <text>{{myScore}}</text>
+    </view>
+    <view class="result-wrapper-rival">
+      <text>{{rivalScore}}</text>
+      <image
+        class="avatar"
+        mode="aspectFit"
+        style="width: 50px; height: 50px;"
+        src="{{rivalAvatarUrl}}">
+      </image>
+    </view>
   </view>
 
-  <view wx:elif="{{!isReady}}">
+  <view wx:elif="{{!isReady}}" class="looking-rival">
     正在为您匹配对手
   </view>
 
   <view wx:else>
     <view wx:if="{{!isStart}}" class='expression-wrapper'>
-      <view class="challenge-record">{{countdownBeforeStart}}</view>
-      <view>{{myReward}}</view>
-      <view>{{rivalReward}}</view>
+      <!-- <view class="challenge-record">{{countdownBeforeStart}}</view> -->
+        <view class="result-wrapper-my">
+          <image
+            class="avatar"
+            mode="aspectFit"
+            style="width: 50px; height: 50px;"
+            src="{{myAvatarUrl}}">
+          </image>
+          <text>{{myReward}}</text>
+        </view>
+        <view class="result-wrapper-rival">
+          <text>{{rivalReward}}</text>
+          <image
+            class="avatar"
+            mode="aspectFit"
+            style="width: 50px; height: 50px;"
+            src="{{rivalAvatarUrl}}">
+          </image>
+        </view>
+
       <view class="challenge-recommend">推荐算法: {{recommendSolution}}</view>
     </view>
 
@@ -86,7 +118,7 @@
       </view>
 
       <view class="footer">
-        <custom-button wx:if="{{!isFinish}}" text='重置' bindtap='_reset'></custom-button>
+        <view class='reset' bindtap='_reset'>重置</view>
       </view>
     </view>
 
