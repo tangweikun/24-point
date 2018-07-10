@@ -32,7 +32,7 @@ Page({
     }
   },
 
-  selectOperator: function(e) {
+  _selectOperator: function(e) {
     const { value } = e.currentTarget.dataset
     const { selectedOperator } = this.data
 
@@ -41,7 +41,7 @@ Page({
     })
   },
 
-  selectCard: function(e) {
+  _selectCard: function(e) {
     const { value, index, state } = e.currentTarget.dataset
     const { cards, selectedOperator, selectedCard } = this.data
 
@@ -104,13 +104,13 @@ Page({
     }
 
     if (isFinish && nextState.selectedCard.value === 24) {
-      this.skip()
+      this._skip()
     } else {
       this.setData({ ...nextState, isFinish })
     }
   },
 
-  reset: function(e) {
+  _reset: function(e) {
     const resetCards = this.data.initialCards.map(x => ({
       value: x.value,
       alias: [x.value],
@@ -125,7 +125,7 @@ Page({
     })
   },
 
-  skip: function(e) {
+  _skip: function(e) {
     const newCards = generateCardsAndRecommendSolution()
     this.setData({
       cards: newCards.cards,

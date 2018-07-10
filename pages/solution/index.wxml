@@ -18,7 +18,7 @@
       <view
         wx:for="{{cards}}"
         class='solution-card-normal'
-        bindtap="selectCard"
+        bindtap="_selectCard"
         wx:key="{{index}}"
         data-value="{{item}}"
         data-index="{{index}}"

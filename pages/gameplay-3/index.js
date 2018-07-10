@@ -58,7 +58,7 @@ Page({
 
   handleCountdownLookingRival: function() {
     const randomTime = Math.random() * 600 + 2000
-    setTimeout(() => this.handleStart(), randomTime)
+    setTimeout(() => this._handleStart(), randomTime)
   },
 
   handleCountdownBeforeStart: function() {
@@ -70,7 +70,7 @@ Page({
       if (reminder === 0) {
         this.setData({ gameOver: true })
       } else {
-        this.handleStart()
+        this._handleStart()
       }
     } else {
       this.setData({ countdownBeforeStart: countdownBeforeStart - 1 })
@@ -115,12 +115,12 @@ Page({
     }, 1000)
   },
 
-  handleStart: function() {
-    this.skip()
+  _handleStart: function() {
+    this._skip()
     this.handleCountdown()
   },
 
-  selectOperator: function(e) {
+  _selectOperator: function(e) {
     const { value } = e.currentTarget.dataset
     const { selectedOperator } = this.data
 
@@ -129,7 +129,7 @@ Page({
     })
   },
 
-  selectCard: function(e) {
+  _selectCard: function(e) {
     const { value, index, state } = e.currentTarget.dataset
     const {
       cards,
@@ -212,7 +212,7 @@ Page({
     }
   },
 
-  reset: function() {
+  _reset: function() {
     const resetCards = this.data.initialCards.map(x => ({
       value: x.value,
       alias: [x.value],
@@ -226,7 +226,7 @@ Page({
     })
   },
 
-  skip: function() {
+  _skip: function() {
     const newCards = generateCardsAndRecommendSolution()
     this.setData({
       cards: newCards.cards,

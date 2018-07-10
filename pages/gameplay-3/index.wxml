@@ -47,7 +47,7 @@
             wx:for="{{cards}}"
             wx:key="{{index}}"
             class="card-{{item.state}}"
-            bindtap="selectCard"
+            bindtap="_selectCard"
             id="{{item.value}}"
             data-state="{{item.state}}"
             data-value="{{item.value}}"
@@ -75,7 +75,7 @@
             wx:for="{{operators}}"
             wx:key="{{index}}"
             class="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
-            bindtap='selectOperator'
+            bindtap='_selectOperator'
             id="{{item}}"
             data-value="{{item}}"
             data-index="{{index}}"
@@ -86,7 +86,7 @@
       </view>
 
       <view class="footer">
-        <custom-button wx:if="{{!isFinish}}" text='重置' bindtap='reset'></custom-button>
+        <custom-button wx:if="{{!isFinish}}" text='重置' bindtap='_reset'></custom-button>
       </view>
     </view>
 

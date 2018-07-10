@@ -54,7 +54,7 @@ Page({
   },
 
   onLoad: function() {
-    this.handleStart()
+    this._handleStart()
   },
 
   onShareAppMessage: function(res) {
@@ -98,7 +98,7 @@ Page({
     }
   },
 
-  handleStart: function() {
+  _handleStart: function() {
     const newCards = generateCardsAndRecommendSolution()
     this.setData({
       isStart: true,
@@ -114,7 +114,7 @@ Page({
     this.countdown()
   },
 
-  selectOperator: function(e) {
+  _selectOperator: function(e) {
     const { value } = e.currentTarget.dataset
     const { selectedOperator } = this.data
 
@@ -123,7 +123,7 @@ Page({
     })
   },
 
-  selectCard: function(e) {
+  _selectCard: function(e) {
     const { value, index } = e.currentTarget.dataset
     const { cards, selectedOperator, selectedCard } = this.data
     if (cards[index].state === 'disable') return
@@ -177,7 +177,7 @@ Page({
     if (isFinish && openid !== '') {
       const isCorrect = nextState.selectedCard.value === 24
       if (isCorrect) {
-        this.skip()
+        this._skip()
         this.setData({ record: this.data.record + 1 })
       } else {
         const foo = this.data.record
@@ -219,7 +219,7 @@ Page({
     }
   },
 
-  reset: function(e) {
+  _reset: function(e) {
     const resetCards = this.data.initialCards.map(x => ({
       value: x.value,
       alias: [x.value],
@@ -233,7 +233,7 @@ Page({
     })
   },
 
-  skip: function(e) {
+  _skip: function(e) {
     const newCards = generateCardsAndRecommendSolution()
     this.setData({
       cards: [...newCards.cards],

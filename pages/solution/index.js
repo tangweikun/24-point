@@ -15,7 +15,7 @@ Page({
     }
   },
 
-  selectCard: function(e) {
+  _selectCard: function(e) {
     const { value } = e.currentTarget.dataset
     const { selectedCards } = this.data
 

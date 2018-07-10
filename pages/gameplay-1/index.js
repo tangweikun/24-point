@@ -56,7 +56,7 @@ Page({
   },
 
   onLoad: function() {
-    this.handleStart()
+    this._handleStart()
   },
 
   onShareAppMessage: function(res) {
@@ -105,7 +105,7 @@ Page({
     }
   },
 
-  handleStart: function() {
+  _handleStart: function() {
     const newCards = generateCardsAndRecommendSolution()
     this.setData({
       isStart: true,
@@ -122,7 +122,7 @@ Page({
     this.countdown()
   },
 
-  selectOperator: function(e) {
+  _selectOperator: function(e) {
     const { value } = e.currentTarget.dataset
     const { selectedOperator } = this.data
 
@@ -131,7 +131,7 @@ Page({
     })
   },
 
-  selectCard: function(e) {
+  _selectCard: function(e) {
     const { value, index } = e.currentTarget.dataset
     const {
       cards,
@@ -191,9 +191,9 @@ Page({
     if (isFinish && openid !== '') {
       const isCorrect = nextState.selectedCard.value === 24
       if (isCorrect) {
-        const awardTime = this.calculateAwardTime()
+        const awardTime = this._calculateAwardTime()
         this.showToast(`答对 +${awardTime}s`, 'success')
-        this.skip()
+        this._skip()
         this.setData({
           record: record + 1,
           countdown: countdown + awardTime,
@@ -203,7 +203,7 @@ Page({
         this.setData({
           countdown: countdown - 5,
         })
-        this.skip()
+        this._skip()
       }
 
       wx.request({
@@ -227,7 +227,7 @@ Page({
     }
   },
 
-  reset: function(e) {
+  _reset: function(e) {
     const resetCards = this.data.initialCards.map(x => ({
       value: x.value,
       alias: [x.value],
@@ -241,7 +241,7 @@ Page({
     })
   },
 
-  calculateAwardTime: function() {
+  _calculateAwardTime: function() {
     const record = this.data.record + 1
 
     if (record % 24 === 0) return 24 + record / 12
@@ -258,7 +258,7 @@ Page({
     })
   },
 
-  skip: function(e) {
+  _skip: function(e) {
     const newCards = generateCardsAndRecommendSolution()
     this.setData({
       cards: [...newCards.cards],
