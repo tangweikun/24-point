@@ -1,0 +1,89 @@
+<view>
+  <view wx:if="{{gameOver}}">
+    比赛结束
+    {{myScore}}
+    ：
+    {{rivalScore}}
+  </view>
+
+  <view wx:else>
+    <view wx:if="{{!isStart}}" class='expression-wrapper'>
+      <view class="challenge-record">{{countdownBeforeStart}}</view>
+      <view class="challenge-recommend">推荐算法: {{recommendSolution}}</view>
+    </view>
+
+    <view wx:else>
+      <view class='header-wrapper'>
+        <view>
+          <image
+            class="avatar"
+            mode="aspectFit"
+            style="width: 50px; height: 50px;"
+            src="{{myAvatarUrl}}">
+          </image>
+          <text>{{myScore}}</text>
+        </view>
+        <view class='countdown'>{{countdown}}</view>
+        <view>
+          <image
+            class="avatar"
+            mode="aspectFit"
+            style="width: 50px; height: 50px;"
+            src="{{rivalAvatarUrl}}">
+          </image>
+          <text>{{rivalScore}}</text>
+        </view>
+      </view>
+
+      <view class='wrapper'>
+        <view class='card-wrapper'>
+          <view
+            wx:for="{{cards}}"
+            wx:key="{{index}}"
+            class="card-{{item.state}}"
+            bindtap="selectCard"
+            id="{{item.value}}"
+            data-state="{{item.state}}"
+            data-value="{{item.value}}"
+            data-index="{{index}}"
+          >
+            <view wx:if="{{item.alias[0] !== 0 || !item.alias[1] }}" class="integer">
+              {{item.alias[0]}}
+            </view>
+            <view class="fractional" wx:if="{{item.alias[1]}}">
+              <view class="numerator">
+                {{item.alias[1]}}
+              </view>
+              <view class="division">
+                -
+              </view>
+              <view class="denominator">
+                {{item.alias[2]}}
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class='operator-wrapper'>
+          <view
+            wx:for="{{operators}}"
+            wx:key="{{index}}"
+            class="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
+            bindtap='selectOperator'
+            id="{{item}}"
+            data-value="{{item}}"
+            data-index="{{index}}"
+          >
+            {{OPERATORS_HASH[item]}}
+          </view>
+        </view>
+      </view>
+
+      <view class="footer">
+        <view wx:if="{{!isFinish}}" class='reset-or-skip' bindtap='reset'>重置</view>
+      </view>
+    </view>
+
+  </view>
+
+</view>

@@ -36,9 +36,9 @@ Page({
       },
       {
         text: '王者对战',
-        url: '',
-        isReady: false,
-        isHot: false,
+        url: '/pages/gameplay-3/index',
+        isReady: true,
+        isHot: true,
       },
     ],
   },
