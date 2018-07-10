@@ -39,17 +39,17 @@
     </view>
 
     <view class='operator-wrapper'>
-      <view
+      <custom-operator
         wx:for="{{operators}}"
         wx:key="{{index}}"
-        class="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
+        text="{{OPERATORS_HASH[item]}}"
+        theme="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
         bindtap='selectOperator'
         id="{{item}}"
         data-value="{{item}}"
         data-index="{{index}}"
       >
-        {{OPERATORS_HASH[item]}}
-      </view>
+      </custom-operator>
     </view>
 
     <view wx:if="{{!isFinish}}" class="footer">

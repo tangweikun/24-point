@@ -8,31 +8,6 @@
   box-sizing: border-box;
 }
 
-.operator-normal {
-  color: red;
-  width: 100rpx;
-  height: 100rpx;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 60rpx;
-  font-weight: bold;
-}
-
-.operator-active {
-  color: #ffffff;
-  background: red;
-  width: 100rpx;
-  height: 100rpx;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 60rpx;
-  font-weight: bold;
-}
-
 .operator-wrapper {
   display: flex;
   width: 90%;

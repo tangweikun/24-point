@@ -1,0 +1,3 @@
+<view class="{{theme}}">
+  {{text}}
+</view>

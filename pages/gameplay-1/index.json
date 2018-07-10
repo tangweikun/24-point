@@ -2,6 +2,7 @@
   "navigationBarTitleText": "分秒必争",
   "usingComponents": {
     "custom-button": "../../components/button/index",
-    "custom-card": "../../components/card/index"
+    "custom-card": "../../components/card/index",
+    "custom-operator": "../../components/operator/index"
   }
 }
