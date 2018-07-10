@@ -8,39 +8,6 @@
   box-sizing: border-box;
 }
 
-.card-normal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 40rpx;
-  background-color: #6ddac8;
-}
-
-.card-active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 40rpx;
-  background-color: green;
-  color: #ffffff;
-}
-
-.card-disable {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 40rpx;
-  background-color: #e5e5e5;
-  color: #ffffff;
-}
-
 .operator-normal {
   color: red;
   width: 100rpx;

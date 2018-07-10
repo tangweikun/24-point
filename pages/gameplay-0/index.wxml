@@ -6,10 +6,10 @@
 
   <view wx:else class='wrapper'>
     <view class='card-wrapper'>
-      <view
+      <custom-card
         wx:for="{{cards}}"
         wx:key="{{index}}"
-        class="card-{{item.state}}"
+        theme="card-{{item.state}}"
         bindtap="selectCard"
         id="{{item.value}}"
         data-state="{{item.state}}"
@@ -30,7 +30,7 @@
             {{item.alias[2]}}
           </view>
         </view>
-      </view>
+      </custom-card>
     </view>
 
     <view class='operator-wrapper'>
