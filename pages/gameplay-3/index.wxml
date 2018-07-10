@@ -121,7 +121,7 @@
         <view class='reset' bindtap='_reset'>重置</view>
       </view>
     </view>
-
+    <view class="warning">比赛进行中,请勿离开</view>
   </view>
 
 </view>

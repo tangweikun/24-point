@@ -178,15 +178,14 @@
 }
 
 .reset {
-  width: 210rpx;
-  height: 60rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1rpx solid #6ddac8;
-  border-radius: 30rpx;
-  color: #6ddac8;
-  font-size: 30rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  width: 200rpx;
+  height: 70rpx;
+  border-radius: 40rpx;
 }
 
 .result-wrapper-my {
@@ -226,4 +225,13 @@
   font-size: 120rpx;
   font-weight: bold;
   padding: 180rpx;
+}
+
+.warning {
+  position: fixed;
+  bottom: 20rpx;
+  text-align: center;
+  width: 100%;
+  color: #b34098;
+  font-size: 30rpx;
 }

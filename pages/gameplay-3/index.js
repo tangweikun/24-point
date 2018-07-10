@@ -3,6 +3,7 @@ const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
+  generateLuckyTime,
 } = require('../../utils/index.js')
 
 const {
@@ -14,20 +15,20 @@ const {
 } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
-const luckyTime = Math.floor(Math.random() * 40) + 10
+const luckyTime = generateLuckyTime(0)
 
 Page({
   data: {
     isReady: false,
     luckyTime,
-    reminder: 10,
+    reminder: 5,
     countdown: 60,
     myScore: 0,
     rivalScore: 0,
     myReward: '+0',
     rivalReward: '+0',
     result: '',
-    countdownBeforeStart: 5,
+    countdownBeforeStart: 4,
     isStart: true,
     gameOver: false,
     onThisPage: true,
@@ -41,6 +42,7 @@ Page({
     rivalAvatarUrl: AVATAR_URL,
     myAvatarUrl: AVATAR_URL,
     rivalUserInfo: {},
+    rivalLevel: 0,
   },
 
   onShareAppMessage: function(res) {
@@ -53,7 +55,14 @@ Page({
   onUnload: function() {
     // TODO: 添加离开页面事件
     this.setData({ onThisPage: false })
-    if (!this.data.gameOver) {
+    if (!this.data.gameOver && this.data.isReady) {
+      wx.showModal({
+        showCancel: false,
+        title: '提示',
+        content: '由于您提前离开比赛,本次对战结果为【投降】',
+        success: function(res) {},
+      })
+
       const { myScore, rivalScore, rivalUserInfo } = this.data
       const openid = app.globalData.openid
       const userInfo = app.globalData.userInfo
@@ -79,11 +88,13 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         rivalUserInfo,
+        rivalLevel: Math.round(Math.random() * 5),
         myAvatarUrl: app.globalData.userInfo.avatarUrl,
       })
     } else {
       this.setData({
         rivalUserInfo,
+        rivalLevel: Math.round(Math.random() * 5),
       })
     }
 
@@ -91,7 +102,7 @@ Page({
   },
 
   handleCountdownLookingRival: function() {
-    const randomTime = Math.random() * 600 + 2000
+    const randomTime = Math.random() * 2000 + 1000
     setTimeout(() => this._handleStart(), randomTime)
   },
 
@@ -291,9 +302,9 @@ Page({
       selectedCard: null,
       selectedOperator: null,
       countdown: 60,
-      luckyTime: Math.floor(Math.random() * 40) + 10,
+      luckyTime: generateLuckyTime(this.data.rivalLevel),
       isStart: true,
-      countdownBeforeStart: 5,
+      countdownBeforeStart: 4,
       reminder: this.data.reminder - 1,
       isReady: true,
       myReward: '+0',
