@@ -42,7 +42,7 @@ Page({
 
   onShareAppMessage: function(res) {
     return {
-      title: '24点',
+      title: '王者对战',
       path: '/pages/index/index',
     }
   },

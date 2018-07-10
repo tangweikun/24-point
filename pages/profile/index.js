@@ -17,8 +17,8 @@ Page({
 
   onShareAppMessage: function(res) {
     return {
-      title: '24点',
-      path: '/pages/profile/index',
+      title: '我的战绩',
+      path: '/pages/index/index',
     }
   },
 

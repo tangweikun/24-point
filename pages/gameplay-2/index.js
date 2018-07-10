@@ -60,7 +60,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: '过关斩将',
-      path: '/pages/gameplay-2/index',
+      path: '/pages/index/index',
     }
   },
 

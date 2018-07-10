@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "王者对战",
-  "usingComponents": {
-    "component-tag-name": "../../components/button/index"
-  }
+  "navigationBarTitleText": "王者对战"
 }

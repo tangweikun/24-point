@@ -62,7 +62,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: '分秒必争',
-      path: '/pages/gameplay-1/index',
+      path: '/pages/index/index',
     }
   },
 

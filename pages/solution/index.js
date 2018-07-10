@@ -10,8 +10,8 @@ Page({
 
   onShareAppMessage: function(res) {
     return {
-      title: '24点',
-      path: '/pages/solution/index',
+      title: '你问我答',
+      path: '/pages/index/index',
     }
   },
 
