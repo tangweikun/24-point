@@ -34,19 +34,17 @@
     </view>
 
     <view class='operator-wrapper'>
-      <button
-        type="{{selectedOperator === item ? 'warn' : 'default'}}"
-        disabled="{{isReady}}"
+      <view
         wx:for="{{operators}}"
         wx:key="{{index}}"
-        class='operator'
+        class="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
         bindtap='selectOperator'
         id="{{item}}"
         data-value="{{item}}"
         data-index="{{index}}"
       >
-        {{item}}
-      </button>
+        {{OPERATORS_HASH[item]}}
+      </view>
     </view>
   </view>
 

@@ -5,13 +5,18 @@ const {
   calculate,
 } = require('../../utils/index.js')
 
-const { OPERATORS, BASE_URL } = require('../../constants/index.js')
+const {
+  OPERATORS,
+  BASE_URL,
+  OPERATORS_HASH,
+} = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
 Page({
   data: {
     operators: OPERATORS,
+    OPERATORS_HASH,
     selectedOperator: null,
     selectedCard: null,
     cards: cardsAndRecommendSolution.cards,
@@ -94,9 +99,7 @@ Page({
           openid,
           isCorrect: nextState.selectedCard.value === 24,
         },
-        success: res => {
-          console.log(res)
-        },
+        success: res => {},
       })
     }
 
