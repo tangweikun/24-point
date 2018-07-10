@@ -16,7 +16,7 @@
         class="avatar"
         mode="aspectFit"
         style="width: 50px; height: 50px;"
-        src="{{rivalAvatarUrl}}">
+        src="{{rivalUserInfo.avatarUrl}}">
       </image>
     </view>
   </view>
@@ -31,7 +31,7 @@
         <view class="result-wrapper-my">
           <image
             class="avatar"
-            mode="aspectFit"
+            mode="scaleToFill"
             style="width: 50px; height: 50px;"
             src="{{myAvatarUrl}}">
           </image>
@@ -41,9 +41,9 @@
           <text>{{rivalReward}}</text>
           <image
             class="avatar"
-            mode="aspectFit"
+            mode="scaleToFill"
             style="width: 50px; height: 50px;"
-            src="{{rivalAvatarUrl}}">
+            src="{{rivalUserInfo.avatarUrl}}">
           </image>
         </view>
 
@@ -55,7 +55,7 @@
         <view>
           <image
             class="avatar"
-            mode="aspectFit"
+            mode="scaleToFill"
             style="width: 50px; height: 50px;"
             src="{{myAvatarUrl}}">
           </image>
@@ -65,9 +65,9 @@
         <view>
           <image
             class="avatar"
-            mode="aspectFit"
+            mode="scaleToFill"
             style="width: 50px; height: 50px;"
-            src="{{rivalAvatarUrl}}">
+            src="{{rivalUserInfo.avatarUrl}}">
           </image>
           <text>{{rivalScore}}</text>
         </view>

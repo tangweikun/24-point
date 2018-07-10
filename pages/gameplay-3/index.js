@@ -10,6 +10,7 @@ const {
   BASE_URL,
   OPERATORS_HASH,
   AVATAR_URL,
+  RIVAL,
 } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
@@ -39,6 +40,7 @@ Page({
     recommendSolution: cardsAndRecommendSolution.recommendSolution,
     rivalAvatarUrl: AVATAR_URL,
     myAvatarUrl: AVATAR_URL,
+    rivalUserInfo: {},
   },
 
   onShareAppMessage: function(res) {
@@ -51,9 +53,40 @@ Page({
   onUnload: function() {
     // TODO: 添加离开页面事件
     this.setData({ onThisPage: false })
+    if (!this.data.gameOver) {
+      const { myScore, rivalScore, rivalUserInfo } = this.data
+      const openid = app.globalData.openid
+      const userInfo = app.globalData.userInfo
+
+      wx.request({
+        url: `${BASE_URL}/addBattle`,
+        method: 'post',
+        data: {
+          openid,
+          myScore,
+          rivalScore,
+          userInfo,
+          result: '投降',
+          rivalUserInfo,
+        },
+        success: res => {},
+      })
+    }
   },
 
   onLoad: function() {
+    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 6)]
+    if (app.globalData.userInfo) {
+      this.setData({
+        rivalUserInfo,
+        myAvatarUrl: app.globalData.userInfo.avatarUrl,
+      })
+    } else {
+      this.setData({
+        rivalUserInfo,
+      })
+    }
+
     this.handleCountdownLookingRival()
   },
 
@@ -69,6 +102,7 @@ Page({
       reminder,
       myScore,
       rivalScore,
+      rivalUserInfo,
     } = this.data
     if (isStart) return
 
@@ -82,6 +116,23 @@ Page({
               ? '平局'
               : '失败'
         this.setData({ gameOver: true, result })
+
+        const openid = app.globalData.openid
+        const userInfo = app.globalData.userInfo
+
+        wx.request({
+          url: `${BASE_URL}/addBattle`,
+          method: 'post',
+          data: {
+            openid,
+            myScore,
+            rivalScore,
+            userInfo,
+            result,
+            rivalUserInfo,
+          },
+          success: res => {},
+        })
       } else {
         this._handleStart()
       }
