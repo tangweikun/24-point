@@ -13,15 +13,18 @@ const {
 } = require('../../constants/index.js')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
-const luckyTime = Math.floor(Math.random() * 10) + 3
+const luckyTime = Math.floor(Math.random() * 60) + 15
 
 Page({
   data: {
+    isReady: false,
     luckyTime,
     reminder: 8,
-    countdown: 15,
+    countdown: 60,
     myScore: 0,
     rivalScore: 0,
+    myReward: 0,
+    rivalReward: 0,
     countdownBeforeStart: 7,
     isStart: true,
     gameOver: false,
@@ -34,8 +37,7 @@ Page({
     initialCards: [...cardsAndRecommendSolution.cards],
     recommendSolution: cardsAndRecommendSolution.recommendSolution,
     rivalAvatarUrl: AVATAR_URL,
-    myAvatarUrl:
-      'https://wx.qlogo.cn/mmopen/vi_32/eXrWeb45sjCs0Z0teC8WDU5VFdYGt5BAbYZOf0JicOSlK94BOWj6NgjUbCE1Adx6Kria0FVLxya3JkLn2DQicDpPA/132',
+    myAvatarUrl: AVATAR_URL,
   },
 
   onShareAppMessage: function(res) {
@@ -51,7 +53,12 @@ Page({
   },
 
   onLoad: function() {
-    this.handleStart()
+    this.handleCountdownLookingRival()
+  },
+
+  handleCountdownLookingRival: function() {
+    const randomTime = Math.random() * 600 + 2000
+    setTimeout(() => this.handleStart(), randomTime)
   },
 
   handleCountdownBeforeStart: function() {
@@ -81,6 +88,7 @@ Page({
       luckyTime,
       rivalScore,
       isStart,
+      rivalReward,
     } = this.data
 
     if (!onThisPage || gameOver || !isStart) return
@@ -89,11 +97,13 @@ Page({
     if (countdown < 2) {
       this.setData({ isStart: false })
       this.handleCountdownBeforeStart()
-      // this.skip()
     } else {
       if (luckyTime === countdown) {
-        // this.skip()
-        this.setData({ rivalScore: rivalScore + 2, isStart: false })
+        this.setData({
+          rivalScore: rivalScore + 2,
+          rivalReward: 2,
+          isStart: false,
+        })
         this.handleCountdownBeforeStart()
       } else {
         this.setData({ countdown: countdown - 1 })
@@ -121,7 +131,13 @@ Page({
 
   selectCard: function(e) {
     const { value, index, state } = e.currentTarget.dataset
-    const { cards, selectedOperator, selectedCard, myScore } = this.data
+    const {
+      cards,
+      selectedOperator,
+      selectedCard,
+      myScore,
+      myReward,
+    } = this.data
 
     if (state === 'disable') return
 
@@ -186,6 +202,8 @@ Page({
         myScore:
           nextState.selectedCard.value === 24 ? myScore + 2 : myScore - 1,
         isStart: false,
+        myReward:
+          nextState.selectedCard.value === 24 ? myReward + 2 : myReward - 1,
       })
 
       this.handleCountdownBeforeStart()
@@ -194,9 +212,15 @@ Page({
     }
   },
 
-  reset: function(e) {
+  reset: function() {
+    const resetCards = this.data.initialCards.map(x => ({
+      value: x.value,
+      alias: [x.value],
+      state: 'normal',
+    }))
+
     this.setData({
-      cards: [...this.data.initialCards],
+      cards: resetCards,
       selectedCard: null,
       selectedOperator: null,
     })
@@ -210,11 +234,14 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 15,
+      countdown: 60,
       luckyTime: Math.floor(Math.random() * 10) + 3,
       isStart: true,
       countdownBeforeStart: 7,
       reminder: this.data.reminder - 1,
+      isReady: true,
+      myReward: 0,
+      rivalReward: 0,
     })
   },
 })

@@ -6,9 +6,15 @@
     {{rivalScore}}
   </view>
 
+  <view wx:elif="{{!isReady}}">
+    正在为您匹配对手
+  </view>
+
   <view wx:else>
     <view wx:if="{{!isStart}}" class='expression-wrapper'>
       <view class="challenge-record">{{countdownBeforeStart}}</view>
+      <view>{{myReward}}</view>
+      <view>{{rivalReward}}</view>
       <view class="challenge-recommend">推荐算法: {{recommendSolution}}</view>
     </view>
 
@@ -80,7 +86,7 @@
       </view>
 
       <view class="footer">
-        <view wx:if="{{!isFinish}}" class='reset-or-skip' bindtap='reset'>重置</view>
+        <custom-button wx:if="{{!isFinish}}" text='重置' bindtap='reset'></custom-button>
       </view>
     </view>
 

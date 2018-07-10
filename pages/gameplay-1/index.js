@@ -228,8 +228,14 @@ Page({
   },
 
   reset: function(e) {
+    const resetCards = this.data.initialCards.map(x => ({
+      value: x.value,
+      alias: [x.value],
+      state: 'normal',
+    }))
+
     this.setData({
-      cards: [...this.data.initialCards],
+      cards: resetCards,
       selectedCard: null,
       selectedOperator: null,
     })

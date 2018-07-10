@@ -126,17 +126,6 @@
   padding: 60rpx;
 }
 
-.reset-or-skip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #6ddac8;
-  color: #ffffff;
-  width: 200rpx;
-  height: 70rpx;
-  border-radius: 40rpx;
-}
-
 .challenge-header {
   justify-content: space-between;
   width: 70%;

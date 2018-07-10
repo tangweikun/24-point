@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "随便玩玩"
+  "navigationBarTitleText": "随便玩玩",
+  "usingComponents": {
+    "custom-button": "../../components/button/index"
+  }
 }

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "分秒必争"
+  "navigationBarTitleText": "分秒必争",
+  "usingComponents": {
+    "custom-button": "../../components/button/index"
+  }
 }

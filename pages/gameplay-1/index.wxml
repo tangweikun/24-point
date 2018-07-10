@@ -53,8 +53,8 @@
     </view>
 
     <view wx:if="{{!isFinish}}" class="footer">
-      <view class='reset-or-skip' bindtap='skip'>下一题</view>
-      <view class='reset-or-skip' bindtap='reset'>重置</view>
+      <custom-button text='下一题' bindtap='skip'></custom-button>
+      <custom-button text='重置' bindtap='reset'></custom-button>
     </view>
   </view>
 </view>

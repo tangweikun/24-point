@@ -1,5 +1,10 @@
 Component({
   options: {},
-  properties: {},
+  properties: {
+    text: {
+      type: String,
+      value: '',
+    },
+  },
   methods: {},
 })
