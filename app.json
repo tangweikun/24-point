@@ -9,6 +9,7 @@
     "pages/gameplay-3/index",
     "pages/ranking-1/index",
     "pages/ranking-2/index",
+    "pages/battle-list/index",
     "pages/ranking/index"
   ],
   "window": {

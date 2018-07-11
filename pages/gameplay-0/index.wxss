@@ -10,7 +10,7 @@
 
 .operator-wrapper {
   display: flex;
-  width: 90%;
+  width: 84%;
   justify-content: space-between;
 }
 

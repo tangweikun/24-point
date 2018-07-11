@@ -1,42 +1,8 @@
-.avatar {
-  width: 200rpx;
-  height: 200rpx;
-  padding: 50rpx;
-}
-
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #3868af;
-}
-
-.rule {
-  position: fixed;
-  left: 40rpx;
-  top: 40rpx;
-  font-size: 24rpx;
-  background: #6ddac8;
-  color: #ffffff;
-  width: 100rpx;
-  height: 40rpx;
-  text-align: center;
-  line-height: 40rpx;
-  border-radius: 20rpx;
-}
-
-.gameplay {
-  position: fixed;
-  right: 40rpx;
-  top: 40rpx;
-  font-size: 24rpx;
-  background: #6ddac8;
-  color: #ffffff;
-  width: 100rpx;
-  height: 40rpx;
-  text-align: center;
-  line-height: 40rpx;
-  border-radius: 20rpx;
 }
 
 .home-circle {
@@ -71,16 +37,34 @@
 
 .home-circle-wrapper {
   display: flex;
-  width: 440rpx;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 200rpx;
+  margin-top: 80rpx;
 }
 
-.footer {
-  position: fixed;
-  bottom: 30rpx;
-  font-size: 30rpx;
-  text-align: center;
-  width: 80%;
+.wrapper {
+  height: 1000rpx;
+  width: 100%;
+}
+
+.ranking-card-wrapper {
+  display: flex;
+  height: 150rpx;
+  width: 600rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  padding: 20rpx 20rpx;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+
+.ranking-card-rank {
+  width: 80rpx;
+}
+
+.ranking-card-right {
+  flex: 1;
+  padding-left: 50rpx;
 }

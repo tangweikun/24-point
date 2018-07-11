@@ -43,8 +43,8 @@
 
 .operator-normal {
   color: red;
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -56,8 +56,8 @@
 .operator-active {
   color: #ffffff;
   background: red;
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -68,7 +68,7 @@
 
 .operator-wrapper {
   display: flex;
-  width: 90%;
+  width: 84%;
   justify-content: space-between;
 }
 

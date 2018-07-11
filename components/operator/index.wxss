@@ -1,7 +1,7 @@
 .operator-normal {
   color: #c1479f;
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -13,8 +13,8 @@
 .operator-active {
   color: #ffffff;
   background: #c1479f;
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   text-align: center;
   display: flex;
   justify-content: center;

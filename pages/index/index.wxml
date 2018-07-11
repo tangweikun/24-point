@@ -1,9 +1,9 @@
 <view class="home-container">
   <view class="rule" bindtap="showRule">规则</view>
   <view class="gameplay" bindtap="showGameplay">玩法</view>
-  <view class="avatar">
+  <!-- <view class="avatar">
     <open-data type="userAvatarUrl"></open-data>
-  </view>
+  </view> -->
 
   <view class="home-circle-wrapper">
     <view

@@ -1,4 +1,5 @@
 const { BASE_URL } = require('./constants/index.js')
+const { filterRankingList } = require('./utils/index.js')
 
 App({
   onLaunch: function() {
@@ -21,31 +22,40 @@ App({
               totalOfAnswers,
             } = response.data
 
+            wx.request({
+              url: `${BASE_URL}/getMyBattleList`,
+              method: 'post',
+              data: { openid },
+              success: res => {
+                this.globalData.battleList = res.data
+              },
+            })
+
             this.globalData.openid = openid
             this.globalData.userInfo = userInfo
 
-            wx.request({
-              url: `${BASE_URL}/getRanking`,
-              method: 'post',
-              data: { openid: response.data.openid },
-              success: res2 => {
-                const {
-                  type1Ranking,
-                  type1Record,
-                  type2Ranking,
-                  type2Record,
-                } = res2.data
+            // wx.request({
+            //   url: `${BASE_URL}/getRanking`,
+            //   method: 'post',
+            //   data: { openid: response.data.openid },
+            //   success: res2 => {
+            //     const {
+            //       type1Ranking,
+            //       type1Record,
+            //       type2Ranking,
+            //       type2Record,
+            //     } = res2.data
 
-                this.globalData.gameData = {
-                  type1Ranking,
-                  type1Record,
-                  type2Ranking,
-                  type2Record,
-                  totalOfCorrectAnswers,
-                  totalOfAnswers,
-                }
-              },
-            })
+            //     this.globalData.gameData = {
+            //       type1Ranking,
+            //       type1Record,
+            //       type2Ranking,
+            //       type2Record,
+            //       totalOfCorrectAnswers,
+            //       totalOfAnswers,
+            //     }
+            //   },
+            // })
           },
         })
 
@@ -60,7 +70,7 @@ App({
       method: 'post',
       data: {},
       success: res => {
-        this.globalData.rankingList1 = this._filterRankingList(res.data)
+        this.globalData.rankingList1 = filterRankingList(res.data)
       },
     })
 
@@ -69,21 +79,9 @@ App({
       method: 'post',
       data: {},
       success: res => {
-        this.globalData.rankingList2 = this._filterRankingList(res.data)
+        this.globalData.rankingList2 = filterRankingList(res.data)
       },
     })
-  },
-
-  _filterRankingList: function(list) {
-    let res = []
-    let helper = []
-    for (let item of list) {
-      if (helper.indexOf(item.openid) === -1) {
-        res.push(item)
-        helper.push(item.openid)
-      }
-    }
-    return res
   },
 
   globalData: {
@@ -92,5 +90,6 @@ App({
     openid: null,
     rankingList1: [],
     rankingList2: [],
+    battleList: [],
   },
 })

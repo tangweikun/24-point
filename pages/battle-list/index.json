@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "对战历史",
+  "usingComponents": {
+    "custom-card": "../../components/ranking-card/index"
+  }
+}

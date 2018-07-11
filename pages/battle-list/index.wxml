@@ -1,0 +1,37 @@
+<view class="home-container">
+  <view class="home-circle-wrapper">
+      <scroll-view class="wrapper" scroll-y>
+        <view
+          class="ranking-card-wrapper"
+          wx:for="{{battleList}}"
+          wx:key="{{index}}"
+        >
+          <view>
+            <view>
+              {{item.userInfo.nickName}}
+            </view>
+              <image
+                mode="aspectFit"
+                style="width: 40px; height: 40px;border-radius: 40px;"
+                src="{{item.userInfo.avatarUrl}}"
+              >
+              </image>
+          </view>
+          <view>
+            <view>
+              {{item.rivalUserInfo.nickName}}
+            </view>
+            <image
+              mode="aspectFit"
+              style="width: 40px; height: 40px;border-radius: 40px;"
+              src="{{item.rivalUserInfo.avatarUrl}}"
+              >
+            </image>
+          </view>
+          <view>{{item.myScore}}</view>
+          <view>{{item.rivalScore}}</view>
+          <view>{{item.createdAt}}</view>
+        </view>
+      </scroll-view>
+  </view>
+</view>

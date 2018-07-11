@@ -36,8 +36,8 @@ Page({
         isHot: false,
       },
       {
-        text: '你问我答',
-        url: '/pages/solution/index',
+        text: '对战历史',
+        url: '/pages/battle-list/index',
         isReady: true,
         isHot: false,
       },
@@ -129,6 +129,7 @@ Page({
           '/pages/profile/index',
           '/pages/gameplay-2/index',
           '/pages/gameplay-1/index',
+          '/pages/battle-list/index',
         ].indexOf(url) !== -1
       ) {
         this._showLoginTip()
