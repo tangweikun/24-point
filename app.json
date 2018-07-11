@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/profile/index",
     "pages/gameplay-2/index",
     "pages/gameplay-0/index",
