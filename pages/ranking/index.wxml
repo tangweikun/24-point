@@ -1,0 +1,17 @@
+<view class="home-container">
+  <view class="tab-wrapper">
+    <view data-tabindex="{{0}}" bindtap="_handleClickTab" class="tab-left {{tabIndex === 0 ? 'tab-active' : 'tab-normal'}}">过关斩将</view>
+    <view data-tabindex="{{1}}" bindtap="_handleClickTab" class="tab-right {{tabIndex === 1 ? 'tab-active' : 'tab-normal'}}">分秒必争</view>
+  </view>
+  <scroll-view class="scroll-wrapper" scroll-y>
+    <custom-card
+      wx:for="{{rankingList}}"
+      wx:key="{{index}}"
+      rank="{{index + 1}}"
+      avatarUrl="{{item.userInfo.avatarUrl}}"
+      nickName="{{item.userInfo.nickName}}"
+      record="{{item.record}}"
+    >
+    </custom-card>
+  </scroll-view>
+</view>

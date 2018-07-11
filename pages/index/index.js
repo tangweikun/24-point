@@ -6,6 +6,12 @@ Page({
     isAuthorized: false,
     gamePlay: [
       {
+        text: '排行榜',
+        url: '/pages/ranking/index',
+        isReady: true,
+        isHot: false,
+      },
+      {
         text: '随便玩玩',
         url: '/pages/gameplay-0/index',
         isReady: true,
@@ -29,13 +35,12 @@ Page({
         isReady: true,
         isHot: false,
       },
-
-      // {
-      //   text: '你问我答',
-      //   url: '/pages/solution/index',
-      //   isReady: true,
-      //   isHot: false,
-      // },
+      {
+        text: '你问我答',
+        url: '/pages/solution/index',
+        isReady: true,
+        isHot: false,
+      },
       // {
       //   text: '我的战绩',
       //   url: '/pages/profile/index',
@@ -92,7 +97,7 @@ Page({
     wx.showModal({
       showCancel: false,
       title: '提示',
-      content: '请先登录再参加【王者对战】',
+      content: '请先登录',
       success: function(res) {},
     })
   },
@@ -117,7 +122,15 @@ Page({
     const { url, ready } = e.currentTarget.dataset
 
     if (ready) {
-      if (!this.data.isAuthorized && url === '/pages/gameplay-3/index') {
+      if (
+        !this.data.isAuthorized &&
+        [
+          '/pages/gameplay-3/index',
+          '/pages/profile/index',
+          '/pages/gameplay-2/index',
+          '/pages/gameplay-1/index',
+        ].indexOf(url) !== -1
+      ) {
         this._showLoginTip()
       } else {
         wx.navigateTo({ url })

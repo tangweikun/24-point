@@ -54,6 +54,36 @@ App({
         }
       },
     })
+
+    wx.request({
+      url: `${BASE_URL}/getRankingList1`,
+      method: 'post',
+      data: {},
+      success: res => {
+        this.globalData.rankingList1 = this._filterRankingList(res.data)
+      },
+    })
+
+    wx.request({
+      url: `${BASE_URL}/getRankingList2`,
+      method: 'post',
+      data: {},
+      success: res => {
+        this.globalData.rankingList2 = this._filterRankingList(res.data)
+      },
+    })
+  },
+
+  _filterRankingList: function(list) {
+    let res = []
+    let helper = []
+    for (let item of list) {
+      if (helper.indexOf(item.openid) === -1) {
+        res.push(item)
+        helper.push(item.openid)
+      }
+    }
+    return res
   },
 
   globalData: {
