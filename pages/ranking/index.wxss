@@ -1,5 +1,5 @@
 .scroll-wrapper {
-  height: 1000rpx;
+  height: 750rpx;
   width: 80%;
 }
 
@@ -44,4 +44,9 @@
 
 .tab-normal {
   color: rgba(255, 255, 255, 0.4);
+}
+
+.ad {
+  position: fixed;
+  bottom: 10rpx;
 }

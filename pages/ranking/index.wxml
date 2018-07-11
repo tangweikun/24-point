@@ -14,4 +14,7 @@
     >
     </custom-card>
   </scroll-view>
+  <view class="ad">
+    <ad unit-id="adunit-e989c465de072824"></ad>
+  </view>
 </view>

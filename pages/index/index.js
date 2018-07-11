@@ -38,7 +38,7 @@ Page({
       {
         text: '对战历史',
         url: '/pages/battle-list/index',
-        isReady: true,
+        isReady: false,
         isHot: false,
       },
       // {
