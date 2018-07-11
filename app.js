@@ -59,6 +59,7 @@ App({
   globalData: {
     userInfo: null,
     gameData: null,
+    openid: null,
     rankingList1: [],
     rankingList2: [],
   },

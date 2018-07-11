@@ -55,15 +55,15 @@ Page({
   },
 
   onLoad: function() {
+    this.setData({
+      isAuthorized: app.globalData.isAuthorized,
+    })
     wx.request({
       url: `${BASE_URL}/getRankingList2`,
       method: 'post',
       data: {},
       success: res => {
         app.globalData.rankingList2 = this._filterRankingList(res.data)
-        if (app.globalData.userInfo) {
-          this.setData({ isAuthorized: true })
-        }
       },
     })
     this._handleStart()
@@ -79,6 +79,25 @@ Page({
       }
     }
     return res
+  },
+
+  bindGetUserInfo: function(e) {
+    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.isAuthorized = true
+    this._goNewPage()
+    if (app.globalData.openid) {
+      wx.request({
+        url: `${BASE_URL}/updateUserInfo`,
+        method: 'post',
+        data: {
+          openid: app.globalData.openid,
+          userInfo: e.detail.userInfo,
+        },
+        success: response => {
+          console.log(response)
+        },
+      })
+    }
   },
 
   _goNewPage: function() {

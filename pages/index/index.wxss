@@ -76,3 +76,11 @@
   flex-wrap: wrap;
   margin-top: 40rpx;
 }
+
+.footer {
+  position: fixed;
+  bottom: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  width: 80%;
+}

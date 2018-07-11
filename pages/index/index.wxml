@@ -6,18 +6,28 @@
   </view>
 
   <view class="home-circle-wrapper">
-      <view
-        wx:for="{{gamePlay}}"
-        style="{{item.isHot ? 'border-color: #45C277' : ''}}"
-        class="{{item.isReady ? 'home-circle' : 'home-circle-disable'}}"
-        bindtap="goNewPage"
-        wx:key="{{index}}"
-        data-url="{{item.url}}"
-        data-ready="{{item.isReady}}"
-        data-index="{{index}}"
-        id="{{item}}"
-      >
-        {{item.text}}
-      </view>
+    <view
+      wx:for="{{gamePlay}}"
+      style="{{item.isHot ? 'border-color: #45C277' : ''}}"
+      class="{{item.isReady ? 'home-circle' : 'home-circle-disable'}}"
+      bindtap="goNewPage"
+      wx:key="{{index}}"
+      data-url="{{item.url}}"
+      data-ready="{{item.isReady}}"
+      data-index="{{index}}"
+      id="{{item}}"
+    >
+      {{item.text}}
     </view>
+  </view>
+
+  <view class="footer" wx:if="{{!isAuthorized}}">
+    <button
+      open-type="getUserInfo"
+      bindgetuserinfo="bindGetUserInfo"
+      type="primary"
+    >
+      登录
+    </button>
+  </view>
 </view>
