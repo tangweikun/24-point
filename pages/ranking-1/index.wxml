@@ -1,0 +1,19 @@
+<view class="home-container">
+  <!-- <view class="rule" bindtap="showRule">规则</view>
+  <view class="gameplay" bindtap="showGameplay">玩法</view> -->
+
+
+  <view class="home-circle-wrapper">
+      <scroll-view class="wrapper" scroll-y>
+        <custom-card
+          wx:for="{{rankingList}}"
+          wx:key="{{index}}"
+          rank="{{index + 1}}"
+          avatarUrl="{{item.userInfo.avatarUrl}}"
+          nickName="{{item.userInfo.nickName}}"
+          record="{{item.record}}"
+        >
+        </custom-card>
+      </scroll-view>
+  </view>
+</view>

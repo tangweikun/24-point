@@ -59,5 +59,6 @@ App({
   globalData: {
     userInfo: null,
     gameData: null,
+    rankingList1: [],
   },
 })

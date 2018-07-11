@@ -1,0 +1,21 @@
+.ranking-card-wrapper {
+  display: flex;
+  height: 150rpx;
+  width: 600rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  padding: 20rpx 20rpx;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+
+.ranking-card-rank {
+  width: 80rpx;
+}
+
+.ranking-card-right {
+  flex: 1;
+  padding-left: 50rpx;
+}

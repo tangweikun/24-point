@@ -24,7 +24,6 @@
 .expression-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
   font-size: 50rpx;
   height: 760rpx;
   flex-direction: column;
@@ -82,10 +81,19 @@
   font-size: 40rpx;
   color: #6ddac8;
   padding: 40rpx;
+  align-self: center;
 }
 
 .challenge-recommend {
   font-size: 40rpx;
   color: #6ddac8;
   padding: 0 0 60rpx;
+  align-self: center;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 100rpx;
+  margin-top: 100rpx;
 }

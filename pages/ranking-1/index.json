@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分秒必争排行榜",
+  "usingComponents": {
+    "custom-card": "../../components/ranking-card/index"
+  }
+}

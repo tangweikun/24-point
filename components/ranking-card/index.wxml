@@ -1,0 +1,15 @@
+<view class="ranking-card-wrapper">
+  <view class='ranking-card-rank'>
+    {{rank}}
+  </view>
+  <image
+    mode="aspectFit"
+    style="width: 40px; height: 40px;border-radius: 40px;"
+    src="{{avatarUrl}}"
+  >
+  </image>
+  <view class='ranking-card-right'>
+    <view>{{nickName}}</view>
+    <view>{{record}}</view>
+  </view>
+</view>
