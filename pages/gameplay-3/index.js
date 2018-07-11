@@ -84,17 +84,17 @@ Page({
   },
 
   onLoad: function() {
-    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 6)]
+    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 30)]
     if (app.globalData.userInfo) {
       this.setData({
         rivalUserInfo,
-        rivalLevel: Math.round(Math.random() * 5),
+        rivalLevel: Math.floor(Math.random() * 9),
         myAvatarUrl: app.globalData.userInfo.avatarUrl,
       })
     } else {
       this.setData({
         rivalUserInfo,
-        rivalLevel: Math.round(Math.random() * 5),
+        rivalLevel: Math.floor(Math.random() * 9),
       })
     }
 
@@ -102,7 +102,7 @@ Page({
   },
 
   handleCountdownLookingRival: function() {
-    const randomTime = Math.random() * 2000 + 1000
+    const randomTime = Math.random() * 1000 + 800
     setTimeout(() => this._handleStart(), randomTime)
   },
 

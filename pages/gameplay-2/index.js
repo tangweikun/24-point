@@ -3,6 +3,7 @@ const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
+  filterRankingList,
 } = require('../../utils/index.js')
 const {
   OPERATORS,
@@ -28,7 +29,6 @@ Page({
     record: 0,
     gameOver: false,
     onThisPage: true,
-    isAuthorized: false,
   },
 
   onUnload: function() {
@@ -52,56 +52,19 @@ Page({
     }
 
     this.setData({ onThisPage: false })
-  },
 
-  onLoad: function() {
-    this.setData({
-      isAuthorized: app.globalData.isAuthorized,
-    })
     wx.request({
       url: `${BASE_URL}/getRankingList2`,
       method: 'post',
       data: {},
       success: res => {
-        app.globalData.rankingList2 = this._filterRankingList(res.data)
+        app.globalData.rankingList2 = filterRankingList(res.data)
       },
     })
+  },
+
+  onLoad: function() {
     this._handleStart()
-  },
-
-  _filterRankingList: function(list) {
-    let res = []
-    let helper = []
-    for (let item of list) {
-      if (helper.indexOf(item.openid) === -1) {
-        res.push(item)
-        helper.push(item.openid)
-      }
-    }
-    return res
-  },
-
-  bindGetUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    app.globalData.isAuthorized = true
-    this._goNewPage()
-    if (app.globalData.openid) {
-      wx.request({
-        url: `${BASE_URL}/updateUserInfo`,
-        method: 'post',
-        data: {
-          openid: app.globalData.openid,
-          userInfo: e.detail.userInfo,
-        },
-        success: response => {
-          console.log(response)
-        },
-      })
-    }
-  },
-
-  _goNewPage: function() {
-    wx.navigateTo({ url: '/pages/ranking-2/index' })
   },
 
   onShareAppMessage: function(res) {

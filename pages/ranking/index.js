@@ -1,9 +1,7 @@
 const app = getApp()
-const { RULE, GAMEPLAY, AVATAR_URL } = require('../../constants/index.js')
 
 Page({
   data: {
-    avatar: AVATAR_URL,
     rankingList: [],
     tabIndex: 0,
   },
@@ -27,18 +25,10 @@ Page({
     }
   },
 
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function() {
     return {
-      title: '24点',
+      title: '排行榜',
       path: '/pages/index/index',
-    }
-  },
-
-  goNewPage: function(e) {
-    const { url, ready } = e.currentTarget.dataset
-
-    if (ready) {
-      wx.navigateTo({ url })
     }
   },
 })

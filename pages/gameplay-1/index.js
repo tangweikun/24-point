@@ -3,6 +3,7 @@ const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
+  filterRankingList,
 } = require('../../utils/index.js')
 const {
   OPERATORS,
@@ -29,7 +30,6 @@ Page({
     totalTime: 0,
     gameOver: false,
     onThisPage: true,
-    isAuthorized: false,
   },
 
   onUnload: function() {
@@ -53,57 +53,20 @@ Page({
       })
     }
 
-    this.setData({ onThisPage: false })
-  },
-
-  onLoad: function() {
-    this.setData({
-      isAuthorized: app.globalData.isAuthorized,
-    })
     wx.request({
       url: `${BASE_URL}/getRankingList1`,
       method: 'post',
       data: {},
       success: res => {
-        app.globalData.rankingList1 = this._filterRankingList(res.data)
+        app.globalData.rankingList1 = filterRankingList(res.data)
       },
     })
+
+    this.setData({ onThisPage: false })
+  },
+
+  onLoad: function() {
     this._handleStart()
-  },
-
-  bindGetUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    app.globalData.isAuthorized = true
-    this._goNewPage()
-    if (app.globalData.openid) {
-      wx.request({
-        url: `${BASE_URL}/updateUserInfo`,
-        method: 'post',
-        data: {
-          openid: app.globalData.openid,
-          userInfo: e.detail.userInfo,
-        },
-        success: response => {
-          console.log(response)
-        },
-      })
-    }
-  },
-
-  _filterRankingList: function(list) {
-    let res = []
-    let helper = []
-    for (let item of list) {
-      if (helper.indexOf(item.openid) === -1) {
-        res.push(item)
-        helper.push(item.openid)
-      }
-    }
-    return res
-  },
-
-  _goNewPage: function() {
-    wx.navigateTo({ url: '/pages/ranking-1/index' })
   },
 
   onShareAppMessage: function(res) {

@@ -2,15 +2,6 @@
   <view wx:if="{{gameOver}}" class='expression-wrapper'>
       <view class="button-wrapper">
         <button type="primary" bindtap="_handleStart">继续挑战</button>
-        <button 
-          wx:if="{{!isAuthorized}}"
-          open-type="getUserInfo"
-          bindgetuserinfo="bindGetUserInfo"
-          type="primary"
-        >
-          查看排行榜
-        </button>
-        <button type="primary" wx:if="{{isAuthorized}}" bindtap="_goNewPage">排行榜</button>
       </view>
       
       <view class="challenge-record" wx:if="{{gameOver}}">
