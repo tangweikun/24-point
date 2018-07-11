@@ -17,6 +17,10 @@ Component({
       type: Number,
       value: '',
     },
+    theme: {
+      type: String,
+      value: '',
+    },
   },
   methods: {},
 })

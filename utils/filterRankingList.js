@@ -3,7 +3,19 @@ const filterRankingList = list => {
   let helper = []
   for (let item of list) {
     if (helper.indexOf(item.openid) === -1) {
-      res.push(item)
+      if (item.userInfo) {
+        res.push(item)
+      } else {
+        res.push({
+          ...item,
+          userInfo: {
+            nickName: '神秘人',
+            avatarUrl:
+              'http://img.mp.sohu.com/upload/20170722/ccbe3680bb3b4797b8a49bea401b2f9a_th.png',
+          },
+        })
+      }
+
       helper.push(item.openid)
     }
   }

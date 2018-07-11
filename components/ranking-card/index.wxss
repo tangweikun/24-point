@@ -2,7 +2,6 @@
   display: flex;
   height: 150rpx;
   width: 600rpx;
-  background: #6ddac8;
   color: #ffffff;
   padding: 20rpx 20rpx;
   align-items: center;
@@ -18,4 +17,12 @@
 .ranking-card-right {
   flex: 1;
   padding-left: 50rpx;
+}
+
+.THEME1 {
+  background: #8999d9;
+}
+
+.THEME2 {
+  background: #6ddac8;
 }

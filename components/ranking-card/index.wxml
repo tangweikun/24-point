@@ -1,4 +1,4 @@
-<view class="ranking-card-wrapper">
+<view class="ranking-card-wrapper {{theme}}">
   <view class='ranking-card-rank'>
     {{rank}}
   </view>
