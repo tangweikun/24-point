@@ -1,5 +1,5 @@
 const { BASE_URL } = require('./constants/index.js')
-const { filterRankingList } = require('./utils/index.js')
+const { filterRankingList, formatTime } = require('./utils/index.js')
 
 App({
   onLaunch: function() {
@@ -27,7 +27,10 @@ App({
               method: 'post',
               data: { openid },
               success: res => {
-                this.globalData.battleList = res.data
+                this.globalData.battleList = res.data.map(x => ({
+                  ...x,
+                  createdAt: formatTime(x.createdAt),
+                }))
               },
             })
 

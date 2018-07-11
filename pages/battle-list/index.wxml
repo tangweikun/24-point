@@ -1,37 +1,49 @@
 <view class="home-container">
-  <view class="home-circle-wrapper">
-      <scroll-view class="wrapper" scroll-y>
-        <view
-          class="ranking-card-wrapper"
-          wx:for="{{battleList}}"
-          wx:key="{{index}}"
-        >
-          <view>
-            <view>
+  <view wx:if="{{battleList.length === 0}}">您还没有参加过【王者对战】</view>
+  <scroll-view class="scroll-wrapper" scroll-y>
+    <view
+      class="ranking-card-wrapper"
+      wx:for="{{battleList}}"
+      wx:key="{{index}}"
+    >
+      <view class="top">
+        <view>{{item.result}}</view>
+        <view>{{item.createdAt}}</view>
+      </view>
+
+      <view class="bottom">
+        <view class="myInfo">
+          <image
+            mode="aspectFit"
+            style="width: 40px; height: 40px;border-radius: 40px;"
+            src="{{item.userInfo.avatarUrl}}"
+          >
+          </image>
+          <view class="myInfo-text-wrapper">
+            <view class="small-font">
               {{item.userInfo.nickName}}
             </view>
-              <image
-                mode="aspectFit"
-                style="width: 40px; height: 40px;border-radius: 40px;"
-                src="{{item.userInfo.avatarUrl}}"
-              >
-              </image>
+            <view class="big-font">{{item.myScore}}</view>       
           </view>
-          <view>
-            <view>
+        </view>
+
+        <view class="rivalInfo">
+          <view class="rivalInfo-text-wrapper">
+            <view class="small-font">
               {{item.rivalUserInfo.nickName}}
             </view>
-            <image
-              mode="aspectFit"
-              style="width: 40px; height: 40px;border-radius: 40px;"
-              src="{{item.rivalUserInfo.avatarUrl}}"
-              >
-            </image>
+            <view class="big-font">{{item.rivalScore}}</view>         
           </view>
-          <view>{{item.myScore}}</view>
-          <view>{{item.rivalScore}}</view>
-          <view>{{item.createdAt}}</view>
+          <image
+            mode="aspectFit"
+            style="width: 40px; height: 40px;border-radius: 40px;"
+            src="{{item.rivalUserInfo.avatarUrl}}"
+            >
+          </image>
         </view>
-      </scroll-view>
-  </view>
+      </view>
+
+    </view>
+  </scroll-view>
+
 </view>

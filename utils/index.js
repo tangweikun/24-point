@@ -4,6 +4,7 @@ const { calculate } = require('./calculate')
 const { generateLuckyTime } = require('./luckyTime')
 const { recommendSolution } = require('./recommend-solution')
 const { filterRankingList } = require('./filterRankingList')
+const { formatTime } = require('./formatTime')
 
 module.exports = {
   generateCardsAndRecommendSolution,
@@ -12,4 +13,5 @@ module.exports = {
   filterRankingList,
   generateLuckyTime,
   recommendSolution,
+  formatTime,
 }

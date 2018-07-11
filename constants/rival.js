@@ -92,7 +92,8 @@ module.exports = {
     },
     {
       nickName: '小胖子',
-      avatarUrl: 'http://img.wxcha.com/file/201710/16/013136a98d.jpg?down',
+      avatarUrl:
+        'http://img18.3lian.com/d/file/201706/19/23cbe6059804874e74017a737c8addc9.jpg',
     },
     {
       nickName: 'Boom',

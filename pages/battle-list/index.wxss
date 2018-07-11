@@ -1,56 +1,19 @@
+.scroll-wrapper {
+  height: 900rpx;
+  width: 90%;
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #3868af;
-}
-
-.home-circle {
-  width: 180rpx;
-  height: 180rpx;
-  border-radius: 90rpx;
-  border: 8rpx solid #6ddac8;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30rpx;
-  padding: 50rpx;
-  margin-bottom: 80rpx;
-  text-align: center;
-}
-
-.home-circle-disable {
-  width: 180rpx;
-  height: 180rpx;
-  border-radius: 90rpx;
-  border: 8rpx solid #e5e5e5;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30rpx;
-  padding: 50rpx;
-  margin-bottom: 80rpx;
-  text-align: center;
-}
-
-.home-circle-wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 80rpx;
-}
-
-.wrapper {
-  height: 1000rpx;
-  width: 100%;
+  color: #6379cc;
+  padding-top: 50rpx;
 }
 
 .ranking-card-wrapper {
-  display: flex;
-  height: 150rpx;
-  width: 600rpx;
+  /* height: 200rpx; */
+  width: 100%;
   background: #6ddac8;
   color: #ffffff;
   padding: 20rpx 20rpx;
@@ -60,11 +23,46 @@
   border-radius: 10rpx;
 }
 
-.ranking-card-rank {
-  width: 80rpx;
+.bottom {
+  display: flex;
 }
 
-.ranking-card-right {
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+  padding-top: 10rpx;
+}
+
+.date {
+  width: 100%;
+}
+
+.myInfo {
+  display: flex;
   flex: 1;
-  padding-left: 50rpx;
+  align-items: center;
+}
+
+.rivalInfo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.rivalInfo-text-wrapper {
+  margin-right: 10rpx;
+}
+
+.myInfo-text-wrapper {
+  margin-left: 10rpx;
+}
+
+.small-font {
+  font-size: 30rpx;
+}
+
+.big-font {
+  font-size: 50rpx;
 }
