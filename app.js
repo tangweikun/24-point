@@ -60,5 +60,6 @@ App({
     userInfo: null,
     gameData: null,
     rankingList1: [],
+    rankingList2: [],
   },
 })

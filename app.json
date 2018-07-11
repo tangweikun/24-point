@@ -8,7 +8,8 @@
     "pages/solution/index",
     "pages/gameplay-1/index",
     "pages/gameplay-3/index",
-    "pages/ranking-1/index"
+    "pages/ranking-1/index",
+    "pages/ranking-2/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

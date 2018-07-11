@@ -143,7 +143,7 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-      countdown: 18,
+      countdown: 100,
       record: 0,
       totalTime: 0,
     })

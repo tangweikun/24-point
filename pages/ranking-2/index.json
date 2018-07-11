@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "过关斩将排行榜",
+  "usingComponents": {
+    "custom-card": "../../components/ranking-card/index"
+  }
+}

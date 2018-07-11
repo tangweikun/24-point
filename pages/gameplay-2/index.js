@@ -28,6 +28,7 @@ Page({
     record: 0,
     gameOver: false,
     onThisPage: true,
+    isAuthorized: false,
   },
 
   onUnload: function() {
@@ -54,7 +55,34 @@ Page({
   },
 
   onLoad: function() {
+    wx.request({
+      url: `${BASE_URL}/getRankingList2`,
+      method: 'post',
+      data: {},
+      success: res => {
+        app.globalData.rankingList2 = this._filterRankingList(res.data)
+        if (app.globalData.userInfo) {
+          this.setData({ isAuthorized: true })
+        }
+      },
+    })
     this._handleStart()
+  },
+
+  _filterRankingList: function(list) {
+    let res = []
+    let helper = []
+    for (let item of list) {
+      if (helper.indexOf(item.openid) === -1) {
+        res.push(item)
+        helper.push(item.openid)
+      }
+    }
+    return res
+  },
+
+  _goNewPage: function() {
+    wx.navigateTo({ url: '/pages/ranking-2/index' })
   },
 
   onShareAppMessage: function(res) {
