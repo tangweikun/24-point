@@ -5,12 +5,8 @@ const {
   calculate,
   filterRankingList,
 } = require('../../utils/index.js')
-const {
-  OPERATORS,
-  BASE_URL,
-  OPERATORS_HASH,
-} = require('../../constants/index.js')
-
+const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
+const { post } = require('../../api/index')
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
 Page({
@@ -36,30 +32,18 @@ Page({
     const { gameOver, record } = this.data
 
     if (!gameOver && record > 0) {
-      wx.request({
-        url: `${BASE_URL}/addChallenge`,
-        method: 'post',
-        data: {
-          openid,
-          userInfo,
-          record,
-          gameplay: 'TYPE_2',
-        },
-        success: res => {
-          console.log(res)
-        },
+      post('addChallenge', {
+        openid,
+        userInfo,
+        record,
+        gameplay: 'TYPE_2',
       })
     }
 
     this.setData({ onThisPage: false })
 
-    wx.request({
-      url: `${BASE_URL}/getRankingList2`,
-      method: 'post',
-      data: {},
-      success: res => {
-        app.globalData.rankingList2 = filterRankingList(res.data)
-      },
+    post('getRankingList2').then(res => {
+      app.globalData.rankingList2 = filterRankingList(res)
     })
   },
 
@@ -85,18 +69,11 @@ Page({
         const foo = this.data.record
 
         this.openAlert(foo)
-        wx.request({
-          url: `${BASE_URL}/addChallenge`,
-          method: 'post',
-          data: {
-            openid,
-            userInfo,
-            record: foo,
-            gameplay: 'TYPE_2',
-          },
-          success: res => {
-            console.log(res)
-          },
+        post('addChallenge', {
+          openid,
+          userInfo,
+          record: foo,
+          gameplay: 'TYPE_2',
         })
       }
     } else {
@@ -192,35 +169,21 @@ Page({
       } else {
         const foo = this.data.record
         this.openAlert(foo)
-        wx.request({
-          url: `${BASE_URL}/addChallenge`,
-          method: 'post',
-          data: {
-            openid,
-            userInfo: app.globalData.userInfo,
-            record: foo,
-            gameplay: 'TYPE_2',
-          },
-          success: res => {
-            console.log(res)
-          },
+        post('addChallenge', {
+          openid,
+          userInfo: app.globalData.userInfo,
+          record: foo,
+          gameplay: 'TYPE_2',
         })
+
         this.setData({ isStart: false, gameOver: true })
       }
 
-      wx.request({
-        url: `${BASE_URL}/increaseAnswersCount`,
-        method: 'post',
-        data: {
-          openid,
-          isCorrect,
-        },
-        success: res => {
-          this.setData({
-            totalOfCorrectAnswers: res.data.totalOfCorrectAnswers,
-            totalOfAnswers: res.data.totalOfAnswers,
-          })
-        },
+      post('increaseAnswersCount', { openid, isCorrect }).then(res => {
+        this.setData({
+          totalOfCorrectAnswers: res.totalOfCorrectAnswers,
+          totalOfAnswers: res.totalOfAnswers,
+        })
       })
     } else {
       this.setData({

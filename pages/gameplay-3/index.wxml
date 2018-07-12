@@ -47,7 +47,7 @@
           </image>
         </view>
 
-      <view class="challenge-recommend">推荐算法: {{recommendSolution}}</view>
+      <!-- <view class="challenge-recommend">推荐算法: {{recommendSolution}}</view> -->
     </view>
 
     <view wx:else>

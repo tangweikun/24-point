@@ -20,4 +20,6 @@
 - [ ] 音效
 - [ ] 动画
 - [ ] CSS 变量
+- [ ] userInfoReadyCallback
+- [ ] getStorageSync
 - [ ] 将用户信息接口与排名接口拆分开

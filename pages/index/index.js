@@ -1,5 +1,6 @@
 const app = getApp()
-const { RULE, GAMEPLAY, BASE_URL } = require('../../constants/index.js')
+const { RULE, GAMEPLAY } = require('../../constants/index.js')
+const { post } = require('../../api/index')
 
 Page({
   data: {
@@ -70,16 +71,9 @@ Page({
     app.globalData.userInfo = e.detail.userInfo
     app.globalData.isAuthorized = true
     if (app.globalData.openid) {
-      wx.request({
-        url: `${BASE_URL}/updateUserInfo`,
-        method: 'post',
-        data: {
-          openid: app.globalData.openid,
-          userInfo: e.detail.userInfo,
-        },
-        success: response => {
-          console.log(response)
-        },
+      post('updateUserInfo', {
+        openid: app.globalData.openid,
+        userInfo: e.detail.userInfo,
       })
     }
   },

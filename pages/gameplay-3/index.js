@@ -5,10 +5,9 @@ const {
   calculate,
   generateLuckyTime,
 } = require('../../utils/index.js')
-
+const { post } = require('../../api/index')
 const {
   OPERATORS,
-  BASE_URL,
   OPERATORS_HASH,
   AVATAR_URL,
   RIVAL,
@@ -28,7 +27,7 @@ Page({
     myReward: '+0',
     rivalReward: '+0',
     result: '',
-    countdownBeforeStart: 4,
+    countdownBeforeStart: 2,
     isStart: true,
     gameOver: false,
     onThisPage: true,
@@ -67,18 +66,13 @@ Page({
       const openid = app.globalData.openid
       const userInfo = app.globalData.userInfo
 
-      wx.request({
-        url: `${BASE_URL}/addBattle`,
-        method: 'post',
-        data: {
-          openid,
-          myScore,
-          rivalScore,
-          userInfo,
-          result: '投降',
-          rivalUserInfo,
-        },
-        success: res => {},
+      post('addBattle', {
+        openid,
+        myScore,
+        rivalScore,
+        userInfo,
+        result: '投降',
+        rivalUserInfo,
       })
     }
   },
@@ -130,19 +124,13 @@ Page({
 
         const openid = app.globalData.openid
         const userInfo = app.globalData.userInfo
-
-        wx.request({
-          url: `${BASE_URL}/addBattle`,
-          method: 'post',
-          data: {
-            openid,
-            myScore,
-            rivalScore,
-            userInfo,
-            result,
-            rivalUserInfo,
-          },
-          success: res => {},
+        post('addBattle', {
+          openid,
+          myScore,
+          rivalScore,
+          userInfo,
+          result,
+          rivalUserInfo,
         })
       } else {
         this._handleStart()
@@ -253,15 +241,10 @@ Page({
       nextState.cards.filter(({ state }) => state === 'disable').length === 3
     const openid = app.globalData.openid
 
-    if (isFinish && openid !== '') {
-      wx.request({
-        url: `${BASE_URL}/increaseAnswersCount`,
-        method: 'post',
-        data: {
-          openid,
-          isCorrect: nextState.selectedCard.value === 24,
-        },
-        success: res => {},
+    if (isFinish && openid) {
+      post('increaseAnswersCount', {
+        openid,
+        isCorrect: nextState.selectedCard.value === 24,
       })
     }
 
@@ -304,7 +287,7 @@ Page({
       countdown: 60,
       luckyTime: generateLuckyTime(this.data.rivalLevel),
       isStart: true,
-      countdownBeforeStart: 4,
+      countdownBeforeStart: 2,
       reminder: this.data.reminder - 1,
       isReady: true,
       myReward: '+0',

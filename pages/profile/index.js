@@ -1,5 +1,5 @@
 const app = getApp()
-const { BASE_URL } = require('../../constants/index.js')
+const { post } = require('../../api/index')
 
 Page({
   data: {
@@ -48,79 +48,54 @@ Page({
 
   getRanking: function() {
     const { openid } = app.globalData
-    if (openid !== '') {
-      wx.request({
-        url: `${BASE_URL}/getRanking`,
-        method: 'post',
-        data: {
-          openid: app.globalData.openid,
-        },
-        success: response => {
-          const {
-            type1Ranking,
-            type1Record,
-            type2Ranking,
-            type2Record,
-          } = response.data
-          this.setData({
-            type1Ranking,
-            type1Record,
-            type2Ranking,
-            type2Record,
-          })
-        },
+    if (openid) {
+      post('getRanking', { openid }).then(res => {
+        const { type1Ranking, type1Record, type2Ranking, type2Record } = res
+        this.setData({
+          type1Ranking,
+          type1Record,
+          type2Ranking,
+          type2Record,
+        })
       })
     }
   },
 
   refreshUserInfo() {
-    wx.request({
-      url: `${BASE_URL}/getUserInfo`,
-      method: 'post',
-      data: {
-        openid: app.globalData.openid,
-      },
-      success: response => {
-        const {
-          userInfo = { avatarUrl: '' },
-          totalOfCorrectAnswers = '--',
-          totalOfAnswers = '--',
-          challengeRanking = '--',
-          bestRecord = '--',
-        } = response.data
+    post('getUserInfo', { openid: app.globalData.openid }).then(res => {
+      const {
+        userInfo = { avatarUrl: '' },
+        totalOfCorrectAnswers = '--',
+        totalOfAnswers = '--',
+        challengeRanking = '--',
+        bestRecord = '--',
+      } = res
 
-        const accuracy =
-          totalOfAnswers === '--'
-            ? '-'
-            : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
+      const accuracy =
+        totalOfAnswers === '--'
+          ? '-'
+          : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
 
-        app.globalData.userInfo = userInfo
-        this.setData({
-          totalOfCorrectAnswers,
-          totalOfAnswers,
-          challengeRanking,
-          bestRecord,
-          isAuthorized: true,
-          accuracy,
-          avatarUrl: userInfo.avatarUrl,
-        })
-      },
+      app.globalData.userInfo = userInfo
+      this.setData({
+        totalOfCorrectAnswers,
+        totalOfAnswers,
+        challengeRanking,
+        bestRecord,
+        isAuthorized: true,
+        accuracy,
+        avatarUrl: userInfo.avatarUrl,
+      })
     })
   },
 
   bindGetUserInfo: function(e) {
     if (app.globalData.openid) {
-      wx.request({
-        url: `${BASE_URL}/updateUserInfo`,
-        method: 'post',
-        data: {
-          openid: app.globalData.openid,
-          userInfo: e.detail.userInfo,
-        },
-        success: response => {
-          console.log(response)
-        },
+      post('updateUserInfo', {
+        openid: app.globalData.openid,
+        userInfo: e.detail.userInfo,
       })
+
       this.refreshUserInfo()
       this.getRanking()
     }

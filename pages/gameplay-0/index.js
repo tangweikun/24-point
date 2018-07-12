@@ -4,13 +4,8 @@ const {
   noDecimal,
   calculate,
 } = require('../../utils/index.js')
-
-const {
-  OPERATORS,
-  BASE_URL,
-  OPERATORS_HASH,
-} = require('../../constants/index.js')
-
+const { post } = require('../../api/index')
+const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
 Page({
@@ -25,7 +20,7 @@ Page({
     isFinish: false,
   },
 
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function() {
     return {
       title: '24点',
       path: '/pages/index/index',
@@ -91,16 +86,9 @@ Page({
       nextState.cards.filter(({ state }) => state === 'disable').length === 3
     const openid = app.globalData.openid
 
-    if (isFinish && openid !== '') {
-      wx.request({
-        url: `${BASE_URL}/increaseAnswersCount`,
-        method: 'post',
-        data: {
-          openid,
-          isCorrect: nextState.selectedCard.value === 24,
-        },
-        success: res => {},
-      })
+    if (isFinish && openid) {
+      const isCorrect = nextState.selectedCard.value === 24
+      post('increaseAnswersCount', { openid, isCorrect })
     }
 
     if (isFinish && nextState.selectedCard.value === 24) {
@@ -110,7 +98,7 @@ Page({
     }
   },
 
-  _reset: function(e) {
+  _reset: function() {
     const resetCards = this.data.initialCards.map(x => ({
       value: x.value,
       alias: [x.value],
@@ -126,11 +114,11 @@ Page({
   },
 
   _skip: function(e) {
-    const newCards = generateCardsAndRecommendSolution()
+    const { cards, recommendSolution } = generateCardsAndRecommendSolution()
     this.setData({
-      cards: newCards.cards,
-      initialCards: [...newCards.cards],
-      recommendSolution: newCards.recommendSolution,
+      cards,
+      initialCards: [...cards],
+      recommendSolution,
       selectedCard: null,
       selectedOperator: null,
       isFinish: false,

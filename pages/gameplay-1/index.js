@@ -5,11 +5,8 @@ const {
   calculate,
   filterRankingList,
 } = require('../../utils/index.js')
-const {
-  OPERATORS,
-  BASE_URL,
-  OPERATORS_HASH,
-} = require('../../constants/index.js')
+const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
+const { post } = require('../../api/index')
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
 
@@ -37,29 +34,17 @@ Page({
     const { gameOver, record, totalTime } = this.data
 
     if (!gameOver && record > 0) {
-      wx.request({
-        url: `${BASE_URL}/addChallenge`,
-        method: 'post',
-        data: {
-          openid,
-          userInfo,
-          record,
-          totalTime,
-          gameplay: 'TYPE_1',
-        },
-        success: res => {
-          console.log(res)
-        },
+      post('addChallenge', {
+        openid,
+        userInfo,
+        record,
+        totalTime,
+        gameplay: 'TYPE_1',
       })
     }
 
-    wx.request({
-      url: `${BASE_URL}/getRankingList1`,
-      method: 'post',
-      data: {},
-      success: res => {
-        app.globalData.rankingList1 = filterRankingList(res.data)
-      },
+    post('getRankingList1').then(res => {
+      app.globalData.rankingList1 = filterRankingList(res)
     })
 
     this.setData({ onThisPage: false })
@@ -88,19 +73,13 @@ Page({
         const bar = this.data.totalTime
 
         this.openAlert()
-        wx.request({
-          url: `${BASE_URL}/addChallenge`,
-          method: 'post',
-          data: {
-            openid,
-            userInfo,
-            record: foo,
-            totalTime: bar,
-            gameplay: 'TYPE_1',
-          },
-          success: res => {
-            console.log(res)
-          },
+
+        post('addChallenge', {
+          openid,
+          userInfo,
+          record: foo,
+          totalTime: bar,
+          gameplay: 'TYPE_1',
         })
       }
     } else {
@@ -216,19 +195,14 @@ Page({
         this._skip()
       }
 
-      wx.request({
-        url: `${BASE_URL}/increaseAnswersCount`,
-        method: 'post',
-        data: {
-          openid,
-          isCorrect,
-        },
-        success: res => {
-          this.setData({
-            totalOfCorrectAnswers: res.data.totalOfCorrectAnswers,
-            totalOfAnswers: res.data.totalOfAnswers,
-          })
-        },
+      post('increaseAnswersCount', {
+        openid,
+        isCorrect,
+      }).then(res => {
+        this.setData({
+          totalOfCorrectAnswers: res.totalOfCorrectAnswers,
+          totalOfAnswers: res.totalOfAnswers,
+        })
       })
     } else {
       this.setData({
