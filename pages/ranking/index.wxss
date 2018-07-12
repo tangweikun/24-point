@@ -1,5 +1,5 @@
 .scroll-wrapper {
-  height: 640rpx;
+  height: 600rpx;
   width: 80%;
 }
 
@@ -46,7 +46,7 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-.ad {
+.ad-wrapper {
   position: fixed;
-  bottom: 10rpx;
+  bottom: 20rpx;
 }

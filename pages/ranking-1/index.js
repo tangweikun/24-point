@@ -13,6 +13,13 @@ Page({
     })
   },
 
+  onShareAppMessage: function(res) {
+    return {
+      title: '24点',
+      path: '/pages/index/index',
+    }
+  },
+
   _showRule: function() {
     wx.showModal({
       showCancel: false,
@@ -29,12 +36,5 @@ Page({
       content: GAMEPLAY,
       success: function(res) {},
     })
-  },
-
-  onShareAppMessage: function(res) {
-    return {
-      title: '24点',
-      path: '/pages/index/index',
-    }
   },
 })

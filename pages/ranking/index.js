@@ -16,7 +16,7 @@ Page({
     const myRankInfo1 = rankingList1.find(x => x.openid === openid) || null
     const myRankInfo2 = rankingList2.find(x => x.openid === openid) || null
     const myRank1 = rankingList1.findIndex(x => x.openid === openid) || null
-    const myRank2 = rankingList1.findIndex(x => x.openid === openid) || null
+    const myRank2 = rankingList2.findIndex(x => x.openid === openid) || null
 
     this.setData({
       rankingList1,

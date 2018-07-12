@@ -19,6 +19,7 @@
 - [ ] 接口测试
 - [ ] 音效
 - [ ] 动画
+- [ ] 闯关模式
 - [ ] CSS 变量
 - [ ] userInfoReadyCallback
 - [ ] getStorageSync

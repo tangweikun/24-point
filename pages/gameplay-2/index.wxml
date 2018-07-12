@@ -1,7 +1,7 @@
 <view class="page">
   <view wx:if="{{gameOver}}" class='expression-wrapper'>
       <view class="button-wrapper">
-        <button type="primary" bindtap="_handleStart">继续挑战</button>
+        <button type="primary" bind:touchstart="_handleStart">继续挑战</button>
       </view>
 
       <view class="challenge-record" wx:if="{{gameOver}}">
