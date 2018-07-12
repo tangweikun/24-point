@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-.card-normal {
+.card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,28 +17,19 @@
   height: 200rpx;
   margin-bottom: 40rpx;
   background-color: #6ddac8;
+  border-radius: 30rpx;
 }
 
-.card-active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 40rpx;
+.normal {
+  background-color: #6ddac8;
+}
+
+.active {
   background-color: green;
-  color: #ffffff;
 }
 
-.card-disable {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 40rpx;
+.disable {
   background-color: #e5e5e5;
-  color: #ffffff;
 }
 
 .operator-normal {

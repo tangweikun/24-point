@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 200rpx 0 80rpx;
+  padding: 200rpx 0 120rpx;
 }
 
 .expression-wrapper {

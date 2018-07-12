@@ -64,7 +64,7 @@
 }
 
 .footer {
-  padding: 60rpx;
+  padding: 120rpx;
 }
 
 .challenge-header {

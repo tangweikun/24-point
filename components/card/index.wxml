@@ -1,3 +1,3 @@
-<view class="{{theme}}">
+<view class="card {{theme}}">
   <slot></slot>
 </view>

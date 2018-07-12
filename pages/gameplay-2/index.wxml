@@ -20,7 +20,7 @@
       <custom-card
         wx:for="{{cards}}"
         wx:key="{{index}}"
-        theme="card-{{item.state}}"
+        theme="{{item.state}}"
         bind:touchstart="_selectCard"
         id="{{item.value}}"
         data-value="{{item.value}}"
@@ -48,7 +48,7 @@
         wx:for="{{operators}}"
         wx:key="{{index}}"
         text="{{OPERATORS_HASH[item]}}"
-        theme="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
+        theme="{{selectedOperator === item ? 'active' : 'normal'}}"
         bind:touchstart='_selectOperator'
         id="{{item}}"
         data-value="{{item}}"

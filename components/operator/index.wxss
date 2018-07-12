@@ -1,5 +1,4 @@
-.operator-normal {
-  color: #c1479f;
+.operator {
   width: 120rpx;
   height: 120rpx;
   text-align: center;
@@ -8,17 +7,14 @@
   align-items: center;
   font-size: 60rpx;
   font-weight: bold;
+  border-radius: 10rpx;
 }
 
-.operator-active {
+.normal {
+  color: #c1479f;
+}
+
+.active {
   color: #ffffff;
   background: #c1479f;
-  width: 120rpx;
-  height: 120rpx;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 60rpx;
-  font-weight: bold;
 }

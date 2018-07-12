@@ -95,5 +95,5 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 100rpx;
-  margin-top: 100rpx;
+  margin-top: 120rpx;
 }
