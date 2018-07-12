@@ -21,7 +21,7 @@
         wx:for="{{cards}}"
         wx:key="{{index}}"
         theme="card-{{item.state}}"
-        bindtap="_selectCard"
+        bind:touchstart="_selectCard"
         id="{{item.value}}"
         data-value="{{item.value}}"
         data-index="{{index}}"
@@ -49,7 +49,7 @@
         wx:key="{{index}}"
         text="{{OPERATORS_HASH[item]}}"
         theme="{{selectedOperator === item ? 'operator-active' : 'operator-normal'}}"
-        bindtap='_selectOperator'
+        bind:touchstart='_selectOperator'
         id="{{item}}"
         data-value="{{item}}"
         data-index="{{index}}"
