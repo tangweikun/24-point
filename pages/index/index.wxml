@@ -1,6 +1,6 @@
 <view class="home-container">
-  <view class="rule" bindtap="showRule">规则</view>
-  <view class="gameplay" bindtap="showGameplay">玩法</view>
+  <view class="rule" bindtap="_showRule">规则</view>
+  <view class="gameplay" bindtap="_showGameplay">玩法</view>
   <!-- <view class="avatar">
     <open-data type="userAvatarUrl"></open-data>
   </view> -->
@@ -10,7 +10,7 @@
       wx:for="{{gamePlay}}"
       style="{{item.isHot ? 'border-color: #45C277' : ''}}"
       class="{{item.isReady ? 'home-circle' : 'home-circle-disable'}}"
-      bindtap="goNewPage"
+      bindtap="_goNewPage"
       wx:key="{{index}}"
       data-url="{{item.url}}"
       data-ready="{{item.isReady}}"

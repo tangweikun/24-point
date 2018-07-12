@@ -72,7 +72,7 @@ Page({
         const foo = this.data.record
         const bar = this.data.totalTime
 
-        this.openAlert()
+        this.setData({ gameOver: true, isStart: false })
 
         post('addChallenge', {
           openid,
@@ -177,7 +177,7 @@ Page({
 
     const openid = app.globalData.openid
 
-    if (isFinish && openid !== '') {
+    if (isFinish && openid) {
       const isCorrect = nextState.selectedCard.value === 24
       if (isCorrect) {
         const awardTime = this._calculateAwardTime()
@@ -250,13 +250,6 @@ Page({
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-    })
-  },
-
-  openAlert: function(record) {
-    this.setData({
-      gameOver: true,
-      isStart: false,
     })
   },
 })

@@ -13,7 +13,7 @@ Page({
     })
   },
 
-  showRule: function() {
+  _showRule: function() {
     wx.showModal({
       showCancel: false,
       title: '规则',
@@ -22,7 +22,7 @@ Page({
     })
   },
 
-  showGameplay: function() {
+  _showGameplay: function() {
     wx.showModal({
       showCancel: false,
       title: '玩法',

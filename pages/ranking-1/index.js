@@ -13,7 +13,7 @@ Page({
     })
   },
 
-  showRule: function() {
+  _showRule: function() {
     wx.showModal({
       showCancel: false,
       title: '规则',
@@ -22,7 +22,7 @@ Page({
     })
   },
 
-  showGameplay: function() {
+  _showGameplay: function() {
     wx.showModal({
       showCancel: false,
       title: '玩法',
@@ -35,14 +35,6 @@ Page({
     return {
       title: '24点',
       path: '/pages/index/index',
-    }
-  },
-
-  goNewPage: function(e) {
-    const { url, ready } = e.currentTarget.dataset
-
-    if (ready) {
-      wx.navigateTo({ url })
     }
   },
 })

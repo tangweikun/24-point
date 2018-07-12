@@ -1,5 +1,4 @@
 const app = getApp()
-const { BASE_URL } = require('../../constants/index.js')
 const { formatTime } = require('../../utils/index.js')
 
 Page({
@@ -8,19 +7,14 @@ Page({
   },
 
   onLoad: function() {
-    this.setData({ battleList: app.globalData.battleList })
-    const { openid } = app.globalData
+    const { openid, battleList } = app.globalData
+    this.setData({ battleList })
     if (openid) {
-      wx.request({
-        url: `${BASE_URL}/getMyBattleList`,
-        method: 'post',
-        data: { openid },
-        success: res => {
-          app.globalData.battleList = res.data.map(x => ({
-            ...x,
-            createdAt: formatTime(x.createdAt),
-          }))
-        },
+      post('getMyBattleList', { openid }).then(res => {
+        app.globalData.battleList = res.map(x => ({
+          ...x,
+          createdAt: formatTime(x.createdAt),
+        }))
       })
     }
   },
