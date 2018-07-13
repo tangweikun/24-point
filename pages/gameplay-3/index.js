@@ -41,7 +41,6 @@ Page({
     rivalAvatarUrl: AVATAR_URL,
     myAvatarUrl: AVATAR_URL,
     rivalUserInfo: {},
-    rivalLevel: 0,
   },
 
   onShareAppMessage: function(res) {
@@ -82,14 +81,10 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         rivalUserInfo,
-        rivalLevel: Math.floor(Math.random() * 9),
         myAvatarUrl: app.globalData.userInfo.avatarUrl,
       })
     } else {
-      this.setData({
-        rivalUserInfo,
-        rivalLevel: Math.floor(Math.random() * 9),
-      })
+      this.setData({ rivalUserInfo })
     }
 
     this.handleCountdownLookingRival()
@@ -98,6 +93,20 @@ Page({
   handleCountdownLookingRival: function() {
     const randomTime = Math.random() * 1000 + 800
     setTimeout(() => this._handleStart(), randomTime)
+  },
+
+  _updateLevel: function() {
+    const { myScore, rivalScore } = this.data
+    const point = myScore === rivalScore ? 0 : myScore > rivalScore ? 1 : -1
+    wx.getStorage({
+      key: 'level',
+      success: function(res) {
+        wx.setStorage({
+          key: 'level',
+          data: res.data + point,
+        })
+      },
+    })
   },
 
   handleCountdownBeforeStart: function() {
@@ -121,7 +130,7 @@ Page({
               ? '平局'
               : '失败'
         this.setData({ gameOver: true, result })
-
+        this._updateLevel()
         const openid = app.globalData.openid
         const userInfo = app.globalData.userInfo
         post('addBattle', {
@@ -285,7 +294,7 @@ Page({
       selectedCard: null,
       selectedOperator: null,
       countdown: 60,
-      luckyTime: generateLuckyTime(this.data.rivalLevel),
+      luckyTime: generateLuckyTime(app.globalData.level),
       isStart: true,
       countdownBeforeStart: 2,
       reminder: this.data.reminder - 1,

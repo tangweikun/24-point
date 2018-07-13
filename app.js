@@ -27,6 +27,20 @@ App({
     post('getRankingList2').then(res => {
       this.globalData.rankingList2 = filterRankingList(res)
     })
+
+    const that = this
+    wx.getStorage({
+      key: 'level',
+      success: function(res) {
+        that.globalData.level = res.data
+      },
+      fail: function() {
+        wx.setStorage({
+          key: 'level',
+          data: 6,
+        })
+      },
+    })
   },
 
   globalData: {
@@ -36,5 +50,6 @@ App({
     rankingList1: [],
     rankingList2: [],
     battleList: [],
+    level: 6,
   },
 })
