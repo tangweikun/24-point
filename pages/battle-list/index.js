@@ -1,5 +1,6 @@
 const app = getApp()
 const { formatTime } = require('../../utils/index.js')
+const { post } = require('../../api/index')
 
 Page({
   data: {

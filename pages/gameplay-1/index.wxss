@@ -97,3 +97,27 @@
   margin-bottom: 100rpx;
   margin-top: 120rpx;
 }
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  background-color: #6ddac8;
+  border-radius: 30rpx;
+}
+
+.normal {
+  background-color: #6ddac8;
+}
+
+.active {
+  background-color: green;
+}
+
+.disable {
+  background-color: #e5e5e5;
+}

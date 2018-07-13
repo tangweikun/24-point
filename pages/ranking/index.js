@@ -19,8 +19,8 @@ Page({
     const myRank2 = rankingList2.findIndex(x => x.openid === openid) || null
 
     this.setData({
-      rankingList1,
-      rankingList2,
+      rankingList1: rankingList1.slice(0, 100),
+      rankingList2: rankingList2.slice(0, 100),
       myRankInfo1,
       myRankInfo2,
       myRank1,
@@ -31,10 +31,19 @@ Page({
   onLoad: function() {
     const { rankingList1, rankingList2 } = app.globalData
     if (rankingList1.length === 0 || rankingList2.length === 0) {
-      setTimeout(() => this._setRanking(), 1000)
+      this._showAndCloseLoading()
+
+      setTimeout(() => this._setRanking(), 3000)
     } else {
       this._setRanking()
     }
+  },
+
+  _showAndCloseLoading: function() {
+    wx.showLoading({ title: '加载中' })
+    setTimeout(function() {
+      wx.hideLoading()
+    }, 3000)
   },
 
   _handleClickTab: function(e) {

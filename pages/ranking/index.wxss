@@ -1,5 +1,5 @@
 .scroll-wrapper {
-  height: 600rpx;
+  height: 580rpx;
   width: 80%;
 }
 
