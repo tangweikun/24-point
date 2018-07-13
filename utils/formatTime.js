@@ -1,14 +1,17 @@
+const formatNumber = n => {
+  return n < 10 ? '0' + n : '' + n
+}
+
 const formatTime = createdAt => {
   const date = new Date(createdAt)
   return (
-    date.getMonth() +
-    1 +
+    formatNumber(date.getMonth() + 1) +
     '-' +
-    date.getDate() +
+    formatNumber(date.getDate()) +
     ' ' +
-    date.getHours() +
+    formatNumber(date.getHours()) +
     ':' +
-    date.getMinutes()
+    formatNumber(date.getMinutes())
   )
 }
 
