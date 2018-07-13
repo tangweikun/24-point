@@ -77,7 +77,7 @@ Page({
   },
 
   onLoad: function() {
-    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 30)]
+    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 90)]
     if (app.globalData.userInfo) {
       this.setData({
         rivalUserInfo,
