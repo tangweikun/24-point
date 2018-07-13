@@ -1,0 +1,49 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  border-radius: 30rpx;
+}
+
+.operator-wrapper {
+  display: flex;
+  width: 84%;
+  justify-content: space-between;
+}
+
+.card-wrapper {
+  flex-grow: 1;
+  display: flex;
+  width: 440rpx;
+  margin-bottom: 40rpx;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.numerator {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.denominator {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.fractional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.division {
+  height: 8rpx;
+  line-height: 8rpx;
+}
+
+.integer {
+  font-size: 50rpx;
+}
