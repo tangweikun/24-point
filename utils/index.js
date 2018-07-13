@@ -5,6 +5,7 @@ const { generateLuckyTime } = require('./luckyTime')
 const { recommendSolution } = require('./recommend-solution')
 const { filterRankingList } = require('./filterRankingList')
 const { formatTime } = require('./formatTime')
+const { shareAppMessage } = require('./shareAppMessage')
 
 module.exports = {
   generateCardsAndRecommendSolution,
@@ -14,4 +15,5 @@ module.exports = {
   generateLuckyTime,
   recommendSolution,
   formatTime,
+  shareAppMessage,
 }

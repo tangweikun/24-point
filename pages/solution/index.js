@@ -1,5 +1,5 @@
 const app = getApp()
-const { recommendSolution } = require('../../utils/index.js')
+const { recommendSolution, shareAppMessage } = require('../../utils/index.js')
 
 Page({
   data: {
@@ -8,12 +8,7 @@ Page({
     cards: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, '重置', '回退'],
   },
 
-  onShareAppMessage: function(res) {
-    return {
-      title: '你问我答',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 
   _selectCard: function(e) {
     const { value } = e.currentTarget.dataset

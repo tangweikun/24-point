@@ -1,4 +1,5 @@
 const app = getApp()
+const { shareAppMessage } = require('../../utils/index')
 const { RULE, GAMEPLAY } = require('../../constants/index.js')
 const { post } = require('../../api/index')
 
@@ -67,12 +68,7 @@ Page({
     })
   },
 
-  onShareAppMessage: function(res) {
-    return {
-      title: '24点',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 
   bindGetUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo

@@ -4,6 +4,7 @@ const {
   noDecimal,
   calculate,
   generateLuckyTime,
+  shareAppMessage,
 } = require('../../utils/index.js')
 const { post } = require('../../api/index')
 const {
@@ -43,12 +44,7 @@ Page({
     rivalUserInfo: {},
   },
 
-  onShareAppMessage: function(res) {
-    return {
-      title: '王者对战',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 
   onUnload: function() {
     // TODO: 添加离开页面事件

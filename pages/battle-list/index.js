@@ -1,11 +1,13 @@
 const app = getApp()
-const { formatTime } = require('../../utils/index.js')
+const { formatTime, shareAppMessage } = require('../../utils/index.js')
 const { post } = require('../../api/index')
 
 Page({
   data: {
     battleList: [],
   },
+
+  onShareAppMessage: shareAppMessage,
 
   onLoad: function() {
     const { openid, battleList } = app.globalData
@@ -17,13 +19,6 @@ Page({
           createdAt: formatTime(x.createdAt),
         }))
       })
-    }
-  },
-
-  onShareAppMessage: function() {
-    return {
-      title: '24点',
-      path: '/pages/index/index',
     }
   },
 })

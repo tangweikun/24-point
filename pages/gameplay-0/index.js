@@ -3,6 +3,7 @@ const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
+  shareAppMessage,
 } = require('../../utils/index.js')
 const { post } = require('../../api/index')
 const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
@@ -20,12 +21,7 @@ Page({
     isFinish: false,
   },
 
-  onShareAppMessage: function() {
-    return {
-      title: '24点',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 
   _selectOperator: function(e) {
     const { value } = e.currentTarget.dataset

@@ -1,5 +1,6 @@
 const app = getApp()
 const { post } = require('../../api/index')
+const { shareAppMessage } = require('../../utils/index')
 
 Page({
   data: {
@@ -15,12 +16,7 @@ Page({
       'https://wx.qlogo.cn/mmopen/vi_32/eXrWeb45sjCs0Z0teC8WDU5VFdYGt5BAbYZOf0JicOSlK94BOWj6NgjUbCE1Adx6Kria0FVLxya3JkLn2DQicDpPA/132',
   },
 
-  onShareAppMessage: function(res) {
-    return {
-      title: '我的战绩',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 
   onLoad: function() {
     if (app.globalData.userInfo && app.globalData.gameData) {

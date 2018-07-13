@@ -1,5 +1,6 @@
 const app = getApp()
 const { RULE, GAMEPLAY, AVATAR_URL } = require('../../constants/index.js')
+const { shareAppMessage } = require('../../utils/index')
 
 Page({
   data: {
@@ -13,12 +14,7 @@ Page({
     })
   },
 
-  onShareAppMessage: function(res) {
-    return {
-      title: '24点',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 
   _showRule: function() {
     wx.showModal({

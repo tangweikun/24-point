@@ -1,4 +1,5 @@
 const app = getApp()
+const { shareAppMessage } = require('../../utils/index')
 
 Page({
   data: {
@@ -53,10 +54,5 @@ Page({
     }
   },
 
-  onShareAppMessage: function() {
-    return {
-      title: '排行榜',
-      path: '/pages/index/index',
-    }
-  },
+  onShareAppMessage: shareAppMessage,
 })

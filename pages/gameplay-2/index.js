@@ -4,6 +4,7 @@ const {
   noDecimal,
   calculate,
   filterRankingList,
+  shareAppMessage,
 } = require('../../utils/index.js')
 const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
 const { post } = require('../../api/index')
@@ -27,6 +28,8 @@ Page({
     onThisPage: true,
   },
 
+  onShareAppMessage: shareAppMessage,
+
   onUnload: function() {
     const { openid, userInfo } = app.globalData
     const { gameOver, record } = this.data
@@ -49,13 +52,6 @@ Page({
 
   onLoad: function() {
     this._handleStart()
-  },
-
-  onShareAppMessage: function(res) {
-    return {
-      title: '过关斩将',
-      path: '/pages/index/index',
-    }
   },
 
   countdown: function() {
