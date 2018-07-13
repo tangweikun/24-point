@@ -9,7 +9,7 @@
       <view
         wx:for="{{cards}}"
         wx:key="{{index}}"
-        class="card {{item.state}}"
+        class="card THEME1-{{item.state}}"
         bind:touchstart="_selectCard"
         id="{{item.value}}"
         data-state="{{item.state}}"
