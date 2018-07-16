@@ -24,3 +24,4 @@
 - [ ] userInfoReadyCallback
 - [ ] getStorageSync
 - [ ] 将用户信息接口与排名接口拆分开
+- [ ] 个人中心雷达图【正确率,经验值】

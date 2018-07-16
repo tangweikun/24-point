@@ -34,7 +34,7 @@ Page({
     if (rankingList1.length === 0 || rankingList2.length === 0) {
       this._showAndCloseLoading()
 
-      setTimeout(() => this._setRanking(), 3000)
+      setTimeout(() => this._setRanking(), 4000)
     } else {
       this._setRanking()
     }
@@ -44,7 +44,7 @@ Page({
     wx.showLoading({ title: '加载中' })
     setTimeout(function() {
       wx.hideLoading()
-    }, 3000)
+    }, 4000)
   },
 
   _handleClickTab: function(e) {

@@ -23,6 +23,10 @@ Page({
 
   onShareAppMessage: shareAppMessage,
 
+  _goProfile: function() {
+    wx.navigateTo({ url: '/pages/profile/index' })
+  },
+
   _selectOperator: function(e) {
     const { value } = e.currentTarget.dataset
     const { selectedOperator } = this.data
@@ -32,9 +36,18 @@ Page({
     })
   },
 
+  _showSolution: function() {
+    wx.showModal({
+      showCancel: false,
+      title: '推荐算法',
+      content: this.data.recommendSolution,
+      success: function(res) {},
+    })
+  },
+
   _selectCard: function(e) {
     const { value, index, state } = e.currentTarget.dataset
-    const { cards, selectedOperator, selectedCard } = this.data
+    const { cards, selectedOperator, selectedCard, initialCards } = this.data
 
     if (state === 'disable') return
 
@@ -85,6 +98,12 @@ Page({
     if (isFinish && openid) {
       const isCorrect = nextState.selectedCard.value === 24
       post('increaseAnswersCount', { openid, isCorrect })
+      post('addQuestion', {
+        openid,
+        isCorrect,
+        question: initialCards.map(x => x.value),
+        gameplay: 'TYPE_0',
+      })
     }
 
     if (isFinish && nextState.selectedCard.value === 24) {

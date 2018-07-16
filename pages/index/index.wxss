@@ -74,7 +74,7 @@
   width: 440rpx;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 200rpx;
+  margin-top: 300rpx;
 }
 
 .footer {

@@ -33,3 +33,31 @@
   color: #6ddac8;
   padding: 0 0 60rpx;
 }
+
+.recommend {
+  position: fixed;
+  right: 50rpx;
+  top: 50rpx;
+  font-size: 24rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  width: 140rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+}
+
+.profile {
+  position: fixed;
+  left: 50rpx;
+  top: 50rpx;
+  font-size: 24rpx;
+  background: #6ddac8;
+  color: #ffffff;
+  width: 140rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+}

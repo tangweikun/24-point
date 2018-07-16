@@ -93,10 +93,12 @@ Page({
 
   _updateLevel: function() {
     const { myScore, rivalScore } = this.data
+
     const point = myScore === rivalScore ? 0 : myScore > rivalScore ? 1 : -1
     wx.getStorage({
       key: 'level',
       success: function(res) {
+        app.globalData.level = res.data + point
         wx.setStorage({
           key: 'level',
           data: res.data + point,
@@ -198,7 +200,13 @@ Page({
 
   _selectCard: function(e) {
     const { value, index, state } = e.currentTarget.dataset
-    const { cards, selectedOperator, selectedCard, myScore } = this.data
+    const {
+      cards,
+      selectedOperator,
+      selectedCard,
+      myScore,
+      initialCards,
+    } = this.data
 
     if (state === 'disable') return
 
@@ -251,12 +259,18 @@ Page({
         openid,
         isCorrect: nextState.selectedCard.value === 24,
       })
+      post('addQuestion', {
+        openid,
+        isCorrect: nextState.selectedCard.value === 24,
+        question: initialCards.map(x => x.value),
+        gameplay: 'TYPE_3',
+      })
     }
 
     if (isFinish) {
       this.setData({
         myScore:
-          nextState.selectedCard.value === 24 ? myScore + 2 : myScore - 1,
+          nextState.selectedCard.value === 24 ? myScore + 2 : myScore - 2,
         isStart: false,
         myReward: nextState.selectedCard.value === 24 ? '+2' : '-1',
       })

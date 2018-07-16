@@ -10,12 +10,21 @@ App({
           this.globalData.openid = openid
           this.globalData.userInfo = userInfo
 
-          post('getMyBattleList', { openid }).then(res2 => {
-            this.globalData.battleList = res2.map(x => ({
-              ...x,
-              createdAt: formatTime(x.createdAt),
-            }))
+          post('getUserInfo', { openid }).then(res => {
+            const { totalOfCorrectAnswers, totalOfAnswers, rank } = res
+            this.globalData.gameData = {
+              totalOfCorrectAnswers,
+              totalOfAnswers,
+              rank,
+            }
           })
+
+          // post('getMyBattleList', { openid }).then(res2 => {
+          //   this.globalData.battleList = res2.map(x => ({
+          //     ...x,
+          //     createdAt: formatTime(x.createdAt),
+          //   }))
+          // })
         })
       },
     })

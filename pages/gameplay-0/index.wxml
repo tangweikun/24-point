@@ -5,6 +5,8 @@
   </view>
 
   <view wx:else class='wrapper'>
+    <view class='profile' bindtap="_goProfile">个人中心</view>
+    <view class='recommend' bindtap="_showSolution">偷瞄算法</view>
     <view class='card-wrapper'>
       <view
         wx:for="{{cards}}"

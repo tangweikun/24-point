@@ -133,11 +133,6 @@ module.exports = {
         'http://img18.3lian.com/d/file/201712/19/33c8c86eacca52643c3e4f8944efe9a8.png',
     },
     {
-      nickName: '眷卿三世',
-      avatarUrl:
-        'http://i.jianbihua.cc/uploads/allimg/150326/15-150326103119456.jpg',
-    },
-    {
       nickName: '谁以微笑',
       avatarUrl:
         'http://www.kuk8.com/uploads/allimg/170915/1-1F9121514231C.jpg',
@@ -262,11 +257,6 @@ module.exports = {
       nickName: '做我心上人',
       avatarUrl:
         'http://02.imgmini.eastday.com/mobile/20170920/20170920141256_6bfa4fc74cbcc10362e815761b653cf8_1.jpeg',
-    },
-    {
-      nickName: '你我来日方长',
-      avatarUrl:
-        'http://www.qqfengshang.com/uploadfile/2014/06/1/20140619090718346.jpg',
     },
     {
       nickName: '大菠菜',

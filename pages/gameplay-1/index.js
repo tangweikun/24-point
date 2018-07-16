@@ -124,6 +124,7 @@ Page({
       selectedCard,
       record,
       countdown,
+      initialCards,
     } = this.data
     if (cards[index].state === 'disable') return
 
@@ -199,6 +200,12 @@ Page({
           totalOfCorrectAnswers: res.totalOfCorrectAnswers,
           totalOfAnswers: res.totalOfAnswers,
         })
+      })
+      post('addQuestion', {
+        openid,
+        isCorrect,
+        question: initialCards.map(x => x.value),
+        gameplay: 'TYPE_1',
       })
     } else {
       this.setData({

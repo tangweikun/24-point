@@ -108,7 +108,7 @@ Page({
 
   _selectCard: function(e) {
     const { value, index } = e.currentTarget.dataset
-    const { cards, selectedOperator, selectedCard } = this.data
+    const { cards, selectedOperator, selectedCard, initialCards } = this.data
     if (cards[index].state === 'disable') return
 
     const nextState = {
@@ -180,6 +180,12 @@ Page({
           totalOfCorrectAnswers: res.totalOfCorrectAnswers,
           totalOfAnswers: res.totalOfAnswers,
         })
+      })
+      post('addQuestion', {
+        openid,
+        isCorrect,
+        question: initialCards.map(x => x.value),
+        gameplay: 'TYPE_2',
       })
     } else {
       this.setData({

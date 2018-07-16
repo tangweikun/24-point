@@ -4,56 +4,37 @@ const { shareAppMessage } = require('../../utils/index')
 
 Page({
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isAuthorized: true,
     totalOfAnswers: '--',
     totalOfCorrectAnswers: '--',
     accuracy: '100%',
-    challengeRanking: '--',
-    bestRecord: '--',
-    f: app.globalData.gameData,
+    rank: '-',
     avatarUrl:
       'https://wx.qlogo.cn/mmopen/vi_32/eXrWeb45sjCs0Z0teC8WDU5VFdYGt5BAbYZOf0JicOSlK94BOWj6NgjUbCE1Adx6Kria0FVLxya3JkLn2DQicDpPA/132',
   },
 
   onShareAppMessage: shareAppMessage,
 
-  onLoad: function() {
-    if (app.globalData.userInfo && app.globalData.gameData) {
-      const { avatarUrl = '' } = app.globalData.userInfo
-      const { totalOfCorrectAnswers, totalOfAnswers } = app.globalData.gameData
-      const accuracy =
-        totalOfAnswers === undefined
-          ? '-'
-          : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
+  _setUserInfo: function() {
+    const { avatarUrl = '' } = app.globalData.userInfo
+    const { totalOfCorrectAnswers, totalOfAnswers } = app.globalData.gameData
+    const accuracy =
+      totalOfAnswers === undefined
+        ? '-'
+        : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
 
-      this.setData({
-        isAuthorized: true,
-        type1Ranking: app.globalData.gameData.type1Ranking,
-        type1Record: app.globalData.gameData.type1Record,
-        type2Ranking: app.globalData.gameData.type2Ranking,
-        type2Record: app.globalData.gameData.type2Record,
-        avatarUrl,
-        accuracy,
-        totalOfAnswers,
-      })
-    } else {
-      this.setData({ isAuthorized: false })
-    }
+    this.setData({
+      avatarUrl,
+      accuracy,
+      totalOfCorrectAnswers,
+      rank: app.globalData.gameData.rank,
+    })
   },
 
-  getRanking: function() {
-    const { openid } = app.globalData
-    if (openid) {
-      post('getRanking', { openid }).then(res => {
-        const { type1Ranking, type1Record, type2Ranking, type2Record } = res
-        this.setData({
-          type1Ranking,
-          type1Record,
-          type2Ranking,
-          type2Record,
-        })
-      })
+  onLoad: function() {
+    if (app.globalData.gameData.rank) {
+      this._setUserInfo()
+    } else {
+      setTimeout(() => this._setUserInfo(), 3000)
     }
   },
 
@@ -63,8 +44,7 @@ Page({
         userInfo = { avatarUrl: '' },
         totalOfCorrectAnswers = '--',
         totalOfAnswers = '--',
-        challengeRanking = '--',
-        bestRecord = '--',
+        rank,
       } = res
 
       const accuracy =
@@ -76,12 +56,14 @@ Page({
       this.setData({
         totalOfCorrectAnswers,
         totalOfAnswers,
-        challengeRanking,
-        bestRecord,
-        isAuthorized: true,
         accuracy,
         avatarUrl: userInfo.avatarUrl,
+        rank,
       })
+
+      app.globalData.gameData.totalOfAnswers = totalOfAnswers
+      app.globalData.gameData.totalOfCorrectAnswers = totalOfCorrectAnswers
+      app.globalData.gameData.rank = rank
     })
   },
 
@@ -93,7 +75,6 @@ Page({
       })
 
       this.refreshUserInfo()
-      this.getRanking()
     }
   },
 
@@ -102,7 +83,6 @@ Page({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           this.refreshUserInfo()
-          this.getRanking()
         }
       },
     })

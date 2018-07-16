@@ -9,31 +9,27 @@
   </view>
 
   <view class="profile-authorize">
-    <button 
-      wx:if="{{!isAuthorized}}"
-      open-type="getUserInfo"
-      bindgetuserinfo="bindGetUserInfo"
-      type="primary"
-    >
-      查看排名
-    </button>
 
-    <view wx:else>
       <view class="ranking-wrapper">
-        <view class="ranking-title">战绩</view>
         <view class="ranking-detail">
           <view class="ranking-detail-left">
-            <label>正确率:</label>
-            <label>{{accuracy}}</label>
+            <label>总排名: </label>
+            <label>{{rank}}</label>
           </view>
           <view class="ranking-detail-right">
-            <label>经验值:</label>
-            <label>{{totalOfAnswers}}</label>
+            <label>总积分: </label>
+            <label>{{totalOfCorrectAnswers}}</label>
           </view>
         </view>
-      </view>
+        <view class="ranking-detail">
+          <view class="ranking-detail-left">
+            <label>正确率: </label>
+            <label>{{accuracy}}</label>
+          </view>
 
-      <view class="ranking-wrapper">
+        </view>
+
+      <!-- <view class="ranking-wrapper">
         <view class="ranking-title">分秒必争</view>
         <view class="ranking-detail">
           <view class="ranking-detail-left">
@@ -45,9 +41,9 @@
             <label>{{type1Record}}题</label>
           </view>
         </view>
-      </view>
+      </view> -->
 
-      <view class="ranking-wrapper">
+      <!-- <view class="ranking-wrapper">
         <view class="ranking-title">过关斩将</view>
         <view class="ranking-detail">
           <view class="ranking-detail-left">
@@ -59,7 +55,7 @@
             <label>{{type2Record}}连斩</label>
           </view>
         </view>     
-      </view>
+      </view> -->
 
       <!-- <view class="feedback">
         <view>

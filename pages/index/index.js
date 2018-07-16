@@ -8,23 +8,23 @@ Page({
     isAuthorized: false,
     gamePlay: [
       {
-        text: '排行榜',
-        url: '/pages/ranking/index',
-        isReady: true,
-        isHot: false,
-      },
-      {
         text: '随便玩玩',
         url: '/pages/gameplay-0/index',
         isReady: true,
         isHot: false,
       },
       {
-        text: '王者对战',
-        url: '/pages/gameplay-3/index',
+        text: '排行榜',
+        url: '/pages/ranking/index',
         isReady: true,
         isHot: false,
       },
+      // {
+      //   text: '王者对战',
+      //   url: '/pages/gameplay-3/index',
+      //   isReady: true,
+      //   isHot: false,
+      // },
       {
         text: '过关斩将',
         url: '/pages/gameplay-2/index',
@@ -37,12 +37,12 @@ Page({
         isReady: true,
         isHot: false,
       },
-      {
-        text: '对战历史',
-        url: '/pages/battle-list/index',
-        isReady: true,
-        isHot: false,
-      },
+      // {
+      //   text: '对战历史',
+      //   url: '/pages/battle-list/index',
+      //   isReady: true,
+      //   isHot: false,
+      // },
       // {
       //   text: '我的战绩',
       //   url: '/pages/profile/index',
