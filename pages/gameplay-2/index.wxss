@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20rpx 0 80rpx;
+  padding: 20rpx 0 0;
 }
 
 .expression-wrapper {

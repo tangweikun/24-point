@@ -16,10 +16,8 @@
     >
       {{item.text}}
     </view>
-  </view>
-
-  <view class="footer" wx:if="{{!isAuthorized}}">
     <button
+      wx:if="{{!isAuthorized}}"
       open-type="getUserInfo"
       bindgetuserinfo="bindGetUserInfo"
       type="primary"
@@ -27,4 +25,5 @@
       登录
     </button>
   </view>
+  <ad class="ad-wrapper" unit-id="adunit-e989c465de072824"></ad>
 </view>

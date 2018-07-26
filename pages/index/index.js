@@ -73,6 +73,7 @@ Page({
   bindGetUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
     app.globalData.isAuthorized = true
+    this.setData({ isAuthorized: true })
     if (app.globalData.openid) {
       post('updateUserInfo', {
         openid: app.globalData.openid,

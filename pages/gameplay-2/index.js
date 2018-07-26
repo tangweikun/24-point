@@ -65,6 +65,13 @@ Page({
         const foo = this.data.record
 
         this.openAlert(foo)
+        post('addQuestion', {
+          openid,
+          isCorrect: false,
+          question: this.data.initialCards.map(x => x.value),
+          gameplay: 'TYPE_2',
+        })
+
         post('addChallenge', {
           openid,
           userInfo,

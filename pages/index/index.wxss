@@ -84,3 +84,8 @@
   text-align: center;
   width: 80%;
 }
+
+.ad-wrapper {
+  position: fixed;
+  bottom: 0;
+}

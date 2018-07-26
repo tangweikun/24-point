@@ -16,7 +16,11 @@ Page({
 
   _setUserInfo: function() {
     const { avatarUrl = '' } = app.globalData.userInfo
-    const { totalOfCorrectAnswers, totalOfAnswers } = app.globalData.gameData
+    const {
+      totalOfCorrectAnswers,
+      totalOfAnswers,
+      rank = '--',
+    } = app.globalData.gameData
     const accuracy =
       totalOfAnswers === undefined
         ? '-'
@@ -26,7 +30,7 @@ Page({
       avatarUrl,
       accuracy,
       totalOfCorrectAnswers,
-      rank: app.globalData.gameData.rank,
+      rank,
     })
   },
 
@@ -44,7 +48,7 @@ Page({
         userInfo = { avatarUrl: '' },
         totalOfCorrectAnswers = '--',
         totalOfAnswers = '--',
-        rank,
+        rank = '--',
       } = res
 
       const accuracy =
