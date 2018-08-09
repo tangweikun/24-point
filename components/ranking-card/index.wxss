@@ -1,13 +1,13 @@
 .ranking-card-wrapper {
   display: flex;
-  height: 150rpx;
-  width: 600rpx;
+  height: 130rpx;
+  width: 100%;
   color: #ffffff;
   padding: 20rpx 20rpx;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 20rpx;
-  border-radius: 10rpx;
+  /* margin-bottom: 20rpx; */
+  /* border-radius: 10rpx; */
 }
 
 .ranking-card-rank {
@@ -17,6 +17,7 @@
 .ranking-card-right {
   flex: 1;
   padding-left: 50rpx;
+  font-size: 30rpx;
 }
 
 .THEME1 {

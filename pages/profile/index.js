@@ -15,7 +15,7 @@ Page({
   onShareAppMessage: shareAppMessage,
 
   _setUserInfo: function() {
-    const { avatarUrl = '' } = app.globalData.userInfo
+    const { avatarUrl = '' } = app.globalData.userInfo || {}
     const {
       totalOfCorrectAnswers,
       totalOfAnswers,
@@ -35,7 +35,11 @@ Page({
   },
 
   onLoad: function() {
-    if (app.globalData.gameData.rank) {
+    if (
+      app.globalData.gameData &&
+      app.globalData.gameData.rank &&
+      app.globalData.userInfo
+    ) {
       this._setUserInfo()
     } else {
       setTimeout(() => this._setUserInfo(), 3000)

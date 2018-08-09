@@ -1,6 +1,6 @@
 <view class="home-container">
   <view class="rule" bindtap="_showRule">规则</view>
-  <view class="gameplay" bindtap="_showGameplay">玩法</view>
+  <!-- <view class="gameplay" bindtap="_showGameplay">玩法</view> -->
 
   <view class="home-circle-wrapper">
     <view
