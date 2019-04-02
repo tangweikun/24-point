@@ -1,15 +1,15 @@
-const app = getApp()
+const app = getApp();
 const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
   filterRankingList,
   shareAppMessage,
-} = require('../../utils/index.js')
-const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
-const { post } = require('../../api/index')
+} = require('../../utils/index.js');
+const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js');
+const { post } = require('../../api/index');
 
-const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
+const cardsAndRecommendSolution = generateCardsAndRecommendSolution();
 
 Page({
   data: {
@@ -33,65 +33,65 @@ Page({
   onShareAppMessage: shareAppMessage,
 
   onUnload: function() {
-    const { openid, userInfo } = app.globalData
-    const { gameOver, record, totalTime } = this.data
+    const { openid, userInfo } = app.globalData;
+    const { gameOver, record, totalTime } = this.data;
 
     if (!gameOver && record > 0) {
-      post('addChallenge', {
+      post('24-points/add_challenge', {
         openid,
         userInfo,
         record,
         totalTime,
         gameplay: 'TYPE_1',
-      })
+      });
     }
 
     post('getRankingList1').then(res => {
-      app.globalData.rankingList1 = filterRankingList(res)
-    })
+      app.globalData.rankingList1 = filterRankingList(res);
+    });
 
-    this.setData({ onThisPage: false })
+    this.setData({ onThisPage: false });
   },
 
   onLoad: function() {
-    this._handleStart()
+    this._handleStart();
   },
 
   countdown: function() {
-    if (!this.data.onThisPage || this.data.gameOver) return
+    if (!this.data.onThisPage || this.data.gameOver) return;
 
-    const that = this
-    const { openid, userInfo } = app.globalData
+    const that = this;
+    const { openid, userInfo } = app.globalData;
 
     if (this.data.countdown < 2) {
       if (this.data.isStart) {
-        const foo = this.data.record
-        const bar = this.data.totalTime
+        const foo = this.data.record;
+        const bar = this.data.totalTime;
 
-        this.setData({ gameOver: true, isStart: false })
+        this.setData({ gameOver: true, isStart: false });
 
-        post('addChallenge', {
+        post('24-points/add_challenge', {
           openid,
           userInfo,
           record: foo,
           totalTime: bar,
           gameplay: 'TYPE_1',
-        })
+        });
       }
     } else {
       this.setData({
         countdown: this.data.countdown - 1,
         totalTime: this.data.totalTime + 1,
-      })
+      });
 
       setTimeout(function() {
-        that.countdown()
-      }, 1000)
+        that.countdown();
+      }, 1000);
     }
   },
 
   _handleStart: function() {
-    const newCards = generateCardsAndRecommendSolution()
+    const newCards = generateCardsAndRecommendSolution();
     this.setData({
       isStart: true,
       gameOver: false,
@@ -103,21 +103,21 @@ Page({
       countdown: 100,
       record: 0,
       totalTime: 0,
-    })
-    this.countdown()
+    });
+    this.countdown();
   },
 
   _selectOperator: function(e) {
-    const { value } = e.currentTarget.dataset
-    const { selectedOperator } = this.data
+    const { value } = e.currentTarget.dataset;
+    const { selectedOperator } = this.data;
 
     this.setData({
       selectedOperator: selectedOperator !== value ? value : null,
-    })
+    });
   },
 
   _selectCard: function(e) {
-    const { value, index } = e.currentTarget.dataset
+    const { value, index } = e.currentTarget.dataset;
     const {
       cards,
       selectedOperator,
@@ -125,38 +125,38 @@ Page({
       record,
       countdown,
       initialCards,
-    } = this.data
-    if (cards[index].state === 'disable') return
+    } = this.data;
+    if (cards[index].state === 'disable') return;
 
     const nextState = {
       cards,
       selectedCard: { value: cards[index].value, position: index },
-    }
-    nextState.cards[index].state = 'active'
+    };
+    nextState.cards[index].state = 'active';
 
     if (selectedCard !== null) {
-      Object.assign(nextState, { selectedCard: null })
-      nextState.cards[selectedCard.position].state = 'normal'
+      Object.assign(nextState, { selectedCard: null });
+      nextState.cards[selectedCard.position].state = 'normal';
 
       if (selectedCard.position !== index) {
         Object.assign(nextState, {
           selectedCard: { value: cards[index].value, position: index },
-        })
-        nextState.cards[selectedCard.position].state = 'normal'
+        });
+        nextState.cards[selectedCard.position].state = 'normal';
 
         if (selectedOperator !== null) {
           const answer = calculate(
             selectedCard.value,
             cards[index].value,
             selectedOperator,
-          )
+          );
 
           Object.assign(nextState, {
             selectedOperator: null,
             selectedCard: { value: answer, position: index },
-          })
+          });
 
-          nextState.cards[selectedCard.position].state = 'disable'
+          nextState.cards[selectedCard.position].state = 'disable';
           nextState.cards[index] = {
             value: answer,
             state: 'active',
@@ -165,31 +165,31 @@ Page({
               nextState.cards[index].alias,
               selectedOperator,
             ),
-          }
+          };
         }
       }
     }
     const isFinish =
-      nextState.cards.filter(({ state }) => state === 'disable').length === 3
+      nextState.cards.filter(({ state }) => state === 'disable').length === 3;
 
-    const openid = app.globalData.openid
+    const openid = app.globalData.openid;
 
     if (isFinish && openid) {
-      const isCorrect = nextState.selectedCard.value === 24
+      const isCorrect = nextState.selectedCard.value === 24;
       if (isCorrect) {
-        const awardTime = this._calculateAwardTime()
-        this.showToast(`答对 +${awardTime}s`, 'success')
-        this._skip()
+        const awardTime = this._calculateAwardTime();
+        this.showToast(`答对 +${awardTime}s`, 'success');
+        this._skip();
         this.setData({
           record: record + 1,
           countdown: countdown + awardTime,
-        })
+        });
       } else {
-        this.showToast('答错 -5s', 'none')
+        this.showToast('答错 -5s', 'none');
         this.setData({
           countdown: countdown - 5,
-        })
-        this._skip()
+        });
+        this._skip();
       }
 
       post('increaseAnswersCount', {
@@ -199,18 +199,18 @@ Page({
         this.setData({
           totalOfCorrectAnswers: res.totalOfCorrectAnswers,
           totalOfAnswers: res.totalOfAnswers,
-        })
-      })
-      post('addQuestion', {
+        });
+      });
+      post('24-points/add_question', {
         openid,
         isCorrect,
         question: initialCards.map(x => x.value),
         gameplay: 'TYPE_1',
-      })
+      });
     } else {
       this.setData({
         ...nextState,
-      })
+      });
     }
   },
 
@@ -219,22 +219,22 @@ Page({
       value: x.value,
       alias: [x.value],
       state: 'normal',
-    }))
+    }));
 
     this.setData({
       cards: resetCards,
       selectedCard: null,
       selectedOperator: null,
-    })
+    });
   },
 
   _calculateAwardTime: function() {
-    const record = this.data.record + 1
+    const record = this.data.record + 1;
 
-    if (record % 24 === 0) return 12 + record / 12
-    if (record <= 6) return 10
-    if (record <= 16) return 8
-    return 6
+    if (record % 24 === 0) return 12 + record / 12;
+    if (record <= 6) return 10;
+    if (record <= 16) return 8;
+    return 6;
   },
 
   showToast: function(title, icon) {
@@ -242,17 +242,17 @@ Page({
       title,
       icon,
       duration: 800,
-    })
+    });
   },
 
   _skip: function(e) {
-    const newCards = generateCardsAndRecommendSolution()
+    const newCards = generateCardsAndRecommendSolution();
     this.setData({
       cards: [...newCards.cards],
       initialCards: [...newCards.cards],
       recommendSolution: newCards.recommendSolution,
       selectedCard: null,
       selectedOperator: null,
-    })
+    });
   },
-})
+});

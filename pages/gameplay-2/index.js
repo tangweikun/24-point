@@ -1,14 +1,14 @@
-const app = getApp()
+const app = getApp();
 const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
   filterRankingList,
   shareAppMessage,
-} = require('../../utils/index.js')
-const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js')
-const { post } = require('../../api/index')
-const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
+} = require('../../utils/index.js');
+const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js');
+const { post } = require('../../api/index');
+const cardsAndRecommendSolution = generateCardsAndRecommendSolution();
 
 Page({
   data: {
@@ -31,65 +31,65 @@ Page({
   onShareAppMessage: shareAppMessage,
 
   onUnload: function() {
-    const { openid, userInfo } = app.globalData
-    const { gameOver, record } = this.data
+    const { openid, userInfo } = app.globalData;
+    const { gameOver, record } = this.data;
 
     if (!gameOver && record > 0) {
-      post('addChallenge', {
+      post('24-points/add_challenge', {
         openid,
         userInfo,
         record,
         gameplay: 'TYPE_2',
-      })
+      });
     }
 
-    this.setData({ onThisPage: false })
+    this.setData({ onThisPage: false });
 
     post('getRankingList2').then(res => {
-      app.globalData.rankingList2 = filterRankingList(res)
-    })
+      app.globalData.rankingList2 = filterRankingList(res);
+    });
   },
 
   onLoad: function() {
-    this._handleStart()
+    this._handleStart();
   },
 
   countdown: function() {
-    if (!this.data.onThisPage || this.data.gameOver) return
+    if (!this.data.onThisPage || this.data.gameOver) return;
 
-    const that = this
-    const { openid, userInfo } = app.globalData
+    const that = this;
+    const { openid, userInfo } = app.globalData;
 
     if (this.data.countdown < 2) {
       if (this.data.isStart) {
-        const foo = this.data.record
+        const foo = this.data.record;
 
-        this.openAlert(foo)
-        post('addQuestion', {
+        this.openAlert(foo);
+        post('24-points/add_question', {
           openid,
           isCorrect: false,
           question: this.data.initialCards.map(x => x.value),
           gameplay: 'TYPE_2',
-        })
+        });
 
-        post('addChallenge', {
+        post('24-points/add_challenge', {
           openid,
           userInfo,
           record: foo,
           gameplay: 'TYPE_2',
-        })
+        });
       }
     } else {
-      this.setData({ countdown: this.data.countdown - 1 })
+      this.setData({ countdown: this.data.countdown - 1 });
 
       setTimeout(function() {
-        that.countdown()
-      }, 1000)
+        that.countdown();
+      }, 1000);
     }
   },
 
   _handleStart: function() {
-    const newCards = generateCardsAndRecommendSolution()
+    const newCards = generateCardsAndRecommendSolution();
     this.setData({
       isStart: true,
       gameOver: false,
@@ -100,53 +100,53 @@ Page({
       selectedOperator: null,
       countdown: 30,
       record: 0,
-    })
-    this.countdown()
+    });
+    this.countdown();
   },
 
   _selectOperator: function(e) {
-    const { value } = e.currentTarget.dataset
-    const { selectedOperator } = this.data
+    const { value } = e.currentTarget.dataset;
+    const { selectedOperator } = this.data;
 
     this.setData({
       selectedOperator: selectedOperator !== value ? value : null,
-    })
+    });
   },
 
   _selectCard: function(e) {
-    const { value, index } = e.currentTarget.dataset
-    const { cards, selectedOperator, selectedCard, initialCards } = this.data
-    if (cards[index].state === 'disable') return
+    const { value, index } = e.currentTarget.dataset;
+    const { cards, selectedOperator, selectedCard, initialCards } = this.data;
+    if (cards[index].state === 'disable') return;
 
     const nextState = {
       cards,
       selectedCard: { value: cards[index].value, position: index },
-    }
-    nextState.cards[index].state = 'active'
+    };
+    nextState.cards[index].state = 'active';
 
     if (selectedCard !== null) {
-      Object.assign(nextState, { selectedCard: null })
-      nextState.cards[selectedCard.position].state = 'normal'
+      Object.assign(nextState, { selectedCard: null });
+      nextState.cards[selectedCard.position].state = 'normal';
 
       if (selectedCard.position !== index) {
         Object.assign(nextState, {
           selectedCard: { value: cards[index].value, position: index },
-        })
-        nextState.cards[selectedCard.position].state = 'normal'
+        });
+        nextState.cards[selectedCard.position].state = 'normal';
 
         if (selectedOperator !== null) {
           const answer = calculate(
             selectedCard.value,
             cards[index].value,
             selectedOperator,
-          )
+          );
 
           Object.assign(nextState, {
             selectedOperator: null,
             selectedCard: { value: answer, position: index },
-          })
+          });
 
-          nextState.cards[selectedCard.position].state = 'disable'
+          nextState.cards[selectedCard.position].state = 'disable';
           nextState.cards[index] = {
             value: answer,
             state: 'active',
@@ -155,49 +155,49 @@ Page({
               nextState.cards[index].alias,
               selectedOperator,
             ),
-          }
+          };
         }
       }
     }
     const isFinish =
-      nextState.cards.filter(({ state }) => state === 'disable').length === 3
+      nextState.cards.filter(({ state }) => state === 'disable').length === 3;
 
-    const openid = app.globalData.openid
+    const openid = app.globalData.openid;
 
     if (isFinish && openid !== '') {
-      const isCorrect = nextState.selectedCard.value === 24
+      const isCorrect = nextState.selectedCard.value === 24;
       if (isCorrect) {
-        this._skip()
-        this.setData({ record: this.data.record + 1 })
+        this._skip();
+        this.setData({ record: this.data.record + 1 });
       } else {
-        const foo = this.data.record
-        this.openAlert(foo)
-        post('addChallenge', {
+        const foo = this.data.record;
+        this.openAlert(foo);
+        post('24-points/add_challenge', {
           openid,
           userInfo: app.globalData.userInfo,
           record: foo,
           gameplay: 'TYPE_2',
-        })
+        });
 
-        this.setData({ isStart: false, gameOver: true })
+        this.setData({ isStart: false, gameOver: true });
       }
 
       post('increaseAnswersCount', { openid, isCorrect }).then(res => {
         this.setData({
           totalOfCorrectAnswers: res.totalOfCorrectAnswers,
           totalOfAnswers: res.totalOfAnswers,
-        })
-      })
-      post('addQuestion', {
+        });
+      });
+      post('24-points/add_question', {
         openid,
         isCorrect,
         question: initialCards.map(x => x.value),
         gameplay: 'TYPE_2',
-      })
+      });
     } else {
       this.setData({
         ...nextState,
-      })
+      });
     }
   },
 
@@ -206,17 +206,17 @@ Page({
       value: x.value,
       alias: [x.value],
       state: 'normal',
-    }))
+    }));
 
     this.setData({
       cards: resetCards,
       selectedCard: null,
       selectedOperator: null,
-    })
+    });
   },
 
   _skip: function(e) {
-    const newCards = generateCardsAndRecommendSolution()
+    const newCards = generateCardsAndRecommendSolution();
     this.setData({
       cards: [...newCards.cards],
       initialCards: [...newCards.cards],
@@ -224,13 +224,13 @@ Page({
       selectedCard: null,
       selectedOperator: null,
       countdown: 30,
-    })
+    });
   },
 
   openAlert: function(record) {
     this.setData({
       gameOver: true,
       isStart: false,
-    })
+    });
   },
-})
+});

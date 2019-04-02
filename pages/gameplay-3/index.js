@@ -1,21 +1,21 @@
-const app = getApp()
+const app = getApp();
 const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
   generateLuckyTime,
   shareAppMessage,
-} = require('../../utils/index.js')
-const { post } = require('../../api/index')
+} = require('../../utils/index.js');
+const { post } = require('../../api/index');
 const {
   OPERATORS,
   OPERATORS_HASH,
   AVATAR_URL,
   RIVAL,
-} = require('../../constants/index.js')
+} = require('../../constants/index.js');
 
-const cardsAndRecommendSolution = generateCardsAndRecommendSolution()
-const luckyTime = generateLuckyTime(0)
+const cardsAndRecommendSolution = generateCardsAndRecommendSolution();
+const luckyTime = generateLuckyTime(0);
 
 Page({
   data: {
@@ -48,63 +48,63 @@ Page({
 
   onUnload: function() {
     // TODO: 添加离开页面事件
-    this.setData({ onThisPage: false })
+    this.setData({ onThisPage: false });
     if (!this.data.gameOver && this.data.isReady) {
       wx.showModal({
         showCancel: false,
         title: '提示',
         content: '由于您提前离开比赛,本次对战结果为【投降】',
         success: function(res) {},
-      })
+      });
 
-      const { myScore, rivalScore, rivalUserInfo } = this.data
-      const openid = app.globalData.openid
-      const userInfo = app.globalData.userInfo
+      const { myScore, rivalScore, rivalUserInfo } = this.data;
+      const openid = app.globalData.openid;
+      const userInfo = app.globalData.userInfo;
 
-      post('addBattle', {
+      post('24-points/add_battle', {
         openid,
         myScore,
         rivalScore,
         userInfo,
         result: '投降',
         rivalUserInfo,
-      })
+      });
     }
   },
 
   onLoad: function() {
-    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 90)]
+    const rivalUserInfo = RIVAL[Math.floor(Math.random() * 90)];
     if (app.globalData.userInfo) {
       this.setData({
         rivalUserInfo,
         myAvatarUrl: app.globalData.userInfo.avatarUrl,
-      })
+      });
     } else {
-      this.setData({ rivalUserInfo })
+      this.setData({ rivalUserInfo });
     }
 
-    this.handleCountdownLookingRival()
+    this.handleCountdownLookingRival();
   },
 
   handleCountdownLookingRival: function() {
-    const randomTime = Math.random() * 1000 + 800
-    setTimeout(() => this._handleStart(), randomTime)
+    const randomTime = Math.random() * 1000 + 800;
+    setTimeout(() => this._handleStart(), randomTime);
   },
 
   _updateLevel: function() {
-    const { myScore, rivalScore } = this.data
+    const { myScore, rivalScore } = this.data;
 
-    const point = myScore === rivalScore ? 0 : myScore > rivalScore ? 1 : -1
+    const point = myScore === rivalScore ? 0 : myScore > rivalScore ? 1 : -1;
     wx.getStorage({
       key: 'level',
       success: function(res) {
-        app.globalData.level = res.data + point
+        app.globalData.level = res.data + point;
         wx.setStorage({
           key: 'level',
           data: res.data + point,
-        })
+        });
       },
-    })
+    });
   },
 
   handleCountdownBeforeStart: function() {
@@ -115,38 +115,38 @@ Page({
       myScore,
       rivalScore,
       rivalUserInfo,
-    } = this.data
-    if (isStart) return
+    } = this.data;
+    if (isStart) return;
 
-    const that = this
+    const that = this;
     if (countdownBeforeStart < 2) {
       if (reminder === 0) {
         const result =
           myScore > rivalScore
             ? '胜利'
             : myScore === rivalScore
-              ? '平局'
-              : '失败'
-        this.setData({ gameOver: true, result })
-        this._updateLevel()
-        const openid = app.globalData.openid
-        const userInfo = app.globalData.userInfo
-        post('addBattle', {
+            ? '平局'
+            : '失败';
+        this.setData({ gameOver: true, result });
+        this._updateLevel();
+        const openid = app.globalData.openid;
+        const userInfo = app.globalData.userInfo;
+        post('24-points/add_battle', {
           openid,
           myScore,
           rivalScore,
           userInfo,
           result,
           rivalUserInfo,
-        })
+        });
       } else {
-        this._handleStart()
+        this._handleStart();
       }
     } else {
-      this.setData({ countdownBeforeStart: countdownBeforeStart - 1 })
+      this.setData({ countdownBeforeStart: countdownBeforeStart - 1 });
       setTimeout(function() {
-        that.handleCountdownBeforeStart()
-      }, 1000)
+        that.handleCountdownBeforeStart();
+      }, 1000);
     }
   },
 
@@ -158,82 +158,82 @@ Page({
       luckyTime,
       rivalScore,
       isStart,
-    } = this.data
+    } = this.data;
 
-    if (!onThisPage || gameOver || !isStart) return
+    if (!onThisPage || gameOver || !isStart) return;
 
-    const that = this
+    const that = this;
     if (countdown < 2) {
-      this.setData({ isStart: false })
-      this.handleCountdownBeforeStart()
+      this.setData({ isStart: false });
+      this.handleCountdownBeforeStart();
     } else {
       if (luckyTime === 60 - countdown) {
         this.setData({
           rivalScore: rivalScore + 2,
           rivalReward: '+2',
           isStart: false,
-        })
-        this.handleCountdownBeforeStart()
+        });
+        this.handleCountdownBeforeStart();
       } else {
-        this.setData({ countdown: countdown - 1 })
+        this.setData({ countdown: countdown - 1 });
       }
     }
 
     setTimeout(function() {
-      that.handleCountdown()
-    }, 1000)
+      that.handleCountdown();
+    }, 1000);
   },
 
   _handleStart: function() {
-    this._skip()
-    this.handleCountdown()
+    this._skip();
+    this.handleCountdown();
   },
 
   _selectOperator: function(e) {
-    const { value } = e.currentTarget.dataset
-    const { selectedOperator } = this.data
+    const { value } = e.currentTarget.dataset;
+    const { selectedOperator } = this.data;
 
     this.setData({
       selectedOperator: selectedOperator !== value ? value : null,
-    })
+    });
   },
 
   _selectCard: function(e) {
-    const { value, index, state } = e.currentTarget.dataset
+    const { value, index, state } = e.currentTarget.dataset;
     const {
       cards,
       selectedOperator,
       selectedCard,
       myScore,
       initialCards,
-    } = this.data
+    } = this.data;
 
-    if (state === 'disable') return
+    if (state === 'disable') return;
 
     const nextState = {
       cards,
       selectedCard: { value, position: index },
-    }
+    };
 
-    nextState.cards[index].state = 'active'
+    nextState.cards[index].state = 'active';
 
     if (selectedCard !== null) {
-      const selectCardPosition = selectedCard.position
+      const selectCardPosition = selectedCard.position;
       if (selectedCard.position !== index) {
         Object.assign(nextState, {
           selectedCard: { value, position: index },
-        })
-        nextState.cards[selectCardPosition].state = 'normal'
+        });
+        nextState.cards[selectCardPosition].state = 'normal';
 
         if (selectedOperator !== null) {
-          const answer = calculate(selectedCard.value, value, selectedOperator)
+          const answer = calculate(selectedCard.value, value, selectedOperator);
 
           Object.assign(nextState, {
             selectedOperator: null,
             selectedCard: { value: answer, position: index },
-          })
+          });
 
-          nextState.cards[selectCardPosition].state = 'disable'
+          nextState.cards[selectCardPosition].state = 'disable';
           nextState.cards[index] = {
             value: answer,
             state: 'active',
@@ -242,29 +242,29 @@ Page({
               nextState.cards[index].alias,
               selectedOperator,
             ),
-          }
+          };
         }
       } else {
-        Object.assign(nextState, { selectedCard: null })
-        nextState.cards[selectCardPosition].state = 'normal'
+        Object.assign(nextState, { selectedCard: null });
+        nextState.cards[selectCardPosition].state = 'normal';
       }
     }
 
     const isFinish =
-      nextState.cards.filter(({ state }) => state === 'disable').length === 3
-    const openid = app.globalData.openid
+      nextState.cards.filter(({ state }) => state === 'disable').length === 3;
+    const openid = app.globalData.openid;
 
     if (isFinish && openid) {
       post('increaseAnswersCount', {
         openid,
         isCorrect: nextState.selectedCard.value === 24,
-      })
-      post('addQuestion', {
+      });
+      post('24-points/add_question', {
         openid,
         isCorrect: nextState.selectedCard.value === 24,
         question: initialCards.map(x => x.value),
         gameplay: 'TYPE_3',
-      })
+      });
     }
 
     if (isFinish) {
@@ -273,11 +273,11 @@ Page({
           nextState.selectedCard.value === 24 ? myScore + 2 : myScore - 2,
         isStart: false,
         myReward: nextState.selectedCard.value === 24 ? '+2' : '-1',
-      })
+      });
 
-      this.handleCountdownBeforeStart()
+      this.handleCountdownBeforeStart();
     } else {
-      this.setData({ ...nextState })
+      this.setData({ ...nextState });
     }
   },
 
@@ -286,17 +286,17 @@ Page({
       value: x.value,
       alias: [x.value],
       state: 'normal',
-    }))
+    }));
 
     this.setData({
       cards: resetCards,
       selectedCard: null,
       selectedOperator: null,
-    })
+    });
   },
 
   _skip: function() {
-    const newCards = generateCardsAndRecommendSolution()
+    const newCards = generateCardsAndRecommendSolution();
     this.setData({
       cards: newCards.cards,
       initialCards: [...newCards.cards],
@@ -311,6 +311,6 @@ Page({
       isReady: true,
       myReward: '+0',
       rivalReward: '+0',
-    })
+    });
   },
-})
+});
