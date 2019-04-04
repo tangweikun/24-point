@@ -1,4 +1,3 @@
-const { filterRankingList, formatTime } = require('./utils/index.js');
 const { post, get } = require('./api/index');
 
 App({

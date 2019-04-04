@@ -3,7 +3,6 @@ const {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
-  filterRankingList,
   shareAppMessage,
 } = require('../../utils/index.js');
 const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js');
