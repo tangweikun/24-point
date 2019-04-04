@@ -46,10 +46,6 @@ Page({
       });
     }
 
-    post('getRankingList1').then(res => {
-      app.globalData.rankingList1 = filterRankingList(res);
-    });
-
     this.setData({ onThisPage: false });
   },
 

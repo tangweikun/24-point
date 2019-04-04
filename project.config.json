@@ -11,6 +11,8 @@
 	"libVersion": "2.1.0",
 	"appid": "wx97a638ee01407a95",
 	"projectname": "24Point",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

@@ -16,6 +16,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#6ddac8",
     "navigationBarTitleText": "24点",
-    "navigationBarTextStyle": "#ffffff"
-  }
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
 }
