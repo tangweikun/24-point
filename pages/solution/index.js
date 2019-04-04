@@ -1,5 +1,5 @@
-const app = getApp()
-const { recommendSolution, shareAppMessage } = require('../../utils/index.js')
+const app = getApp();
+import { recommendSolution, shareAppMessage } from '../../utils/index.js';
 
 Page({
   data: {
@@ -11,39 +11,39 @@ Page({
   onShareAppMessage: shareAppMessage,
 
   _selectCard: function(e) {
-    const { value } = e.currentTarget.dataset
-    const { selectedCards } = this.data
+    const { value } = e.currentTarget.dataset;
+    const { selectedCards } = this.data;
 
     if (value === '重置') {
       this.setData({
         selectedCards: [],
         solution: '-',
-      })
-      return
+      });
+      return;
     }
 
     if (value === '回退') {
       this.setData({
         selectedCards: selectedCards.slice(0, -1),
         solution: '-',
-      })
-      return
+      });
+      return;
     }
 
     if (selectedCards.length === 3) {
-      const solution = recommendSolution(...selectedCards, value)
+      const solution = recommendSolution(...selectedCards, value);
       this.setData({
         selectedCards: [...selectedCards, value],
         solution: solution || '无解',
-      })
-      return
+      });
+      return;
     }
 
     if (selectedCards.length < 3) {
       this.setData({
         selectedCards: [...selectedCards, value],
         solution: '-',
-      })
+      });
     }
   },
-})
+});

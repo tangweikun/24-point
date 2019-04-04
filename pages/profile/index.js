@@ -1,6 +1,6 @@
-const app = getApp()
-const { post } = require('../../api/index')
-const { shareAppMessage } = require('../../utils/index')
+const app = getApp();
+import { post } from '../../api/index';
+import { shareAppMessage } from '../../utils/index';
 
 Page({
   data: {
@@ -15,23 +15,23 @@ Page({
   onShareAppMessage: shareAppMessage,
 
   _setUserInfo: function() {
-    const { avatarUrl = '' } = app.globalData.userInfo || {}
+    const { avatarUrl = '' } = app.globalData.userInfo || {};
     const {
       totalOfCorrectAnswers,
       totalOfAnswers,
       rank = '--',
-    } = app.globalData.gameData
+    } = app.globalData.gameData;
     const accuracy =
       totalOfAnswers === undefined
         ? '-'
-        : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
+        : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%';
 
     this.setData({
       avatarUrl,
       accuracy,
       totalOfCorrectAnswers,
       rank,
-    })
+    });
   },
 
   onLoad: function() {
@@ -40,9 +40,9 @@ Page({
       app.globalData.gameData.rank &&
       app.globalData.userInfo
     ) {
-      this._setUserInfo()
+      this._setUserInfo();
     } else {
-      setTimeout(() => this._setUserInfo(), 3000)
+      setTimeout(() => this._setUserInfo(), 3000);
     }
   },
 
@@ -53,26 +53,26 @@ Page({
         totalOfCorrectAnswers = '--',
         totalOfAnswers = '--',
         rank = '--',
-      } = res
+      } = res;
 
       const accuracy =
         totalOfAnswers === '--'
           ? '-'
-          : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%'
+          : ((100 * totalOfCorrectAnswers) / totalOfAnswers).toFixed(2) + '%';
 
-      app.globalData.userInfo = userInfo
+      app.globalData.userInfo = userInfo;
       this.setData({
         totalOfCorrectAnswers,
         totalOfAnswers,
         accuracy,
         avatarUrl: userInfo.avatarUrl,
         rank,
-      })
+      });
 
-      app.globalData.gameData.totalOfAnswers = totalOfAnswers
-      app.globalData.gameData.totalOfCorrectAnswers = totalOfCorrectAnswers
-      app.globalData.gameData.rank = rank
-    })
+      app.globalData.gameData.totalOfAnswers = totalOfAnswers;
+      app.globalData.gameData.totalOfCorrectAnswers = totalOfCorrectAnswers;
+      app.globalData.gameData.rank = rank;
+    });
   },
 
   bindGetUserInfo: function(e) {
@@ -80,9 +80,9 @@ Page({
       post('updateUserInfo', {
         openid: app.globalData.openid,
         userInfo: e.detail.userInfo,
-      })
+      });
 
-      this.refreshUserInfo()
+      this.refreshUserInfo();
     }
   },
 
@@ -90,10 +90,10 @@ Page({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          this.refreshUserInfo()
+          this.refreshUserInfo();
         }
       },
-    })
-    wx.stopPullDownRefresh()
+    });
+    wx.stopPullDownRefresh();
   },
-})
+});

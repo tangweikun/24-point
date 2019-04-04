@@ -1,9 +1,9 @@
 const formatNumber = n => {
-  return n < 10 ? '0' + n : '' + n
-}
+  return n < 10 ? '0' + n : '' + n;
+};
 
-const formatTime = createdAt => {
-  const date = new Date(createdAt)
+export const formatTime = createdAt => {
+  const date = new Date(createdAt);
   return (
     formatNumber(date.getMonth() + 1) +
     '-' +
@@ -12,9 +12,5 @@ const formatTime = createdAt => {
     formatNumber(date.getHours()) +
     ':' +
     formatNumber(date.getMinutes())
-  )
-}
-
-module.exports = {
-  formatTime,
-}
+  );
+};

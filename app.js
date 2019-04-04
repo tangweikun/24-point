@@ -28,12 +28,12 @@ App({
       },
     });
 
-    get('24-points/get_rank', { gameplay: 'TYPE_1' }).then(res => {
-      this.globalData.rankingList1 = res;
-    });
-
-    get('24-points/get_rank', { gameplay: 'TYPE_2' }).then(res => {
-      this.globalData.rankingList2 = res;
+    Promise.all([
+      get('24-points/get_rank', { gameplay: 'TYPE_1' }),
+      get('24-points/get_rank', { gameplay: 'TYPE_2' }),
+    ]).then(([res1, res2]) => {
+      this.globalData.rankingList1 = res1;
+      this.globalData.rankingList2 = res2;
     });
 
     const that = this;

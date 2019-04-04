@@ -1,6 +1,6 @@
-const app = getApp()
-const { RULE, GAMEPLAY, AVATAR_URL } = require('../../constants/index.js')
-const { shareAppMessage } = require('../../utils/index')
+const app = getApp();
+import { RULE, GAMEPLAY, AVATAR_URL } from '../../constants/index.js';
+import { shareAppMessage } from '../../utils/index';
 
 Page({
   data: {
@@ -11,7 +11,7 @@ Page({
   onLoad: function() {
     this.setData({
       rankingList: app.globalData.rankingList2,
-    })
+    });
   },
 
   _showRule: function() {
@@ -20,7 +20,7 @@ Page({
       title: '规则',
       content: RULE,
       success: function(res) {},
-    })
+    });
   },
 
   _showGameplay: function() {
@@ -29,8 +29,8 @@ Page({
       title: '玩法',
       content: GAMEPLAY,
       success: function(res) {},
-    })
+    });
   },
 
   onShareAppMessage: shareAppMessage,
-})
+});

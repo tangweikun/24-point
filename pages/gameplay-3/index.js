@@ -1,18 +1,18 @@
 const app = getApp();
-const {
+import {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
   generateLuckyTime,
   shareAppMessage,
-} = require('../../utils/index.js');
-const { post } = require('../../api/index');
-const {
+} from '../../utils/index.js';
+import { post } from '../../api/index';
+import {
   OPERATORS,
   OPERATORS_HASH,
   AVATAR_URL,
   RIVAL,
-} = require('../../constants/index.js');
+} from '../../constants/index.js';
 
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution();
 const luckyTime = generateLuckyTime(0);

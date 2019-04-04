@@ -1,12 +1,12 @@
 const app = getApp();
-const {
+import {
   generateCardsAndRecommendSolution,
   noDecimal,
   calculate,
   shareAppMessage,
-} = require('../../utils/index.js');
-const { OPERATORS, OPERATORS_HASH } = require('../../constants/index.js');
-const { post } = require('../../api/index');
+} from '../../utils/index.js';
+import { OPERATORS, OPERATORS_HASH } from '../../constants/index.js';
+import { post } from '../../api/index';
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution();
 
 Page({

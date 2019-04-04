@@ -1,7 +1,7 @@
-const app = getApp()
-const { shareAppMessage } = require('../../utils/index')
-const { RULE, GAMEPLAY } = require('../../constants/index.js')
-const { post } = require('../../api/index')
+const app = getApp();
+import { shareAppMessage } from '../../utils/index';
+import { RULE, GAMEPLAY } from '../../constants/index.js';
+import { post } from '../../api/index';
 
 Page({
   data: {
@@ -56,29 +56,29 @@ Page({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          app.globalData.isAuthorized = true
-          this.setData({ isAuthorized: true })
+          app.globalData.isAuthorized = true;
+          this.setData({ isAuthorized: true });
           wx.getUserInfo({
             success: function(res2) {
-              app.globalData.userInfo = res2.userInfo
+              app.globalData.userInfo = res2.userInfo;
             },
-          })
+          });
         }
       },
-    })
+    });
   },
 
   onShareAppMessage: shareAppMessage,
 
   bindGetUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    app.globalData.isAuthorized = true
-    this.setData({ isAuthorized: true })
+    app.globalData.userInfo = e.detail.userInfo;
+    app.globalData.isAuthorized = true;
+    this.setData({ isAuthorized: true });
     if (app.globalData.openid) {
       post('updateUserInfo', {
         openid: app.globalData.openid,
         userInfo: e.detail.userInfo,
-      })
+      });
     }
   },
 
@@ -88,7 +88,7 @@ Page({
       title: '规则',
       content: RULE,
       success: function(res) {},
-    })
+    });
   },
 
   _showLoginTip: function() {
@@ -97,7 +97,7 @@ Page({
       title: '提示',
       content: '请先登录',
       success: function(res) {},
-    })
+    });
   },
 
   _showGameplay: function() {
@@ -106,11 +106,11 @@ Page({
       title: '玩法',
       content: GAMEPLAY,
       success: function(res) {},
-    })
+    });
   },
 
   _goNewPage: function(e) {
-    const { url, ready } = e.currentTarget.dataset
+    const { url, ready } = e.currentTarget.dataset;
 
     if (ready) {
       if (
@@ -123,10 +123,10 @@ Page({
           '/pages/battle-list/index',
         ].indexOf(url) !== -1
       ) {
-        this._showLoginTip()
+        this._showLoginTip();
       } else {
-        wx.navigateTo({ url })
+        wx.navigateTo({ url });
       }
     }
   },
-})
+});

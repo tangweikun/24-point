@@ -5,10 +5,13 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true,
+		"checkInvalidKey": true,
+		"autoAudits": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.0",
+	"libVersion": "2.6.4",
 	"appid": "wx97a638ee01407a95",
 	"projectname": "24Point",
 	"simulatorType": "wechat",
