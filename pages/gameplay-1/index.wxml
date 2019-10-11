@@ -62,4 +62,6 @@
       <custom-button text='重置' bindtap='_reset'></custom-button>
     </view>
   </view>
+
+  <ad class="ad-wrapper" unit-id="adunit-db9d624247face5e"></ad>
 </view>

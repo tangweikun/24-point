@@ -8,7 +8,7 @@ import {
 } from '../../utils/index.js';
 import { post } from '../../api/index';
 import { OPERATORS, OPERATORS_HASH } from '../../constants/index.js';
-
+import { RULE } from '../../constants/index.js';
 const cardsAndRecommendSolution = generateCardsAndRecommendSolution();
 
 Page({
@@ -26,7 +26,16 @@ Page({
   onShareAppMessage: shareAppMessage,
 
   _goProfile: function() {
-    wx.navigateTo({ url: '/pages/profile/index' });
+    wx.navigateTo({ url: '/pages/index/index' });
+  },
+
+  _showRule: function() {
+    wx.showModal({
+      showCancel: false,
+      title: '规则',
+      content: RULE,
+      success: function(res) {},
+    });
   },
 
   _selectOperator: function(e) {

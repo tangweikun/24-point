@@ -1,5 +1,5 @@
 <view class="home-container">
-  <view class="rule" bindtap="_showRule">规则</view>
+  <!-- <view class="rule" bindtap="_showRule">规则</view> -->
   <!-- <view class="gameplay" bindtap="_showGameplay">玩法</view> -->
 
   <view class="home-circle-wrapper">
@@ -16,14 +16,6 @@
     >
       {{item.text}}
     </view>
-    <button
-      wx:if="{{!isAuthorized}}"
-      open-type="getUserInfo"
-      bindgetuserinfo="bindGetUserInfo"
-      type="primary"
-    >
-      登录
-    </button>
   </view>
   <ad class="ad-wrapper" unit-id="adunit-e989c465de072824"></ad>
 </view>

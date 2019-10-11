@@ -5,8 +5,9 @@
   </view>
 
   <view wx:else class='wrapper'>
-    <view class='profile' bindtap="_goProfile">个人中心</view>
-    <view class='recommend' bindtap="_showSolution">偷瞄算法</view>
+    <view class="recommend" bindtap="_showRule">规则</view>
+    <view class='profile' bindtap="_goProfile">更多玩法</view>
+    <!-- <view class='recommend' bindtap="_showSolution">偷瞄算法</view> -->
     <view class='card-wrapper'>
       <view
         wx:for="{{cards}}"
@@ -55,4 +56,5 @@
     <custom-button wx:if="{{!isFinish}}" text="重置" bindtap='_reset'></custom-button>
   </view>
 
+  <ad class="ad-wrapper" unit-id="adunit-e989c465de072824"></ad>
 </view>

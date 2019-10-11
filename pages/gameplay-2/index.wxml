@@ -61,4 +61,6 @@
       <custom-button wx:if="{{!isFinish}}" text='重置' bindtap='_reset'></custom-button>
     </view>
   </view>
+
+  <ad class="ad-wrapper" unit-id="adunit-dc2439eb6f8a070b"></ad>
 </view>

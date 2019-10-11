@@ -17,7 +17,7 @@
 }
 
 .footer {
-  margin-top: 100rpx;
+  margin-top: 20rpx;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -49,4 +49,9 @@
   justify-content: space-around;
   margin-bottom: 100rpx;
   margin-top: 120rpx;
+}
+
+.ad-wrapper {
+  position: fixed;
+  bottom: 0;
 }

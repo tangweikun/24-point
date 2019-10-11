@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 200rpx 0 120rpx;
+  padding: 160rpx 0 60rpx;
 }
 
 .expression-wrapper {
@@ -60,4 +60,9 @@
   text-align: center;
   line-height: 50rpx;
   border-radius: 50rpx;
+}
+
+.ad-wrapper {
+  position: fixed;
+  bottom: 0;
 }
